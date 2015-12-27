@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Antorcha</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="facebook_app_id">1543889922602257</string>
+
+    //Strings google
+    <string name="loading">Loading…</string>
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="title_activity_maps">Map</string>
+
+</resources>
