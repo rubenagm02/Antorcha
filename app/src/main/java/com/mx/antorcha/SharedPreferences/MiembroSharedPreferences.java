@@ -18,7 +18,9 @@ public class MiembroSharedPreferences {
     private String LLAVE_EDAD = "llave_edad";
     private String LLAVE_ID_FACEBOOK = "llave_facebook";
     private String LLAVE_ID_GOOGLE = "llave_google";
+    private String LLAVE_CORREO = "llave_correo";
     private String DEFAULT = "default";
+    private String LLAVE_FECHA_NACIMIENTO = "fecha_nacimiento";
 
     public MiembroSharedPreferences(Activity activity) {
         sharedPreferences = activity.getSharedPreferences(NOMBRE_SP, Context.MODE_PRIVATE);
@@ -54,6 +56,7 @@ public class MiembroSharedPreferences {
 
     public void setIdGoogle (String google) {
         editor.putString(LLAVE_ID_GOOGLE, google);
+        editor.apply();
     }
 
     public String getIdGoogle () {
@@ -62,6 +65,7 @@ public class MiembroSharedPreferences {
 
     public void setEdad (String edad) {
         editor.putString(LLAVE_EDAD, edad);
+        editor.apply();
     }
 
     public String getEdad () {
@@ -75,5 +79,23 @@ public class MiembroSharedPreferences {
 
     public String getIdFacebook () {
         return sharedPreferences.getString(LLAVE_ID_FACEBOOK, DEFAULT);
+    }
+
+    public void setFechaNacimiento (String fechaNacimiento) {
+        editor.putString(LLAVE_FECHA_NACIMIENTO, fechaNacimiento);
+        editor.apply();
+    }
+
+    public String getFechaNacimiento () {
+        return sharedPreferences.getString(LLAVE_FECHA_NACIMIENTO, DEFAULT);
+    }
+
+    public void setCorreo (String correo) {
+        editor.putString(LLAVE_CORREO, correo);
+        editor.apply();
+    }
+
+    public String getCorreo () {
+        return sharedPreferences.getString(LLAVE_CORREO, DEFAULT);
     }
 }

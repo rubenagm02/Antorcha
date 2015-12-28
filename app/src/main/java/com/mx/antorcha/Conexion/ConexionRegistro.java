@@ -1,20 +1,29 @@
 package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mx.antorcha.Activities.Principal;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.mx.antorcha.Conexion.InfoConexion.URL_META;
+import static com.mx.antorcha.Conexion.InfoConexion.URL_REGISTRO;
 
 /**
- * Created by Ruben on 27/12/2015.
+ *
  */
 public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
 
@@ -42,11 +51,29 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, URL_META,
+        StringRequest postRequest = new StringRequest(Request.Method.POST, URL_REGISTRO,
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //Si todo sale correcto, después del registro se hace...
+                    Log.i("Peticion registro", response);
+
+                    //se obtiene el Id del miembro
+                    int id = 0;
+
+                    try {
+                        id = new JSONArray(response).getJSONObject(0).getInt("id");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    //Se guardan los cambios en el Shared preferences
+                    MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
+                    miembroSharedPreferences.setId(id);
+                    miembroSharedPreferences.setNombre(nombre);
+                    miembroSharedPreferences.setCorreo(correo);
+                    miembroSharedPreferences.setFechaNacimiento("1992-02-02");
+                    miembroSharedPreferences.setSexo("M");
 
                 }
             },
@@ -79,5 +106,8 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute (Void v) {
         //Lo que se hace cuando el Login se hace de manera correcta
+        Intent intent = new Intent(activity, Principal.class);
+        activity.startActivity(intent);
+        activity.finish();
     }
 }

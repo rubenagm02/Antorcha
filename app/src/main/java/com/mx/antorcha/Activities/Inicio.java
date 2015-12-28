@@ -42,7 +42,7 @@ public class Inicio extends AppCompatActivity {
         imageViewIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Inicio.this, Login.class);
+                Intent intent = new Intent(Inicio.this, Registro.class);
                 startActivity(intent);
                 finish();
             }
@@ -62,7 +62,6 @@ public class Inicio extends AppCompatActivity {
         AdaptadorSVG.mostrarImagen(imageViewRegistrarse, this, R.raw.registrarse);
 
         AdaptadorInicioTabs adaptadorInicioTabs = new AdaptadorInicioTabs(getSupportFragmentManager());
-
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.inicio_pager);
         viewPager.setAdapter(adaptadorInicioTabs);

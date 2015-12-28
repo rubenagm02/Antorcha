@@ -1,34 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#232C39"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mx.antorcha.Activities.Registro">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/registro_toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+        android:background="@drawable/degradado_toolbar"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/registro_barra_regresar"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:text="Registrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="15">
-
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/login_button"
+            <EditText
+                android:id="@+id/registro_nombre"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:hint="Nombre"
+                android:background="@drawable/edittext_diseno"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"/>
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/sign_in_button"
+                android:layout_height="37dp" />
+            <EditText
+                android:id="@+id/registro_apellidos"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:hint="Apellidos"
+                android:background="@drawable/edittext_diseno"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="10dp" />
+                android:layout_height="37dp" />
+            <EditText
+                android:inputType="textEmailAddress"
+                android:id="@+id/registro_correo"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:hint="Correo electrónico"
+                android:background="@drawable/edittext_diseno"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+            <EditText
+                android:id="@+id/registro_password"
+                android:inputType="textPassword"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:hint="Contraseña"
+                android:background="@drawable/edittext_diseno"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+            <ImageView
+                android:id="@+id/registro_boton_regitrarse"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="42dp" />
         </LinearLayout>
+
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -40,7 +41,7 @@ public class SplashScreen extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
 
             try {
-                Thread.sleep(10);
+                Thread.sleep(30);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -50,9 +51,19 @@ public class SplashScreen extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void v){
-            Intent intent = new Intent(activity, Inicio.class);
-            activity.startActivity(intent);
-            activity.finish();
+
+            //Se comprueba si ya se ha iniciado sesión
+            MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
+
+            if (miembroSharedPreferences.getId() != 0) {
+                Intent intent = new Intent(activity, Principal.class);
+                activity.startActivity(intent);
+                activity.finish();
+            } else {
+                Intent intent = new Intent(activity, Principal.class);
+                activity.startActivity(intent);
+                activity.finish();
+            }
         }
     }
 

@@ -18,6 +18,17 @@ public class Compartir extends AppCompatActivity {
         ImageView imageViewInvitar = (ImageView) findViewById(R.id.compartir_boton_compartir);
         AdaptadorSVG.mostrarImagen(imageViewInvitar, this, R.raw.boton_guardar_meta); //Temporal
 
+        //se carga el boton para atrás
+        ImageView imageViewAtras = (ImageView) findViewById(R.id.compartir_atras);
+        AdaptadorSVG.mostrarImagen(imageViewAtras, this, R.raw.icono_regresar);
+
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         imageViewInvitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

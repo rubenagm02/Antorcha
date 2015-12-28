@@ -21,6 +21,9 @@ import com.mx.antorcha.Adaptadores.AdaptadorListaMedallas;
 import com.mx.antorcha.Dialogos.DialogoImagenPerfil;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -97,6 +100,13 @@ public class FragmentPerfilPerfil extends Fragment {
         if (bitmapImagenPerfil != null) {
             imageViewPerfil.setImageBitmap(bitmapImagenPerfil);
         }
+
+        //se carga la información del usuario en el perfil
+        MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
+
+        //se inicializan los datos
+        TextView textViewNombre = (TextView) rootView.findViewById(R.id.perfil_nombre_miembro);
+        textViewNombre.setText(miembroSharedPreferences.getNombre());
 
         return rootView;
     }

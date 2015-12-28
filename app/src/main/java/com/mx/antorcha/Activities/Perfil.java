@@ -25,6 +25,7 @@ import com.mx.antorcha.Dialogos.DialogoImagenPerfil;
 import com.mx.antorcha.LibreriaTabsSliding.SlidingTabLayout;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import java.io.File;
 import java.io.FileInputStream;

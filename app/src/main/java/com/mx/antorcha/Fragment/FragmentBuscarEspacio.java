@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
+import com.mx.antorcha.Conexion.ConexionBuscarEspacio;
 import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
 import com.mx.antorcha.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -39,6 +40,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
     public LinearLayout linearLayoutSliding;
     LinearLayout linearLayoutCentral;
     private FragmentManager fragmentManager;
+    private ConexionBuscarEspacio conexionBuscarEspacio;
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_buscar_espacio, container, false);
+
 
         //
         DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
@@ -127,6 +130,9 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
                 dialogoMostrarFiltroEspacio.show(fragmentManager, "filtro_espacio");
             }
         });
+
+        //Se busca infomración de los espacios deportivos
+        ConexionBuscarEspacio conexionBuscarEspacio = new ConexionBuscarEspacio(activity, mMap) ;
 
         return rootView;
     }

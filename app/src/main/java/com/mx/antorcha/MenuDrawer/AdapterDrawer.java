@@ -20,6 +20,7 @@ import com.mx.antorcha.Activities.Perfil;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Fragment.FragmentPerfilPerfil;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.w3c.dom.Text;
 
@@ -178,6 +179,13 @@ public class AdapterDrawer extends ArrayAdapter<String> {
         if (bitmapImagenPerfil != null) {
             imageViewImagenPerfil.setImageBitmap(bitmapImagenPerfil);
         }
+
+        //Se carga el sharedPreferences del miembro
+        MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
+
+        //Se carga la información de usuario
+        TextView textViewNombre = (TextView) convertView.findViewById(R.id.drawer_nombre_miembro);
+        textViewNombre.setText(miembroSharedPreferences.getNombre());
 
         return convertView;
     }

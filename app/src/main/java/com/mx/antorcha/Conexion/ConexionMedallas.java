@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.mx.antorcha.Conexion.InfoConexion.URL_MEDALLA;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_META;
 
 /**
@@ -39,12 +40,12 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
 
         final ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, URL_META,
+        StringRequest postRequest = new StringRequest(Request.Method.POST, URL_MEDALLA,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.i("Peticion", response);
-                        /*
+
                         try {
                             JSONArray jsonArray = new JSONArray(response);
 
@@ -56,7 +57,7 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
                                         jsonArray.getJSONObject(x).getString("nombre"),
                                         Integer.parseInt(jsonArray.getJSONObject(x).getString("tipo")),
                                         jsonArray.getJSONObject(x).getString("descripcion"),
-                                        jsonArray.getJSONObject(x).getString("comoSeLogra"),
+                                        jsonArray.getJSONObject(x).getString("comoObtener"),
                                         jsonArray.getJSONObject(x).getString("imagen")
                                 );
 
@@ -66,7 +67,7 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        */
+
                     }
                 },
                 new Response.ErrorListener() {
