@@ -21,6 +21,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <TextView
+                android:fontFamily="sans-serif-light"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
@@ -41,6 +42,7 @@
             android:layout_height="match_parent"
             android:layout_weight="15">
             <EditText
+                android:inputType="textPersonName"
                 android:id="@+id/registro_nombre"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="40dp"
@@ -52,6 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="37dp" />
             <EditText
+                android:inputType="textPersonName"
                 android:id="@+id/registro_apellidos"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="40dp"

@@ -16,7 +16,7 @@ public class Compartir extends AppCompatActivity {
         setContentView(R.layout.activity_compartir);
 
         ImageView imageViewInvitar = (ImageView) findViewById(R.id.compartir_boton_compartir);
-        AdaptadorSVG.mostrarImagen(imageViewInvitar, this, R.raw.boton_guardar_meta); //Temporal
+        AdaptadorSVG.mostrarImagen(imageViewInvitar, this, R.raw.boton_compartir_codigo);
 
         //se carga el boton para atrás
         ImageView imageViewAtras = (ImageView) findViewById(R.id.compartir_atras);

@@ -98,4 +98,9 @@ public class MiembroSharedPreferences {
     public String getCorreo () {
         return sharedPreferences.getString(LLAVE_CORREO, DEFAULT);
     }
+
+    public void borrarTodo () {
+        editor.clear();
+        editor.apply();
+    }
 }

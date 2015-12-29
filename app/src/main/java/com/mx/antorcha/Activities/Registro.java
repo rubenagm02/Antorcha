@@ -48,7 +48,7 @@ public class Registro extends AppCompatActivity {
 
         //se cargan las imagenes de las imagenes en svg
         AdaptadorSVG.mostrarImagen(imageViewAtras, this, R.raw.icono_regresar);
-        AdaptadorSVG.mostrarImagen(imageViewRegistrarse, this, R.raw.boton_guardar_meta);
+        AdaptadorSVG.mostrarImagen(imageViewRegistrarse, this, R.raw.boton_registrate);
 
         //Se inicializan todos los elementos
         final EditText editTextNombre = (EditText) findViewById(R.id.registro_nombre);
@@ -71,6 +71,13 @@ public class Registro extends AppCompatActivity {
                 );
 
                 conexionRegistro.execute();
+            }
+        });
+
+        imageViewAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

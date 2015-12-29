@@ -27,6 +27,11 @@
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
+    <style name="estrella" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/estrella_chica_llena</item>
+        <item name="android:minHeight">23dip</item>
+        <item name="android:maxHeight">25dip</item>
+    </style>
 
 
 

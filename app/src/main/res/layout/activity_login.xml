@@ -6,17 +6,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mx.antorcha.Activities.Login">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/login_toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+        android:background="@drawable/degradado_toolbar"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_alignParentLeft="true"
+                android:id="@+id/login_barra_atras"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:fontFamily="sans-serif-light"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:text="Iniciar sesión"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
     <LinearLayout
-        android:layout_marginRight="13dp"
-        android:layout_marginLeft="13dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:src="@drawable/logo_antorcha"
             android:layout_width="wrap_content"
-            android:layout_height="170dp" />
+            android:layout_height="140dp" />
         <TextView
+            android:layout_marginTop="15dp"
             android:textSize="20sp"
             android:fontFamily="sans-serif-light"
             android:textColor="#FFFFFF"
@@ -25,12 +55,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
             android:background="@drawable/edittext_diseno"
             android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:hint="Correo Electronico"
             android:layout_height="35dp" />
         <EditText
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:inputType="textPassword"
             android:layout_marginBottom="25dp"
             android:background="@drawable/edittext_diseno"
             android:layout_width="match_parent"
@@ -39,7 +76,7 @@
         <ImageView
             android:id="@+id/login_boton_inicio_sesion"
             android:layout_width="match_parent"
-            android:layout_height="35dp" />
+            android:layout_height="39dp" />
         <TextView
             android:textSize="13sp"
             android:gravity="center"
@@ -54,9 +91,10 @@
             android:layout_height="20dp" />
 
         <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
+            android:layout_gravity="center"
+            android:id="@+id/login_facebook_login"
             android:layout_width="match_parent"
-            android:layout_height="30dp"/>
+            android:layout_height="wrap_content"/>
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
