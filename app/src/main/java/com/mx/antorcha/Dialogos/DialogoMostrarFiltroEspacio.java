@@ -1,18 +1,16 @@
 package com.mx.antorcha.Dialogos;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.TextView;
 
 import com.mx.antorcha.R;
 
 /**
- * Created by Ruben on 26/12/2015.
+ *
  */
 public class DialogoMostrarFiltroEspacio extends DialogFragment {
 

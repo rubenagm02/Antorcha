@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -19,7 +20,6 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.mx.antorcha.Conexion.InfoConexion.URL_META;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_REGISTRO;
 
 /**
@@ -33,6 +33,7 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
     private String password;
     private String fechaNacimiento;
     private Activity activity;
+    private boolean bandera = false; //Determina si se cambia de actividad o no
 
     public ConexionRegistro(String nombre, String sexo, String correo, String password, String fechaNacimiento, Activity activity) {
 
@@ -59,22 +60,22 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
                     Log.i("Peticion registro", response);
 
                     //se obtiene el Id del miembro
-                    int id = 0;
+                    int id;
 
                     try {
                         id = new JSONArray(response).getJSONObject(0).getInt("id");
+                        bandera = true;
+
+                        //Se guardan los cambios en el Shared preferences
+                        MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
+                        miembroSharedPreferences.setId(id);
+                        miembroSharedPreferences.setNombre(nombre);
+                        miembroSharedPreferences.setCorreo(correo);
+                        miembroSharedPreferences.setFechaNacimiento("1992-02-02");
+                        miembroSharedPreferences.setSexo("M");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                    //Se guardan los cambios en el Shared preferences
-                    MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
-                    miembroSharedPreferences.setId(id);
-                    miembroSharedPreferences.setNombre(nombre);
-                    miembroSharedPreferences.setCorreo(correo);
-                    miembroSharedPreferences.setFechaNacimiento("1992-02-02");
-                    miembroSharedPreferences.setSexo("M");
-
                 }
             },
             new Response.ErrorListener() {
@@ -105,9 +106,17 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute (Void v) {
-        //Lo que se hace cuando el Login se hace de manera correcta
-        Intent intent = new Intent(activity, Principal.class);
-        activity.startActivity(intent);
-        activity.finish();
+
+        if (bandera) {
+            //Lo que se hace cuando el Login se hace de manera correcta
+            Intent intent = new Intent(activity, Principal.class);
+            activity.startActivity(intent);
+            activity.finish();
+        } else {
+            Toast.makeText(activity, "Parece que hay un error con la conexión, " +
+                    "intentalo de nuevo o ponte en contacto con nosotros. " +
+                    "admin@antorcha.com.mx",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }

@@ -6,10 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.mx.antorcha.Modelos.Deporte;
+import com.mx.antorcha.Modelos.Disciplina;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.Modelos.MetaProgreso;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +29,8 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
         db.execSQL(Querys.CREAR_TABLA_METAS);
         db.execSQL(Querys.CREAR_TABLA_META_PROGRESO);
         db.execSQL(Querys.CREAR_TABLA_MEDALLAS);
+        db.execSQL(Querys.CREAR_TABLA_DEPORTES);
+        db.execSQL(Querys.CREAR_TABLA_DISCIPLINAS);
     }
 
     @Override
@@ -107,6 +112,79 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
         cursor.close();
 
         return medallas;
+    }
+
+
+    //Se obtienen todas las disciplinas
+    public ArrayList<Disciplina> obtenerDisciplinas () {
+        ArrayList<Disciplina> disciplinas = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_DISCIPLINAS, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+
+            disciplinas.add(new Disciplina(
+                    cursor.getInt(cursor.getColumnIndex("Id")),
+                    cursor.getString(cursor.getColumnIndex("Nombre")),
+                    cursor.getString(cursor.getColumnIndex("Descripcion")),
+                    cursor.getString(cursor.getColumnIndex("Imagen"))
+            ));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return disciplinas;
+    }
+
+    //Se obtienen todos los deportes
+    public ArrayList<Deporte> obtenerDeportes () {
+        ArrayList<Deporte> deportes = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_DEPORTES, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+
+            deportes.add(new Deporte(
+                    cursor.getInt(cursor.getColumnIndex("Id")),
+                    cursor.getString(cursor.getColumnIndex("Nombre")),
+                    cursor.getString(cursor.getColumnIndex("Descripcion")),
+                    cursor.getString(cursor.getColumnIndex("Imagen"))
+            ));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return deportes;
+    }
+
+    //Se obtienen los deportes por disciplina
+    public ArrayList<Deporte> obtenerDeportes (int disciplina) {
+        ArrayList<Deporte> deportes = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_DEPORTE_POR_DISCPLINA + disciplina, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+
+            deportes.add(new Deporte(
+                    cursor.getInt(cursor.getColumnIndex("Id")),
+                    cursor.getString(cursor.getColumnIndex("Nombre")),
+                    cursor.getString(cursor.getColumnIndex("Descripcion")),
+                    cursor.getString(cursor.getColumnIndex("Imagen"))
+            ));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return deportes;
     }
 
 }

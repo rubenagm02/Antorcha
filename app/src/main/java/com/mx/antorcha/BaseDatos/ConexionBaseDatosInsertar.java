@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.mx.antorcha.Modelos.Deporte;
+import com.mx.antorcha.Modelos.Disciplina;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.Modelos.MetaProgreso;
@@ -25,6 +27,8 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
         db.execSQL(Querys.CREAR_TABLA_METAS);
         db.execSQL(Querys.CREAR_TABLA_META_PROGRESO);
         db.execSQL(Querys.CREAR_TABLA_MEDALLAS);
+        db.execSQL(Querys.CREAR_TABLA_DEPORTES);
+        db.execSQL(Querys.CREAR_TABLA_DISCIPLINAS);
     }
 
     @Override
@@ -82,5 +86,36 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
         sqLiteDatabase.insert("Medalla", null, contentValues);
 
         Log.i(Querys.TAG_INSERTAR, "Se ha insertado una medalla");
+    }
+
+    //Se inserta una disciplina
+    public void insertarDisciplina (Disciplina disciplina) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues contentValues   = new ContentValues();
+
+        contentValues.put("Id", disciplina.getId());
+        contentValues.put("Nombre",disciplina.getNombre());
+        contentValues.put("Descripcion", disciplina.getDescripcion());
+
+        sqLiteDatabase.insert("Disciplina", null, contentValues);
+
+        Log.i(Querys.TAG_INSERTAR, "Se ha insertado una disciplina");
+    }
+
+    //Se inserta un deporte
+    public void insertarDeporte (Deporte deporte) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues contentValues   = new ContentValues();
+
+        contentValues.put("Id", deporte.getId());
+        contentValues.put("Nombre",deporte.getNombre());
+        contentValues.put("Disciplina", deporte.getDisciplina());
+        contentValues.put("Imagen", deporte.getImagen());
+
+        sqLiteDatabase.insert("Deporte", null, contentValues);
+
+        Log.i(Querys.TAG_INSERTAR, "Se ha insertado un Deporte");
     }
 }

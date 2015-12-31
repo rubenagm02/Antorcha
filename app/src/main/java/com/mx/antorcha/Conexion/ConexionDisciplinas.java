@@ -10,28 +10,27 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
+import com.mx.antorcha.Modelos.Disciplina;
 import com.mx.antorcha.Modelos.Medalla;
-import com.mx.antorcha.Modelos.Meta;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.mx.antorcha.Conexion.InfoConexion.URL_DISCIPLINA;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_MEDALLA;
-import static com.mx.antorcha.Conexion.InfoConexion.URL_META;
+
 
 /**
  *
  */
-public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
+public class ConexionDisciplinas extends AsyncTask<Void, Void, Void> {
 
     private Activity activity;
 
-    public ConexionMedallas(Activity activity) {
-
+    public ConexionDisciplinas(Activity activity) {
         this.activity = activity;
     }
 
@@ -40,7 +39,7 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
 
         final ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, URL_MEDALLA,
+        StringRequest postRequest = new StringRequest(Request.Method.POST, URL_DISCIPLINA,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -52,16 +51,14 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
                             for (int x = 0; x < jsonArray.length(); x++) {
 
                                 //Se obtienen los datos y se mandan a la medalla
-                                Medalla medalla = new Medalla(
-                                        Integer.parseInt(jsonArray.getJSONObject(x).getString("idMedalla")),
-                                        jsonArray.getJSONObject(x).getString("nombreMedalla"),
-                                        Integer.parseInt(jsonArray.getJSONObject(x).getString("tipoMedalla")),
-                                        jsonArray.getJSONObject(x).getString("descripcionMedalla"),
-                                        jsonArray.getJSONObject(x).getString("comoObtener"),
-                                        jsonArray.getJSONObject(x).getString("imagenMedalla")
+                                Disciplina disciplina = new Disciplina(
+                                        Integer.parseInt(jsonArray.getJSONObject(x).getString("id")),
+                                        jsonArray.getJSONObject(x).getString("nombre"),
+                                        jsonArray.getJSONObject(x).getString("descripcion"),
+                                        jsonArray.getJSONObject(x).getString("imagen")
                                 );
 
-                                conexionBaseDatosInsertar.insertarMedalla(medalla);
+                                conexionBaseDatosInsertar.insertarDisciplina(disciplina);
                             }
 
                         } catch (JSONException e) {
@@ -88,6 +85,7 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
         };
         Volley.newRequestQueue(activity).add(postRequest);
 
-        return  null;
+
+        return null;
     }
 }

@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
+import com.mx.antorcha.Adaptadores.AdaptadorListaNuevosDeportes;
+import com.mx.antorcha.Modelos.Disciplina;
 import com.mx.antorcha.R;
+
+import java.util.ArrayList;
 
 public class NuevoDeporteFavorito extends AppCompatActivity {
 
@@ -30,5 +35,18 @@ public class NuevoDeporteFavorito extends AppCompatActivity {
                 finish();
             }
         });
+
+        /****** VARIABLES DE PRUEBAS ******/
+        ArrayList<Disciplina> disciplinas = new ArrayList<>();
+        disciplinas.add(new Disciplina());
+        disciplinas.add(new Disciplina());
+        disciplinas.add(new Disciplina());
+
+        /***********/
+
+        //Se Carga el listView
+        ListView listViewDisciplinas = (ListView) findViewById(R.id.nuevo_deporte_lista_disciplina);
+        AdaptadorListaNuevosDeportes adaptadorListaNuevosDeportes = new AdaptadorListaNuevosDeportes(this, disciplinas);
+        listViewDisciplinas.setAdapter(adaptadorListaNuevosDeportes);
     }
 }
