@@ -89,10 +89,17 @@ public class Perfil extends AppCompatActivity {
         slidingTabLayout.setSelectedIndicatorColors(Color.WHITE);
         slidingTabLayout.setViewPager(viewPager);
 
-
         //Cambiar los colores de los tabs
         slidingTabLayout.setSelectedIndicatorColors(Color.WHITE);
 
+        //el onclick cuando se quieren agregar deportes
+        imageViewAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Perfil.this, NuevoDeporteFavorito.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

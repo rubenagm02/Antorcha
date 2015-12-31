@@ -33,6 +33,12 @@
         <item name="android:maxHeight">25dip</item>
     </style>
 
+    <style name="datePickerDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <!-- this is new -->
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
 
 
 </resources>

@@ -50,6 +50,7 @@ public class NuevaMeta extends AppCompatActivity {
                 int mes = c.get(Calendar.MONTH);
                 int dia = c.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(activity,
+                        R.style.datePickerDialogStyle,
                     new DatePickerDialog.OnDateSetListener() {
 
                         @Override
@@ -60,7 +61,6 @@ public class NuevaMeta extends AppCompatActivity {
 
                         }
                     }, anio, mes, dia);
-
                 datePickerDialog.show();
             }
         });
