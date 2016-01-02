@@ -56,7 +56,7 @@ public class SplashScreen extends AppCompatActivity {
             MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
 
             if (miembroSharedPreferences.getId() != 0) {
-                Intent intent = new Intent(activity, Login.class);
+                Intent intent = new Intent(activity, Principal.class);
                 activity.startActivity(intent);
                 activity.finish();
             } else {

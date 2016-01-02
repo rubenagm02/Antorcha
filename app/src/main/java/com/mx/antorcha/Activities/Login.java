@@ -17,6 +17,7 @@ import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.PersonBuffer;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
+import com.mx.antorcha.Conexion.ConexionLogin;
 import com.mx.antorcha.R;
 
 import android.content.Intent;
@@ -35,16 +36,14 @@ import com.facebook.login.widget.LoginButton;
 import com.facebook.FacebookSdk;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
 
-public class Login extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, ResultCallback<People.LoadPeopleResult> {
+public class Login extends AppCompatActivity {
 
     private CallbackManager callbackManager;
-    private MiembroSharedPreferences miembroSharedPreferences;
-    private GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +55,12 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         Toolbar toolbar = (Toolbar) findViewById(R.id.login_toolbar);
         setSupportActionBar(toolbar);
 
-        //Se inicializa el shared Preferences
-        miembroSharedPreferences = new MiembroSharedPreferences(this);
-
         //Se agrega el callback
         callbackManager = CallbackManager.Factory.create();
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_facebook_login);
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday"));
+
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -77,6 +74,20 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
                                     GraphResponse response) {
                                 // Application code
                                 Log.v("LoginActivity", response.toString());
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response.toString()).getJSONObject("graphObject");
+                                    String idFacebook = jsonObject.getString("id");
+                                    String nombre = jsonObject.getString("name");
+                                    String email = jsonObject.getString("email");
+                                    String genero = jsonObject.getString("gender");
+                                    String fechaNacimiento = jsonObject.getString("birthday");
+
+                                    ConexionLogin conexionLogin = new ConexionLogin(idFacebook, Login.this);
+                                    conexionLogin.execute();
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                 Bundle parameters = new Bundle();
@@ -113,102 +124,14 @@ public class Login extends AppCompatActivity implements GoogleApiClient.Connecti
         });
 
 
-        //pruebas con google
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
 
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
     }
 
-    private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-        startActivityForResult(signInIntent, 9001);
-    }
+
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 9001) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            Log.i("GOOGLE", result.getSignInAccount().toString());
-        } else {
-            callbackManager.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-
-    @Override
-    public void onConnected(Bundle bundle) {
-        Plus.PeopleApi.loadVisible(googleApiClient, null)
-                .setResultCallback(this);
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    public void onResult(People.LoadPeopleResult peopleData) {
-        if (peopleData.getStatus().getStatusCode() == CommonStatusCodes.SUCCESS) {
-            PersonBuffer personBuffer = peopleData.getPersonBuffer();
-            try {
-                int count = personBuffer.getCount();
-                for (int i = 0; i < count; i++) {
-                    Log.d("NOMBRE", "Display name: " + personBuffer.get(i).getDisplayName());
-                }
-            } finally {
-                personBuffer.release();
-            }
-        } else {
-            Log.e("NOMBRE", "Error requesting visible circles: " + peopleData.getStatus());
-        }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
-        if (opr.isDone()) {
-            // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
-            // and the GoogleSignInResult will be available instantly.
-            Log.d("TAG", "Got cached sign-in");
-            GoogleSignInResult result = opr.get();
-        } else {
-            // If the user has not previously signed in on this device or the sign-in has expired,
-            // this asynchronous branch will attempt to sign in the user silently.  Cross-device
-            // single sign-on will occur in this branch.
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(GoogleSignInResult googleSignInResult) {
-                }
-            });
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // disconnect api if it is connected
-        if (googleApiClient.isConnected())
-            googleApiClient.disconnect();
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }
