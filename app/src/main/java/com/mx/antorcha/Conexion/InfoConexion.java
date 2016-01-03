@@ -14,6 +14,7 @@ public class InfoConexion {
     final static public String URL_BUSCAR_EVENTO = "";
     final static public String URL_INFORMACION_EVENTO = "";
     final static public String URL_MEDALLA = "http://api.antorcha.mx/V0.1/medallas";
-    final static public String URL_DISCIPLINA = "";
-    final static public String URL_DEPORTE = "";
+    final static public String URL_DISCIPLINA = "http://api.antorcha.mx/V0.1/disciplinas";
+    final static public String URL_DEPORTE = "http://api.antorcha.mx/V0.1/deportes";
+    final static public String URL_RESENIA = "";
 }

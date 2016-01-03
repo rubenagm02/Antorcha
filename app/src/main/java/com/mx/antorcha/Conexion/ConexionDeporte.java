@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
+import com.mx.antorcha.Modelos.Deporte;
 import com.mx.antorcha.Modelos.Disciplina;
 
 import org.json.JSONArray;
@@ -37,7 +38,7 @@ public class ConexionDeporte extends AsyncTask<Void, Void, Void> {
 
         final ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, URL_DEPORTE,
+        StringRequest postRequest = new StringRequest(Request.Method.GET, URL_DEPORTE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -49,14 +50,14 @@ public class ConexionDeporte extends AsyncTask<Void, Void, Void> {
                             for (int x = 0; x < jsonArray.length(); x++) {
 
                                 //Se obtienen los datos y se mandan a la medalla
-                                Disciplina disciplina = new Disciplina(
+                                Deporte deporte = new Deporte(
                                         Integer.parseInt(jsonArray.getJSONObject(x).getString("id")),
                                         jsonArray.getJSONObject(x).getString("nombre"),
-                                        jsonArray.getJSONObject(x).getString("descripcion"),
+                                        jsonArray.getJSONObject(x).getString("disciplina"),
                                         jsonArray.getJSONObject(x).getString("imagen")
                                 );
 
-                                conexionBaseDatosInsertar.insertarDisciplina(disciplina);
+                                conexionBaseDatosInsertar.insertarDeporte(deporte);
                             }
 
                         } catch (JSONException e) {

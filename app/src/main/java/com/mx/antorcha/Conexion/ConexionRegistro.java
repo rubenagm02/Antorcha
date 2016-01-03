@@ -92,7 +92,7 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
                 // the POST parameters:
                 params.put("nombre", nombre);
                 params.put("sexo", sexo);
-                params.put("password", password);
+                params.put("pass", password);
                 params.put("fechaNacimiento", fechaNacimiento);
                 params.put("correo", correo);
 

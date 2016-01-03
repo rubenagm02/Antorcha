@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Modelos.Deporte;
 import com.mx.antorcha.Modelos.Disciplina;
 import com.mx.antorcha.R;
@@ -41,12 +42,15 @@ public class AdaptadorListaNuevosDeportes extends ArrayAdapter<Disciplina>{
         ImageView imageView = (ImageView) convertView.findViewById(R.id.item_seleccionar_disciplina_imagen);
         AdaptadorSVG.mostrarImagen(imageView, activity, R.raw.icono_flecha_izquierda);
 
-        /****** VARIABLES DE PRUEBA *******/
+        /****** VARIABLES DE PRUEBA *******
 
         ArrayList<Deporte> deportes = new ArrayList<>();
         deportes.add(new Deporte());
         deportes.add(new Deporte());
         /**********************************/
+
+        ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
+        ArrayList<Deporte> deportes = conexionBaseDatosObtener.obtenerDeportes(disciplina.getId());
 
         LinearLayout linearLayoutSeleccionarDisciplina = (LinearLayout) convertView.findViewById(R.id.seleccionar_disciplina_layout);
 

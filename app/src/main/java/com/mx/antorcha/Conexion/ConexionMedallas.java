@@ -40,7 +40,7 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
 
         final ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, URL_MEDALLA,
+        StringRequest postRequest = new StringRequest(Request.Method.GET, InfoConexion.URL_MEDALLA,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -82,7 +82,6 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
             {
                 Map<String, String>  params = new HashMap<>();
                 // the POST parameters:
-
                 return params;
             }
         };

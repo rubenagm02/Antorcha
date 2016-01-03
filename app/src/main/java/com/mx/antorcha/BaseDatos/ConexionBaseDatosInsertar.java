@@ -81,7 +81,6 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
         contentValues.put("Descripcion", medalla.getDescripcion());
         contentValues.put("ComoSeLogra", medalla.getComoSeLogra());
         contentValues.put("Imagen", medalla.getImagen());
-        contentValues.put("IdServidor", 0);
 
         sqLiteDatabase.insert("Medalla", null, contentValues);
 

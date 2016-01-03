@@ -1,16 +1,11 @@
 package com.mx.antorcha.Activities;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.MotionEvent;
-import android.view.View;
 
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
@@ -60,7 +55,7 @@ public class SplashScreen extends AppCompatActivity {
                 activity.startActivity(intent);
                 activity.finish();
             } else {
-                Intent intent = new Intent(activity, Login.class);
+                Intent intent = new Intent(activity, Principal.class);
                 activity.startActivity(intent);
                 activity.finish();
             }

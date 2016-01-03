@@ -11,9 +11,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mx.antorcha.Modelos.Medalla;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +33,9 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
     private String password;
     private String idGoogle;
     private String idFacebook;
+    private String nombre;
+    private String fechaNacimiento;
+    private String genero;
 
     public ConexionLogin(Activity activity, String correo, String password) {
         this.activity = activity;
@@ -58,6 +63,44 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
                     public void onResponse(String response) {
                         Log.i("Login", response);
 
+                        if (response.equals("FAlSE") && idFacebook != null) {
+                            ConexionRegistro conexionRegistro= new ConexionRegistro(
+                                    nombre,
+                                    genero.substring(0,1),
+                                    correo,
+                                    "facebook", //No va ningún password
+                                    fechaNacimiento,
+                                    activity);
+                            conexionRegistro.execute();
+                        } else {
+
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+
+                                if (!jsonObject.isNull("nombre")) {
+
+                                    //Se obtuvo correcto el login
+                                    //Se guardan los cambios en el Shared preferences
+                                    MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
+                                    miembroSharedPreferences.setId(jsonObject.getInt("id"));
+                                    miembroSharedPreferences.setNombre(jsonObject.getString("nombre"));
+                                    miembroSharedPreferences.setCorreo(jsonObject.getString("correo"));
+                                    miembroSharedPreferences.setFechaNacimiento(jsonObject.getString("fechaNacimiento"));
+                                    miembroSharedPreferences.setSexo(jsonObject.getString("sexo"));
+                                } else if (!jsonObject.isNull("login")) {
+                                    //No se pudo acceder con el login
+
+                                    Toast.makeText(activity,
+                                            "Lo sentimos, la información que introduciste " +
+                                                    "es incorrecta, intentalo de nuevo",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -77,9 +120,9 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
                     params.put("correo", correo);
                     params.put("password", password);
                 } else if (idFacebook != null) {
-                    params.put("idFacebook", idFacebook);
+                    params.put("facebook", idFacebook);
                 } else if (idGoogle != null) {
-                    params.put("idGoogle", idGoogle);
+                    params.put("google", idGoogle);
                 } else {
                     Toast.makeText(activity,
                             "Estamos teniendo un problema para iniciar sesión, " +
@@ -97,5 +140,21 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
     @Override
     public void onPostExecute (Void v) {
         //lo que se hace una ves que se fue logueado.
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public void setCorreo (String correo) {
+        this.correo = correo;
     }
 }

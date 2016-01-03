@@ -39,7 +39,7 @@ public class ConexionDisciplinas extends AsyncTask<Void, Void, Void> {
 
         final ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, URL_DISCIPLINA,
+        StringRequest postRequest = new StringRequest(Request.Method.GET, URL_DISCIPLINA,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -55,7 +55,7 @@ public class ConexionDisciplinas extends AsyncTask<Void, Void, Void> {
                                         Integer.parseInt(jsonArray.getJSONObject(x).getString("id")),
                                         jsonArray.getJSONObject(x).getString("nombre"),
                                         jsonArray.getJSONObject(x).getString("descripcion"),
-                                        jsonArray.getJSONObject(x).getString("imagen")
+                                        ""
                                 );
 
                                 conexionBaseDatosInsertar.insertarDisciplina(disciplina);

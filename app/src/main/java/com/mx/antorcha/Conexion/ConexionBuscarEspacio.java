@@ -10,13 +10,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.mx.antorcha.Modelos.EspacioDeportivo;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +28,7 @@ import static com.mx.antorcha.Conexion.InfoConexion.URL_BUSCAR_ESPACIO;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_META;
 
 /**
- * Created by Ruben on 27/12/2015.
+ *
  */
 public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
 
@@ -56,6 +60,7 @@ public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
         this.espacios = "si";
         this.idMiembro = miembroSharedPreferences.getId() + "";
         this.googleMap = googleMap;
+        this.activity = activity;
     }
 
     @Override
@@ -66,6 +71,41 @@ public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
                     @Override
                     public void onResponse(String response) {
                         Log.i("ConexionBuscarEspacio", response);
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            for (int x = 0; x < jsonArray.length(); x++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(x);
+
+                                EspacioDeportivo espacioDeportivo = new EspacioDeportivo(
+                                        jsonObject.getInt("id"),
+                                        jsonObject.getString("nombre"),
+                                        jsonObject.getString("descripcion"),
+                                        jsonObject.getString("domicilio"),
+                                        jsonObject.getString("colonia"),
+                                        jsonObject.getString("codigoPostal"),
+                                        jsonObject.getString("municipio"),
+                                        jsonObject.getString("ciudad"),
+                                        jsonObject.getString("estado"),
+                                        jsonObject.getString("telefono"),
+                                        jsonObject.getDouble("latitud"),
+                                        jsonObject.getDouble("longitud")
+                                        );
+
+                                //Se agrega el mapa a la vista
+                                googleMap.addMarker(
+                                        new MarkerOptions().position(
+                                                new LatLng(espacioDeportivo.getLatitud(),
+                                                        espacioDeportivo.getLongitud()))
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                                );
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        //Se obtienen los datos
+
                     }
                 },
                 new Response.ErrorListener() {

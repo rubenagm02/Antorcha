@@ -130,9 +130,12 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
                 dialogoMostrarFiltroEspacio.show(fragmentManager, "filtro_espacio");
             }
         });
+        ConexionBuscarEspacio conexionBuscarEspacio = new ConexionBuscarEspacio(activity, mMap);
+        conexionBuscarEspacio.execute();
 
-        //Se busca infomración de los espacios deportivos
-        ConexionBuscarEspacio conexionBuscarEspacio = new ConexionBuscarEspacio(activity, mMap) ;
+        //Se carga la imagen del boton de asignarme espacio
+        ImageView imageViewAsignarmeEspacio = (ImageView) rootView.findViewById(R.id.buscar_espacio_boton_asignarme_espacio);
+        AdaptadorSVG.mostrarImagen(imageViewAsignarmeEspacio, activity, R.raw.boton_asisto_centro_deportivo);
 
         return rootView;
     }

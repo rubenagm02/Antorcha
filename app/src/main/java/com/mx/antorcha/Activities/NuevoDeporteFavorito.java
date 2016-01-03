@@ -9,9 +9,13 @@ import android.widget.ListView;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaNuevosDeportes;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
+import com.mx.antorcha.Conexion.ConexionDeporte;
+import com.mx.antorcha.Conexion.ConexionDisciplinas;
 import com.mx.antorcha.Modelos.Disciplina;
 import com.mx.antorcha.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class NuevoDeporteFavorito extends AppCompatActivity {
@@ -36,13 +40,24 @@ public class NuevoDeporteFavorito extends AppCompatActivity {
             }
         });
 
-        /****** VARIABLES DE PRUEBAS ******/
+        /****** VARIABLES DE PRUEBAS ******
         ArrayList<Disciplina> disciplinas = new ArrayList<>();
         disciplinas.add(new Disciplina());
         disciplinas.add(new Disciplina());
         disciplinas.add(new Disciplina());
 
         /***********/
+
+        ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(this);
+
+        //se ejcutan los hilos para verificar los datos
+        ConexionDisciplinas conexionDisciplinas = new ConexionDisciplinas(this);
+        ConexionDeporte conexionDeporte = new ConexionDeporte(this);
+        conexionDisciplinas.execute();
+        conexionDeporte.execute();
+
+        //Se obitnene los datos guardados
+        ArrayList<Disciplina> disciplinas = conexionBaseDatosObtener.obtenerDisciplinas();
 
         //Se Carga el listView
         ListView listViewDisciplinas = (ListView) findViewById(R.id.nuevo_deporte_lista_disciplina);

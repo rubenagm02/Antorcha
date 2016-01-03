@@ -2,20 +2,6 @@ package com.mx.antorcha.Activities;
 
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.login.LoginManager;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.Scopes;
-import com.google.android.gms.common.api.CommonStatusCodes;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Scope;
-import com.google.android.gms.plus.People;
-import com.google.android.gms.plus.Plus;
-import com.google.android.gms.plus.model.people.PersonBuffer;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Conexion.ConexionLogin;
 import com.mx.antorcha.R;
@@ -26,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.facebook.CallbackManager;
@@ -34,7 +21,6 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.FacebookSdk;
-import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,6 +30,8 @@ import java.util.Arrays;
 public class Login extends AppCompatActivity {
 
     private CallbackManager callbackManager;
+    private EditText editTextCorreo;
+    private EditText editTextPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +42,10 @@ public class Login extends AppCompatActivity {
         //se carga la barra de android por el xml
         Toolbar toolbar = (Toolbar) findViewById(R.id.login_toolbar);
         setSupportActionBar(toolbar);
+
+        //se inicializan los campos de texto
+        editTextCorreo = (EditText) findViewById(R.id.login_campo_correo);
+        editTextPass = (EditText) findViewById(R.id.login_campo_pass);
 
         //Se agrega el callback
         callbackManager = CallbackManager.Factory.create();
@@ -74,8 +66,10 @@ public class Login extends AppCompatActivity {
                                     GraphResponse response) {
                                 // Application code
                                 Log.v("LoginActivity", response.toString());
+                                String respuesta = response.toString().replace("{Response:  responseCode: 200, graphObject: ", "");
+                                respuesta = respuesta.toString().replace(", error: null}", "");
                                 try {
-                                    JSONObject jsonObject = new JSONObject(response.toString()).getJSONObject("graphObject");
+                                    JSONObject jsonObject = new JSONObject(respuesta);
                                     String idFacebook = jsonObject.getString("id");
                                     String nombre = jsonObject.getString("name");
                                     String email = jsonObject.getString("email");
@@ -83,6 +77,10 @@ public class Login extends AppCompatActivity {
                                     String fechaNacimiento = jsonObject.getString("birthday");
 
                                     ConexionLogin conexionLogin = new ConexionLogin(idFacebook, Login.this);
+                                    conexionLogin.setNombre(nombre);
+                                    conexionLogin.setCorreo(email);
+                                    conexionLogin.setGenero(genero);
+                                    conexionLogin.setFechaNacimiento(fechaNacimiento);
                                     conexionLogin.execute();
 
                                 } catch (JSONException e) {
@@ -123,7 +121,18 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //el click en el inicio de sesión
+        imageViewInicioSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConexionLogin conexionLogin = new ConexionLogin(Login.this,
+                        editTextCorreo.getText().toString(),
+                        editTextPass.getText().toString());
 
+                conexionLogin.execute();
+
+            }
+        });
 
     }
 

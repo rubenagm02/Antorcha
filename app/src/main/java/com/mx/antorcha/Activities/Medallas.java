@@ -15,8 +15,10 @@ import android.widget.ListView;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaMedallas;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Compartir.*;
 import com.mx.antorcha.Compartir.Compartir;
+import com.mx.antorcha.Conexion.ConexionMedallas;
 import com.mx.antorcha.Conexion.DescargarImagen;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.Modelos.Medalla;
@@ -59,7 +61,7 @@ public class Medallas extends AppCompatActivity {
         });
 
 
-        /******** VARIABLES TEMPORALES PARA PRUEBAS *******/
+        /******** VARIABLES TEMPORALES PARA PRUEBAS *******
         ArrayList<Medalla> medallas = new ArrayList<>();
         medallas.add(new Medalla());
         medallas.add(new Medalla());
@@ -75,6 +77,12 @@ public class Medallas extends AppCompatActivity {
         medallas.add(new Medalla());
 
         /*************************************************/
+
+        //Se obtienen las medallas
+        ConexionMedallas conexionMedallas = new ConexionMedallas(this);
+        conexionMedallas.execute();
+        ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(this);
+        ArrayList<Medalla> medallas = conexionBaseDatosObtener.obtenerMedallas();
 
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
