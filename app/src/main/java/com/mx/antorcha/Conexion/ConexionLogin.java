@@ -71,6 +71,7 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
                                     "facebook", //No va ningún password
                                     fechaNacimiento,
                                     activity);
+                            conexionRegistro.setFacebook(idFacebook);
                             conexionRegistro.execute();
                         } else {
 

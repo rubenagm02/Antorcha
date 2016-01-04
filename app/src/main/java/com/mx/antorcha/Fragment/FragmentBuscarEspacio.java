@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -90,6 +91,9 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
                 return false;
             }
         });
+
+        //Cambio de fecha
+
 
         //Onclick del mapa
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -193,6 +197,9 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         public View getInfoContents(Marker marker) {
             // set some bitmap to the imageview
             linearLayout.setVisibility(View.VISIBLE);
+
+            TextView textView = (TextView) v.findViewById(R.id.etiqueta_marquer_nombre);
+            textView.setText(marker.getTitle());
             return v;
         }
 

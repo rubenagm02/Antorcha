@@ -19,13 +19,10 @@ import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.mx.antorcha.Conexion.InfoConexion.URL_BUSCAR_ESPACIO;
-import static com.mx.antorcha.Conexion.InfoConexion.URL_META;
 
 /**
  *
@@ -99,6 +96,7 @@ public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
                                                 new LatLng(espacioDeportivo.getLatitud(),
                                                         espacioDeportivo.getLongitud()))
                                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                                        .title(espacioDeportivo.getNombre())
                                 );
                             }
                         } catch (JSONException e) {

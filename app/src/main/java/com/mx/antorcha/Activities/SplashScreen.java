@@ -36,7 +36,7 @@ public class SplashScreen extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
 
             try {
-                Thread.sleep(30);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -51,11 +51,11 @@ public class SplashScreen extends AppCompatActivity {
             MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
 
             if (miembroSharedPreferences.getId() != 0) {
-                Intent intent = new Intent(activity, Principal.class);
+                Intent intent = new Intent(activity, BuscarActividad.class);
                 activity.startActivity(intent);
                 activity.finish();
             } else {
-                Intent intent = new Intent(activity, Principal.class);
+                Intent intent = new Intent(activity, Inicio.class);
                 activity.startActivity(intent);
                 activity.finish();
             }

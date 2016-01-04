@@ -11,7 +11,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Activities.Principal;
+import com.mx.antorcha.OtrasFunciones.CalculoFechas;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONArray;
@@ -33,6 +35,7 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
     private String password;
     private String fechaNacimiento;
     private Activity activity;
+    private String facebook;
     private boolean bandera = false; //Determina si se cambia de actividad o no
 
     public ConexionRegistro(String nombre, String sexo, String correo, String password, String fechaNacimiento, Activity activity) {
@@ -64,7 +67,6 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
 
                     try {
                         id = new JSONArray(response).getJSONObject(0).getInt("id");
-                        bandera = true;
 
                         //Se guardan los cambios en el Shared preferences
                         MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
@@ -73,6 +75,13 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
                         miembroSharedPreferences.setCorreo(correo);
                         miembroSharedPreferences.setFechaNacimiento("1992-02-02");
                         miembroSharedPreferences.setSexo("M");
+
+                        //se inicia el activity
+                        //Lo que se hace cuando el Login se hace de manera correcta
+                        Intent intent = new Intent(activity, BuscarActividad.class);
+                        activity.startActivity(intent);
+                        activity.finish();
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -91,10 +100,15 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
                 Map<String, String>  params = new HashMap<>();
                 // the POST parameters:
                 params.put("nombre", nombre);
-                params.put("sexo", sexo);
-                params.put("pass", password);
-                params.put("fechaNacimiento", fechaNacimiento);
+                params.put("sexo", sexo.toUpperCase());
+                params.put("fechaNacimiento", CalculoFechas.cambiarFormatoFacebook(fechaNacimiento));
                 params.put("correo", correo);
+
+                if (facebook != null && facebook != "") {
+                    params.put("facebook", facebook);
+                } else {
+                    params.put("pass", password);
+                }
 
                 return params;
             }
@@ -118,5 +132,13 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
                     "admin@antorcha.com.mx",
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
     }
 }

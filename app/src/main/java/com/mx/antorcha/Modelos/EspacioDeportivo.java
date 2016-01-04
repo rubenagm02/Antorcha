@@ -1,7 +1,7 @@
 package com.mx.antorcha.Modelos;
 
 /**
- * Created by Ruben on 19/12/2015.
+ *
  */
 public class EspacioDeportivo {
 

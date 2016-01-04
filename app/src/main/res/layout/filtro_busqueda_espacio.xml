@@ -61,12 +61,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/dialogo_filtro_espacio_cancelar"
             android:textSize="15sp"
             android:textColor="@color/wallet_holo_blue_light"
             android:text="CANCELAR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/dialogo_filtro_espacio_aceptar"
             android:textColor="@color/wallet_holo_blue_light"
             android:textSize="15sp"
             android:layout_marginLeft="30dp"

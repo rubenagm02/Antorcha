@@ -20,6 +20,7 @@ import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaMedallas;
 import com.mx.antorcha.Dialogos.DialogoImagenPerfil;
 import com.mx.antorcha.Modelos.Medalla;
+import com.mx.antorcha.OtrasFunciones.CalculoFechas;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
@@ -107,6 +108,10 @@ public class FragmentPerfilPerfil extends Fragment {
         //se inicializan los datos
         TextView textViewNombre = (TextView) rootView.findViewById(R.id.perfil_nombre_miembro);
         textViewNombre.setText(miembroSharedPreferences.getNombre());
+
+        //se coloca la edad
+        TextView textViewEdad = (TextView) rootView.findViewById(R.id.perfil_edad_miembro);
+        textViewEdad.setText(CalculoFechas.calcularEdad(miembroSharedPreferences.getFechaNacimiento()) + " años");
 
         return rootView;
     }

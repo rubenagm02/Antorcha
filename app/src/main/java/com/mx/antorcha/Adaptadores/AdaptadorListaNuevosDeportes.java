@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
@@ -52,7 +53,7 @@ public class AdaptadorListaNuevosDeportes extends ArrayAdapter<Disciplina>{
         ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
         ArrayList<Deporte> deportes = conexionBaseDatosObtener.obtenerDeportes(disciplina.getId());
 
-        LinearLayout linearLayoutSeleccionarDisciplina = (LinearLayout) convertView.findViewById(R.id.seleccionar_disciplina_layout);
+        final LinearLayout linearLayoutSeleccionarDisciplina = (LinearLayout) convertView.findViewById(R.id.seleccionar_disciplina_layout);
 
         for (Deporte deporte : deportes) {
             View view = vi.inflate(R.layout.item_seleccionar_deporte, null);
@@ -63,6 +64,24 @@ public class AdaptadorListaNuevosDeportes extends ArrayAdapter<Disciplina>{
             TextView textView = (TextView) linearLayout.getChildAt(1);
             textView.setText(deporte.getNombre());
         }
+
+        //Se oculta
+        linearLayoutSeleccionarDisciplina.setVisibility(View.GONE);
+
+        //Se ca´tura el clic de la disciplina
+        final RelativeLayout relativeLayoutClic = (RelativeLayout) convertView.findViewById(R.id.item_disciplina_clic);
+
+        relativeLayoutClic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (linearLayoutSeleccionarDisciplina.getVisibility() == View.GONE) {
+                    linearLayoutSeleccionarDisciplina.setVisibility(View.VISIBLE);
+                } else {
+                    linearLayoutSeleccionarDisciplina.setVisibility(View.GONE);
+                }
+            }
+        });
 
         return convertView;
     }

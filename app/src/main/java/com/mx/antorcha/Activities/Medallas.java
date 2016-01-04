@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaMedallas;
@@ -60,6 +61,11 @@ public class Medallas extends AppCompatActivity {
             }
         });
 
+        //Se obtienen los textview de las descripciones
+        TextView textViewNombre = (TextView) findViewById(R.id.medallas_nombre_medalla);
+        TextView textViewDescripcion = (TextView) findViewById(R.id.medallas_descripcion_medalla);
+        TextView textViewTipo = (TextView) findViewById(R.id.medallas_tipo_medalla);
+
 
         /******** VARIABLES TEMPORALES PARA PRUEBAS *******
         ArrayList<Medalla> medallas = new ArrayList<>();
@@ -91,7 +97,9 @@ public class Medallas extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.medallas_lista_medallas);
         recyclerView.setLayoutManager(layoutManager);
         AdaptadorListaMedallas adaptadorListaMedallas = new AdaptadorListaMedallas(this, medallas);
-
+        adaptadorListaMedallas.setTextViewNombre(textViewNombre);
+        adaptadorListaMedallas.setTextViewDescripcion(textViewDescripcion);
+        adaptadorListaMedallas.setTextViewTipo(textViewTipo);
         recyclerView.setAdapter(adaptadorListaMedallas);
 
         //Se colocan las imagenes de las medallas
