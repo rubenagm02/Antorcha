@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorSpinner;
@@ -104,27 +105,35 @@ public class NuevaMeta extends AppCompatActivity {
         imageViewGuardarMeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Meta meta = new Meta();
-                meta.setNombre(editTextNombre.getText().toString());
-                meta.setInicio(Double.parseDouble(editTextInicio.getText().toString()));
-                meta.setFin(Double.parseDouble(editTextFin.getText().toString()));
 
-                //se guarda la fecha actual
-                final Calendar c = Calendar.getInstance();
-                int anio = c.get(Calendar.YEAR);
-                int mes = c.get(Calendar.MONTH);
-                int dia = c.get(Calendar.DAY_OF_MONTH);
+                if (editTextNombre.getText().toString().length() > 2
+                        && editTextInicio.getText().toString().length() > 0
+                        && editTextFin.getText().toString().length() > 0
+                        && (!textViewCalendario.getText().toString().equals("Selecciona la fecha"))) {
+                    Meta meta = new Meta();
+                    meta.setNombre(editTextNombre.getText().toString());
+                    meta.setInicio(Double.parseDouble(editTextInicio.getText().toString()));
+                    meta.setFin(Double.parseDouble(editTextFin.getText().toString()));
 
-                meta.setFechaInicio(anio + "-" + mes + "-" + dia);
-                meta.setFechaFin(textViewCalendario.getText().toString());
-                meta.setTipoMedida(spinnerTipo.getSelectedItem().toString());
+                    //se guarda la fecha actual
+                    final Calendar c = Calendar.getInstance();
+                    int anio = c.get(Calendar.YEAR);
+                    int mes = c.get(Calendar.MONTH);
+                    int dia = c.get(Calendar.DAY_OF_MONTH);
 
-                ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
-                conexionBaseDatosInsertar.insertarMeta(meta);
+                    meta.setFechaInicio(anio + "-" + mes + "-" + dia);
+                    meta.setFechaFin(textViewCalendario.getText().toString());
+                    meta.setTipoMedida(spinnerTipo.getSelectedItem().toString());
 
-                Intent intent = new Intent(NuevaMeta.this, Metas.class);
-                startActivity(intent);
-                finish();
+                    ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
+                    conexionBaseDatosInsertar.insertarMeta(meta);
+
+                    Intent intent = new Intent(NuevaMeta.this, Metas.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(NuevaMeta.this, "Debes llenar todos los campos para poder guardar la meta", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

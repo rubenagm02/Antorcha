@@ -1,6 +1,7 @@
 package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
@@ -20,6 +22,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.mx.antorcha.Conexion.InfoConexion.URL_FACEBOOK_IMAGEN_1;
+import static com.mx.antorcha.Conexion.InfoConexion.URL_FACEBOOK_IMAGEN_2;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_LOGIN;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_MEDALLA;
 
@@ -57,6 +61,10 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
     @Override
     protected Void doInBackground(Void... params) {
 
+        return null;
+    }
+
+    public void login () {
         StringRequest postRequest = new StringRequest(Request.Method.POST, URL_LOGIN,
                 new Response.Listener<String>() {
                     @Override
@@ -88,13 +96,36 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
                                     miembroSharedPreferences.setCorreo(jsonObject.getString("correo"));
                                     miembroSharedPreferences.setFechaNacimiento(jsonObject.getString("fechaNacimiento"));
                                     miembroSharedPreferences.setSexo(jsonObject.getString("sexo"));
-                                } else if (!jsonObject.isNull("login")) {
-                                    //No se pudo acceder con el login
 
-                                    Toast.makeText(activity,
-                                            "Lo sentimos, la información que introduciste " +
-                                                    "es incorrecta, intentalo de nuevo",
-                                            Toast.LENGTH_LONG).show();
+                                    if (idFacebook != null && idFacebook.length() > 0) {
+                                        miembroSharedPreferences.setIdFacebook(idFacebook);
+                                        DescargarImagen.guardarImagen(activity, URL_FACEBOOK_IMAGEN_1 + idFacebook + URL_FACEBOOK_IMAGEN_2, "perfil_antorcha.jpg");
+
+                                    }
+
+                                    Intent intent = new Intent(activity, BuscarActividad.class);
+                                    activity.startActivity(intent);
+                                    activity.finish();
+                                } else if (!jsonObject.isNull("login")) {
+
+                                    if (idFacebook != null && idFacebook != "") {
+                                        ConexionRegistro conexionRegistro= new ConexionRegistro(
+                                                nombre,
+                                                genero.substring(0,1),
+                                                correo,
+                                                "facebook", //No va ningún password
+                                                fechaNacimiento,
+                                                activity);
+                                        conexionRegistro.setFacebook(idFacebook);
+                                        conexionRegistro.execute();
+                                    } else {
+                                        //No se pudo acceder con el login
+
+                                        Toast.makeText(activity,
+                                                "Lo sentimos, la información que introduciste " +
+                                                        "es incorrecta, intentalo de nuevo",
+                                                Toast.LENGTH_LONG).show();
+                                    }
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -116,12 +147,12 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
             {
                 Map<String, String>  params = new HashMap<>();
                 // the POST parameters:
-
+                //Dentro de Java aquí agrego los parametros de el regsitro y el login
                 if (correo != null && password != null) {
                     params.put("correo", correo);
                     params.put("password", password);
                 } else if (idFacebook != null) {
-                    params.put("facebook", idFacebook);
+                    params.put("idFacebook", idFacebook);
                 } else if (idGoogle != null) {
                     params.put("google", idGoogle);
                 } else {
@@ -134,8 +165,6 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
             }
         };
         Volley.newRequestQueue(activity).add(postRequest);
-
-        return null;
     }
 
     @Override

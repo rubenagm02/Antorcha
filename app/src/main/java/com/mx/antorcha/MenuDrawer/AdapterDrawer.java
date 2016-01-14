@@ -241,6 +241,8 @@ public class AdapterDrawer extends ArrayAdapter<String> {
                 .setTitle("Cerrar sesión")
                 .show();
 
+                //Se borra la base de datos
+                activity.deleteDatabase("Antorcha");
 
             }
         });

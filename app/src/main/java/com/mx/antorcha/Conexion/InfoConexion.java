@@ -1,7 +1,7 @@
 package com.mx.antorcha.Conexion;
 
 /**
- * Created by Ruben on 25/12/2015.
+ *
  */
 public class InfoConexion {
 
@@ -17,4 +17,7 @@ public class InfoConexion {
     final static public String URL_DISCIPLINA = "http://api.antorcha.mx/V0.1/disciplinas";
     final static public String URL_DEPORTE = "http://api.antorcha.mx/V0.1/deportes";
     final static public String URL_RESENIA = "";
+
+    final static public String URL_FACEBOOK_IMAGEN_1 = "https://graph.facebook.com/";
+    final static public String URL_FACEBOOK_IMAGEN_2 = "/picture?type=large";
 }

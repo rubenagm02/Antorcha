@@ -80,6 +80,42 @@ public class DescargarImagen {
         });
     }
 
+    //Se guarda una imagen de una url
+    static public void guardarImagen (Activity activity, final String url, final String nombre) {
+
+        Picasso.with(activity).load(url).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                // Se guarda la imagen
+                String root = Environment.getExternalStorageDirectory().toString();
+                File directorio = new File(root + "/antorcha");
+                directorio.mkdirs();
+                File file = new File (directorio, nombre);
+
+                if (file.exists()) {
+                    file.delete();
+                }
+                try {
+                    FileOutputStream out = new FileOutputStream(file);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                    out.flush();
+                    out.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+            }
+        });
+    }
+
     static public void imagenGuardada (Activity activity, final String nombre, final ImageView imageView) {
 
         String root = Environment.getExternalStorageDirectory().toString();

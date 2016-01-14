@@ -4,6 +4,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Conexion.ConexionLogin;
+import com.mx.antorcha.OtrasFunciones.CalculoFechas;
 import com.mx.antorcha.R;
 
 import android.content.Intent;
@@ -12,8 +13,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -25,6 +28,7 @@ import com.facebook.FacebookSdk;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Login extends AppCompatActivity {
@@ -66,21 +70,33 @@ public class Login extends AppCompatActivity {
                                     GraphResponse response) {
                                 // Application code
                                 Log.v("LoginActivity", response.toString());
-                                String respuesta = response.toString().replace("{Response:  responseCode: 200, graphObject: ", "");
+                                String respuesta = response.toString().replace("{Response:", "");
+                                respuesta = respuesta.replace("responseCode: 200, graphObject:", "");
                                 respuesta = respuesta.toString().replace(", error: null}", "");
                                 try {
                                     JSONObject jsonObject = new JSONObject(respuesta);
                                     String idFacebook = jsonObject.getString("id");
                                     String nombre = jsonObject.getString("name");
                                     String email = jsonObject.getString("email");
-                                    String genero = jsonObject.getString("gender");
-                                    String fechaNacimiento = jsonObject.getString("birthday");
+                                    String genero = "N";
+                                    String fechaNacimiento = "0000-00-00";
+
+                                    if (jsonObject.has("gender")) {
+                                        genero = jsonObject.getString("gender");
+                                    }
+
+                                    if (jsonObject.has("birthday")) {
+                                        fechaNacimiento = jsonObject.getString("birthday");
+                                        fechaNacimiento = CalculoFechas.cambiarFormatoFacebook(fechaNacimiento);
+                                    }
 
                                     ConexionLogin conexionLogin = new ConexionLogin(idFacebook, Login.this);
                                     conexionLogin.setNombre(nombre);
                                     conexionLogin.setCorreo(email);
                                     conexionLogin.setGenero(genero);
                                     conexionLogin.setFechaNacimiento(fechaNacimiento);
+                                    conexionLogin.login();
+
                                     conexionLogin.execute();
 
                                 } catch (JSONException e) {
@@ -133,6 +149,8 @@ public class Login extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 

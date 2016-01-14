@@ -14,25 +14,31 @@ public class CalculoFechas {
 
     public static int calcularEdad(String fecha) {
 
-        //Se separa la fecha
-        StringTokenizer stringTokenizer = new StringTokenizer(fecha, "-");
-        int anio = Integer.parseInt(stringTokenizer.nextToken());
-        int mes = Integer.parseInt(stringTokenizer.nextToken());
-        int dia = Integer.parseInt(stringTokenizer.nextToken());
+        try {
+            //Se separa la fecha
+            StringTokenizer stringTokenizer = new StringTokenizer(fecha, "-");
+            int anio = Integer.parseInt(stringTokenizer.nextToken());
+            int mes = Integer.parseInt(stringTokenizer.nextToken());
+            int dia = Integer.parseInt(stringTokenizer.nextToken());
 
-        Calendar calendar = Calendar.getInstance();
+            Calendar calendar = Calendar.getInstance();
 
-        int anioActual = calendar.get(Calendar.YEAR);
-        int mesActual = 12 - calendar.getActualMaximum(Calendar.MONTH);
-        int diaActual = calendar.get(Calendar.DAY_OF_MONTH);
+            int anioActual = calendar.get(Calendar.YEAR);
+            int mesActual = 12 - calendar.getActualMaximum(Calendar.MONTH);
+            int diaActual = calendar.get(Calendar.DAY_OF_MONTH);
 
-        anio = anioActual - anio;
+            anio = anioActual - anio;
 
-        if (mesActual - mes <= 0 && diaActual - dia <= 0) {
-            anio--;
+            if (mesActual - mes <= 0 && diaActual - dia <= 0) {
+                anio--;
+            }
+
+            return anio;
+        } catch (Exception e) {
+
+            return 0;
         }
 
-        return anio;
     }
 
     //cambiar formato de facebook a sql

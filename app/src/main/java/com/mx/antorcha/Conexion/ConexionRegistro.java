@@ -22,6 +22,8 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.mx.antorcha.Conexion.InfoConexion.URL_FACEBOOK_IMAGEN_1;
+import static com.mx.antorcha.Conexion.InfoConexion.URL_FACEBOOK_IMAGEN_2;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_REGISTRO;
 
 /**
@@ -54,7 +56,7 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-
+//así es como funciona el post, los campos se mandan con una llave ys e agregan...
         StringRequest postRequest = new StringRequest(Request.Method.POST, URL_REGISTRO,
             new Response.Listener<String>() {
                 @Override
@@ -67,15 +69,19 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
 
                     try {
                         id = new JSONArray(response).getJSONObject(0).getInt("id");
-
+//Y los decodifico como un json... eso sí lo saben...
                         //Se guardan los cambios en el Shared preferences
                         MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
                         miembroSharedPreferences.setId(id);
                         miembroSharedPreferences.setNombre(nombre);
                         miembroSharedPreferences.setCorreo(correo);
-                        miembroSharedPreferences.setFechaNacimiento("1992-02-02");
+                        miembroSharedPreferences.setFechaNacimiento(fechaNacimiento);
                         miembroSharedPreferences.setSexo("M");
 
+                        if (facebook != null && facebook.length() > 0) {
+                            miembroSharedPreferences.setIdFacebook(facebook);
+                            DescargarImagen.guardarImagen(activity, URL_FACEBOOK_IMAGEN_1 + facebook + URL_FACEBOOK_IMAGEN_2, "perfil_antorcha.jpg");
+                        }
                         //se inicia el activity
                         //Lo que se hace cuando el Login se hace de manera correcta
                         Intent intent = new Intent(activity, BuscarActividad.class);
@@ -101,13 +107,14 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
                 // the POST parameters:
                 params.put("nombre", nombre);
                 params.put("sexo", sexo.toUpperCase());
-                params.put("fechaNacimiento", CalculoFechas.cambiarFormatoFacebook(fechaNacimiento));
                 params.put("correo", correo);
 
                 if (facebook != null && facebook != "") {
                     params.put("facebook", facebook);
+                    params.put("fechaNacimiento", fechaNacimiento);
                 } else {
                     params.put("pass", password);
+                    params.put("fechaNacimiento", fechaNacimiento);
                 }
 
                 return params;

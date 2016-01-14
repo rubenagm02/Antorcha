@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -56,24 +58,6 @@ public class Registro extends AppCompatActivity {
         final EditText editTextCorreo = (EditText) findViewById(R.id.registro_correo);
         final EditText editTextPassword = (EditText) findViewById(R.id.registro_password);
 
-
-
-        imageViewRegistrarse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ConexionRegistro conexionRegistro = new ConexionRegistro(
-                        editTextNombre.getText().toString() + " " + editTextApellido.getText().toString(),
-                        "M",
-                        editTextCorreo.getText().toString(),
-                        editTextPassword.getText().toString(),
-                        "1992-02-02",
-                        Registro.this
-                );
-
-                conexionRegistro.execute();
-            }
-        });
-
         imageViewAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +65,67 @@ public class Registro extends AppCompatActivity {
             }
         });
 
+
+        //Se agregan los datos a los spinner de fecha de nacimiento
+        ArrayAdapter adapterDias = ArrayAdapter.createFromResource(this, R.array.dias, android.R.layout.simple_spinner_item);
+        //Añadimos el layout para el menú
+        adapterDias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Le indicamos al spinner el adaptador a usar
+        final Spinner spinnerDias = (Spinner) findViewById(R.id.login_fecha_dia);
+        spinnerDias.setAdapter(adapterDias);
+
+        //Se agregan los datos a los spinner de fecha de nacimiento
+        ArrayAdapter adapterMeses = ArrayAdapter.createFromResource(this, R.array.meses, android.R.layout.simple_spinner_item);
+        //Añadimos el layout para el menú
+        adapterMeses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Le indicamos al spinner el adaptador a usar
+        final Spinner spinnerMeses = (Spinner) findViewById(R.id.login_fecha_mes);
+        spinnerMeses.setAdapter(adapterMeses);
+
+        //Se agregan los datos a los spinner de fecha de nacimiento
+        ArrayAdapter adapterAnios = ArrayAdapter.createFromResource(this, R.array.anios, android.R.layout.simple_spinner_item);
+        //Añadimos el layout para el menú
+        adapterAnios.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Le indicamos al spinner el adaptador a usar
+        final Spinner spinnerAnios = (Spinner) findViewById(R.id.login_fecha_anio);
+        spinnerAnios.setAdapter(adapterAnios);
+
+        //Se agregan los datos a los spinner de fecha de nacimiento
+        ArrayAdapter adapterSexo = ArrayAdapter.createFromResource(this, R.array.sexo, android.R.layout.simple_spinner_item);
+        //Añadimos el layout para el menú
+        adapterSexo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Le indicamos al spinner el adaptador a usar
+        final Spinner spinnerSexo = (Spinner) findViewById(R.id.login_sexo);
+        spinnerSexo.setAdapter(adapterSexo);
+
+        //Se coloca el click
+        imageViewRegistrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (editTextNombre.getText().toString().length() > 3
+                        && editTextApellido.getText().toString().length() > 3
+                        && editTextCorreo.getText().toString().length() > 5
+                        && editTextPassword.getText().toString().length() > 3) {
+                    ConexionRegistro conexionRegistro = new ConexionRegistro(
+                            editTextNombre.getText().toString() + " " + editTextApellido.getText().toString(),
+                            spinnerSexo.getSelectedItem().toString().substring(0,1).toUpperCase(),
+                            editTextCorreo.getText().toString(),
+                            editTextPassword.getText().toString(),
+                            spinnerAnios.getSelectedItem().toString() + "-"
+                                    + spinnerMeses.getSelectedItem().toString() + "-"
+                                    + spinnerDias.getSelectedItem().toString(),
+                            Registro.this
+                    );
+
+                    conexionRegistro.execute();
+                } else {
+                    Toast.makeText(Registro.this,
+                            "Debes llenar todos los campos para completar el registro",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
 

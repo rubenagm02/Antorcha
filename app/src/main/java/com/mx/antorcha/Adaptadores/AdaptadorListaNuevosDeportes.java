@@ -27,6 +27,8 @@ import java.util.ArrayList;
 public class AdaptadorListaNuevosDeportes extends ArrayAdapter<Disciplina>{
 
     private Activity activity;
+    private ArrayList<String> stringDeportes;
+    private ArrayList<String> stringDisciplinas;
 
     public AdaptadorListaNuevosDeportes(Activity activity, ArrayList<Disciplina> disciplinas) {
         super(activity, R.layout.item_seleccionar_disciplina, disciplinas);
@@ -55,14 +57,34 @@ public class AdaptadorListaNuevosDeportes extends ArrayAdapter<Disciplina>{
 
         final LinearLayout linearLayoutSeleccionarDisciplina = (LinearLayout) convertView.findViewById(R.id.seleccionar_disciplina_layout);
 
-        for (Deporte deporte : deportes) {
+        for (final Deporte deporte : deportes) {
             View view = vi.inflate(R.layout.item_seleccionar_deporte, null);
             linearLayoutSeleccionarDisciplina.addView(view);
 
             LinearLayout linearLayout = (LinearLayout) view;
-            CheckBox checkBox = (CheckBox) linearLayout.getChildAt(0);
+            final CheckBox checkBoxDeportes = (CheckBox) linearLayout.getChildAt(0);
             TextView textView = (TextView) linearLayout.getChildAt(1);
             textView.setText(deporte.getNombre());
+
+            if (stringDeportes.contains(deporte.getId() + "")) {
+                checkBoxDeportes.setChecked(true);
+            }
+
+            //Se pone el click de los checbox
+            checkBoxDeportes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (checkBoxDeportes.isChecked()) {
+                        //checkBoxDeportes.setChecked(false);
+                        stringDeportes.add(deporte.getId() + "");
+                    } else {
+                        //checkBoxDeportes.setChecked(true);
+                        stringDeportes.remove(deporte.getId() + "");
+                    }
+                }
+            });
+
         }
 
         //Se oculta
@@ -83,8 +105,34 @@ public class AdaptadorListaNuevosDeportes extends ArrayAdapter<Disciplina>{
             }
         });
 
+        //el click en el checkbox de las disciplinas
+        final CheckBox checkBoxDisciplina = (CheckBox) convertView.findViewById(R.id.item_seleccionar_disciplina_check);
+        checkBoxDisciplina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkBoxDisciplina.isChecked()) {
+                    //checkBoxDisciplina.setChecked(false);
+                    stringDisciplinas.add(disciplina.getId() + "");
+                } else {
+                    //checkBoxDisciplina.setChecked(true);
+                    stringDisciplinas.remove(disciplina.getId() + "");
+                }
+            }
+        });
+
+        if (stringDisciplinas.contains(disciplina.getId() + "")) {
+            checkBoxDisciplina.setChecked(true);
+        }
+
         return convertView;
     }
 
 
+    public void setStringDeportes(ArrayList<String> stringDeportes) {
+        this.stringDeportes = stringDeportes;
+    }
+
+    public void setStringDisciplinas(ArrayList<String> stringDisciplinas) {
+        this.stringDisciplinas = stringDisciplinas;
+    }
 }

@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaNuevosDeportes;
@@ -14,6 +15,7 @@ import com.mx.antorcha.Conexion.ConexionDeporte;
 import com.mx.antorcha.Conexion.ConexionDisciplinas;
 import com.mx.antorcha.Modelos.Disciplina;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.DisciplinasDeportesSharedPreferences;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -56,12 +58,37 @@ public class NuevoDeporteFavorito extends AppCompatActivity {
         conexionDisciplinas.execute();
         conexionDeporte.execute();
 
+        //Se cargan las preferencias del arrayList
+        final DisciplinasDeportesSharedPreferences disciplinasDeportesSharedPreferences
+                = new DisciplinasDeportesSharedPreferences(this);
+
+        //Se crean los dos arrays que guardarán los deportes favoritos seleccionados y las disciplinas
+        final ArrayList<String> stringDeportes = disciplinasDeportesSharedPreferences.getDeportes();
+        final ArrayList<String> stringDisciplinas = disciplinasDeportesSharedPreferences.getDisciplinas();
+
         //Se obitnene los datos guardados
         ArrayList<Disciplina> disciplinas = conexionBaseDatosObtener.obtenerDisciplinas();
 
         //Se Carga el listView
         ListView listViewDisciplinas = (ListView) findViewById(R.id.nuevo_deporte_lista_disciplina);
         AdaptadorListaNuevosDeportes adaptadorListaNuevosDeportes = new AdaptadorListaNuevosDeportes(this, disciplinas);
+        adaptadorListaNuevosDeportes.setStringDeportes(stringDeportes);
+        adaptadorListaNuevosDeportes.setStringDisciplinas(stringDisciplinas);
         listViewDisciplinas.setAdapter(adaptadorListaNuevosDeportes);
+
+        //el click en guardar
+        ImageView imageViewGuardar = (ImageView) findViewById(R.id.nuevo_deporte_guardar);
+        AdaptadorSVG.mostrarImagen(imageViewGuardar, this, R.raw.icono_guardar_palomita);
+
+        //En el click se guarda el arreglo
+        imageViewGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                disciplinasDeportesSharedPreferences.setDeportes(stringDeportes);
+                disciplinasDeportesSharedPreferences.setDisciplinas(stringDisciplinas);
+                Toast.makeText(NuevoDeporteFavorito.this, "Se han guardado los cambios", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
     }
 }

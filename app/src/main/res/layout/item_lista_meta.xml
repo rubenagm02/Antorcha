@@ -71,12 +71,12 @@
                     android:layout_weight="4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
-                <TextView
-                    android:gravity="center"
-                    android:background="@drawable/degradado_toolbar"
+                <ImageView
+                    android:id="@+id/item_lista_medalla_linea"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="7dp" />
+                    android:layout_height="25dp" />
                 <TextView
                     android:id="@+id/item_meta_fin"
                     android:textSize="27sp"

@@ -82,6 +82,10 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
         TextView textViewFin = (TextView) convertView.findViewById(R.id.item_meta_fin);
         textViewFin.setText(meta.getFin() + "KG");
 
+        //se coloca la linea
+        ImageView imageViewLinea = (ImageView) convertView.findViewById(R.id.item_lista_medalla_linea);
+        AdaptadorSVG.mostrarImagen(imageViewLinea, activity, R.raw.linea_meta);
+
         //Onclick de compartir
         RelativeLayout relativeLayoutClicCompartir = (RelativeLayout) convertView.findViewById(R.id.item_metas_clic_compartir);
 

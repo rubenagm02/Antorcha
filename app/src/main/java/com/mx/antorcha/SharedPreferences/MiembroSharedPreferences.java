@@ -9,7 +9,7 @@ import android.content.SharedPreferences;
  */
 public class MiembroSharedPreferences {
 
-    private String NOMBRE_SP = "";
+    private String NOMBRE_SP = "Antorcha";
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private String LLAVE_NOMBRE = "llave_nombre";

@@ -89,6 +89,38 @@
                 android:background="@drawable/edittext_diseno"
                 android:layout_width="match_parent"
                 android:layout_height="37dp" />
+            <LinearLayout
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Spinner
+                    android:id="@+id/login_fecha_dia"
+                    android:background="@drawable/edittext_diseno"
+                    android:layout_width="45dp"
+                    android:layout_height="37dp"></Spinner>
+                <Spinner
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/login_fecha_mes"
+                    android:background="@drawable/edittext_diseno"
+                    android:layout_width="45dp"
+                    android:layout_height="37dp"></Spinner>
+                <Spinner
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/login_fecha_anio"
+                    android:background="@drawable/edittext_diseno"
+                    android:layout_width="60dp"
+                    android:layout_height="37dp"></Spinner>
+                <Spinner
+                    android:id="@+id/login_sexo"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/edittext_diseno"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp">
+                </Spinner>
+            </LinearLayout>
             <ImageView
                 android:id="@+id/registro_boton_regitrarse"
                 android:layout_marginTop="30dp"
