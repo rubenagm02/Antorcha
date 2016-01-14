@@ -12,10 +12,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mx.antorcha.Activities.BuscarActividad;
-import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,7 +23,6 @@ import java.util.Map;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_FACEBOOK_IMAGEN_1;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_FACEBOOK_IMAGEN_2;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_LOGIN;
-import static com.mx.antorcha.Conexion.InfoConexion.URL_MEDALLA;
 
 /**
  *

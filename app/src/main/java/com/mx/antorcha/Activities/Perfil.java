@@ -1,10 +1,8 @@
 package com.mx.antorcha.Activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
@@ -25,16 +23,11 @@ import com.mx.antorcha.Dialogos.DialogoImagenPerfil;
 import com.mx.antorcha.LibreriaTabsSliding.SlidingTabLayout;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.R;
-import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Perfil extends AppCompatActivity {
 
