@@ -13,7 +13,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Activities.Principal;
-import com.mx.antorcha.OtrasFunciones.CalculoFechas;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONArray;
@@ -80,7 +79,7 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
 
                         if (facebook != null && facebook.length() > 0) {
                             miembroSharedPreferences.setIdFacebook(facebook);
-                            DescargarImagen.guardarImagen(activity, URL_FACEBOOK_IMAGEN_1 + facebook + URL_FACEBOOK_IMAGEN_2, "perfil_antorcha.jpg");
+                            DescargarImagen.guardarImagen(activity, URL_FACEBOOK_IMAGEN_1 + facebook + URL_FACEBOOK_IMAGEN_2, miembroSharedPreferences.getId() + ".jpg");
                         }
                         //se inicia el activity
                         //Lo que se hace cuando el Login se hace de manera correcta

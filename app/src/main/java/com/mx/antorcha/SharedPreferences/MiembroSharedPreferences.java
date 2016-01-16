@@ -50,6 +50,7 @@ public class MiembroSharedPreferences {
         editor.apply();
     }
 
+
     public int getId () {
         return sharedPreferences.getInt(LLAVE_ID, 0);
     }

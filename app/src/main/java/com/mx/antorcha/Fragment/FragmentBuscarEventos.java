@@ -1,13 +1,8 @@
 package com.mx.antorcha.Fragment;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -16,25 +11,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
 import com.mx.antorcha.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by Ruben on 15/12/2015.
@@ -80,39 +66,42 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         mapView = (MapView) rootView.findViewById(R.id.map_fragment_evento);
         mapView.onCreate(savedInstanceState);
         MapsInitializer.initialize(activity);
-        mMap = mapView.getMap();
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(2000000f));
-        mMap.setMyLocationEnabled(true);
 
-        //Onclick del mapa
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                slidingUpPanelLayout.setPanelHeight(0);
-                linearLayoutCentral.setVisibility(View.VISIBLE);
-            }
-        });
+        if (mMap != null) {
+            mMap = mapView.getMap();
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(2000000f));
+            mMap.setMyLocationEnabled(true);
 
-        //Onclick del Marker
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                slidingUpPanelLayout.setPanelHeight(pixels);
-                linearLayoutCentral.setVisibility(View.INVISIBLE);
-                return false;
-            }
-        });
+            //Onclick del mapa
+            mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    slidingUpPanelLayout.setPanelHeight(0);
+                    linearLayoutCentral.setVisibility(View.VISIBLE);
+                }
+            });
 
-        //El on click de layout
-        linearLayoutCentral = (LinearLayout) rootView.findViewById(R.id.buscar_evento_layout_click_filtro);
-        linearLayoutCentral.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogoMostrarFiltroEspacio dialogoMostrarFiltroEspacio = new DialogoMostrarFiltroEspacio();
-                dialogoMostrarFiltroEspacio.show(fragmentManager, "filtro_espacio");
-            }
-        });
+            //Onclick del Marker
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    slidingUpPanelLayout.setPanelHeight(pixels);
+                    linearLayoutCentral.setVisibility(View.INVISIBLE);
+                    return false;
+                }
+            });
+
+            //El on click de layout
+            linearLayoutCentral = (LinearLayout) rootView.findViewById(R.id.buscar_evento_layout_click_filtro);
+            linearLayoutCentral.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialogoMostrarFiltroEspacio dialogoMostrarFiltroEspacio = new DialogoMostrarFiltroEspacio();
+                    dialogoMostrarFiltroEspacio.show(fragmentManager, "filtro_espacio");
+                }
+            });
+        }
 
         return rootView;
     }

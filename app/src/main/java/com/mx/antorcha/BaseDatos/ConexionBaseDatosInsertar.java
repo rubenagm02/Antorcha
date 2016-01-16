@@ -2,7 +2,6 @@ package com.mx.antorcha.BaseDatos;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -37,7 +36,7 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
     }
 
     //Se insertan datos en la meta
-    public void insertarMeta(Meta meta){
+    public long insertarMeta(Meta meta){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues contentValues   = new ContentValues();
@@ -49,9 +48,11 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
         contentValues.put("FechaFin", meta.getFechaFin());
         contentValues.put("TipoMedida", meta.getTipoMedida());
 
-        sqLiteDatabase.insert("Meta", null, contentValues);
+        long id = sqLiteDatabase.insert("Meta", null, contentValues);
 
         Log.i(Querys.TAG_INSERTAR, "Se ha insertado una meta");
+
+        return id;
     }
 
     //Se insertan datos en la meta
@@ -63,6 +64,7 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
         contentValues.put("IdMeta", metaProgreso.getIdMeta());
         contentValues.put("Progreso",metaProgreso.getProgreso());
         contentValues.put("Fecha",metaProgreso.getFecha());
+        contentValues.put("IdServidor", 0);
 
         sqLiteDatabase.insert("MetaProgreso", null, contentValues);
 

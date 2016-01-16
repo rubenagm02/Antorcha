@@ -9,8 +9,8 @@ public class Querys {
     static String TAG_INSERTAR = "Insertando dato";
 
     /* QUERYS DE CREACION DE TABLAS */
-    static String CREAR_TABLA_METAS = "CREATE TABLE Meta (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Nombre TEXT, Inicio DECIMAL, Fin DECIMAL, FechaInicio DATE, FechaFin DATE, TipoMedida TEXT, IdServidor INTEGER)";
-    static String CREAR_TABLA_META_PROGRESO = "CREATE TABLE MetaProgreso (IdMeta INTEGER, Progreso DECIMAL, Fecha DATE)";
+    static String CREAR_TABLA_METAS = "CREATE TABLE Meta (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Nombre TEXT, Inicio DECIMAL, Fin DECIMAL, FechaInicio DATE, FechaFin DATE, TipoMedida TEXT, IdServidor INTEGER UNIQUE)";
+    static String CREAR_TABLA_META_PROGRESO = "CREATE TABLE MetaProgreso (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, IdMeta INTEGER, Progreso DECIMAL, Fecha DATE, IdServidor INTEGER UNIQUE)";
     static String CREAR_TABLA_MEDALLAS = "CREATE TABLE Medalla (Id INTEGER PRIMARY KEY, Nombre TEXT, Tipo INTEGER, Descripcion TEXT, ComoSeLogra TEXT, Imagen TEXT);";
     static String CREAR_TABLA_DISCIPLINAS = "CREATE TABLE Disciplina (Id INTEGER PRIMARY KEY, Nombre TEXT, Descripcion TEXT);";
     static String CREAR_TABLA_DEPORTES = "CREATE TABLE Deporte (Id INTEGER PRIMARY KEY, Nombre TEXT, Disciplina INTEGER, Imagen TEXT)";
@@ -24,6 +24,4 @@ public class Querys {
     static String OBTENER_DISCIPLINAS = "SELECT * FROM Disciplina";
     static String OBTENER_DEPORTES = "SELECT * FROM Deporte";
     static String OBTENER_DEPORTE_POR_DISCPLINA = "SELECT * FROM Deporte WHERE Disciplina = ";
-
-
 }

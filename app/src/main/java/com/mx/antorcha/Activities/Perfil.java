@@ -19,10 +19,12 @@ import android.widget.ListView;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorPerfilTabs;
+import com.mx.antorcha.Conexion.SubirImagen;
 import com.mx.antorcha.Dialogos.DialogoImagenPerfil;
 import com.mx.antorcha.LibreriaTabsSliding.SlidingTabLayout;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,6 +36,8 @@ public class Perfil extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ListView listView;
     private ImageView imageViewPerfil;
+    private Perfil activity;
+    private MiembroSharedPreferences miembroSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,9 @@ public class Perfil extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        //Se inicializa el shared preferences
+        miembroSharedPreferences = new MiembroSharedPreferences(this);
 
         //se carga la barra de android por el xml
         Toolbar toolbar = (Toolbar) findViewById(R.id.perfil_toolbar);
@@ -56,7 +63,7 @@ public class Perfil extends AppCompatActivity {
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("");
         listView.setAdapter(new AdapterDrawer(this, R.layout.drawer, arrayList, "Perfil"));
-
+        SubirImagen.subirImagen(this, miembroSharedPreferences.getId());
         //Se muestra el boton del drawer
         ImageView imageViewDrawer = (ImageView) findViewById(R.id.perfil_barra_drawer);
         AdaptadorSVG.mostrarImagen(imageViewDrawer, this, R.raw.icono_menu_drawer);
@@ -104,14 +111,14 @@ public class Perfil extends AppCompatActivity {
             if (requestCode == DialogoImagenPerfil.INTENT_CAMARA) {
                 Bitmap imagenPerfil = (Bitmap) data.getExtras().get("data");
                 imageViewPerfil.setImageBitmap(imagenPerfil);
-                guardarImagen(imagenPerfil);
+                guardarImagen(imagenPerfil, miembroSharedPreferences.getId());
             } else if (requestCode == DialogoImagenPerfil.INTENT_GALERIA){
                 Uri uri = data.getData();
 
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                     imageViewPerfil.setImageBitmap(bitmap);
-                    guardarImagen(bitmap);
+                    guardarImagen(bitmap, miembroSharedPreferences.getId());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -120,12 +127,12 @@ public class Perfil extends AppCompatActivity {
 
     }
 
-    static public void guardarImagen(Bitmap finalBitmap) {
+    static public void guardarImagen(Bitmap finalBitmap, int id) {
 
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/antorcha");
         myDir.mkdirs();
-        String fname = "perfil_antorcha.jpg";
+        String fname =  id + ".jpg";
         File file = new File (myDir, fname);
 
         if (file.exists ()) {

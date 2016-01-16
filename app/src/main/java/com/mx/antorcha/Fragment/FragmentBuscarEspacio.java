@@ -1,13 +1,11 @@
 package com.mx.antorcha.Fragment;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,70 +74,73 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         mapView = (MapView) rootView.findViewById(R.id.map_fragment_espacio);
         mapView.onCreate(savedInstanceState);
         MapsInitializer.initialize(getContext());
-        mMap = mapView.getMap();
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(2000000f));
-        mMap.setMyLocationEnabled(true);
+
+        if (mMap != null) {
+            mMap = mapView.getMap();
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(2000000f));
+            mMap.setMyLocationEnabled(true);
 
 
-        //Onclick del Marker
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                slidingUpPanelLayout.setPanelHeight(pixels);
-                linearLayoutCentral.setVisibility(View.INVISIBLE);
-                return false;
-            }
-        });
+            //Onclick del Marker
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    slidingUpPanelLayout.setPanelHeight(pixels);
+                    linearLayoutCentral.setVisibility(View.INVISIBLE);
+                    return false;
+                }
+            });
 
-        //Cambio de fecha
-
-
-        //Onclick del mapa
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                slidingUpPanelLayout.setPanelHeight(0);
-                linearLayoutCentral.setVisibility(View.VISIBLE);
-            }
-        });
-
-        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
-            @Override
-            public void onCameraChange(CameraPosition cameraPosition) {
-                Log.i("Google", cameraPosition.target.toString());
-            }
-        });
-
-        mMap.setInfoWindowAdapter(new MyInfoWindowAdapter(activity, linearLayoutSliding));
-
-        //Se cargan las imagenes en vectores
-        AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_compartir);
-        AdaptadorSVG.mostrarImagen(imageViewContacto, activity, R.raw.icono_llamada);
-        AdaptadorSVG.mostrarImagen(imageViewLapiz, activity, R.raw.icono_lapiz);
-        AdaptadorSVG.mostrarImagen(imageViewMarkerCentral, activity, R.raw.icono_marker_naranja);
-
-        //marker de prueba
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(20.699359689441785,-103.29570472240448))
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            //Cambio de fecha
 
 
-        //El on click de layout
-        linearLayoutCentral = (LinearLayout) rootView.findViewById(R.id.buscar_espacio_layout_click_filtro);
-        linearLayoutCentral.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogoMostrarFiltroEspacio dialogoMostrarFiltroEspacio = new DialogoMostrarFiltroEspacio();
-                dialogoMostrarFiltroEspacio.show(fragmentManager, "filtro_espacio");
-            }
-        });
-        ConexionBuscarEspacio conexionBuscarEspacio = new ConexionBuscarEspacio(activity, mMap);
-        conexionBuscarEspacio.execute();
+            //Onclick del mapa
+            mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    slidingUpPanelLayout.setPanelHeight(0);
+                    linearLayoutCentral.setVisibility(View.VISIBLE);
+                }
+            });
 
-        //Se carga la imagen del boton de asignarme espacio
-        ImageView imageViewAsignarmeEspacio = (ImageView) rootView.findViewById(R.id.buscar_espacio_boton_asignarme_espacio);
-        AdaptadorSVG.mostrarImagen(imageViewAsignarmeEspacio, activity, R.raw.boton_asisto_centro_deportivo);
+            mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+                @Override
+                public void onCameraChange(CameraPosition cameraPosition) {
+                    Log.i("Google", cameraPosition.target.toString());
+                }
+            });
+
+            mMap.setInfoWindowAdapter(new MyInfoWindowAdapter(activity, linearLayoutSliding));
+
+            //Se cargan las imagenes en vectores
+            AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_compartir);
+            AdaptadorSVG.mostrarImagen(imageViewContacto, activity, R.raw.icono_llamada);
+            AdaptadorSVG.mostrarImagen(imageViewLapiz, activity, R.raw.icono_lapiz);
+            AdaptadorSVG.mostrarImagen(imageViewMarkerCentral, activity, R.raw.icono_marker_naranja);
+
+            //marker de prueba
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(20.699359689441785,-103.29570472240448))
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+
+            //El on click de layout
+            linearLayoutCentral = (LinearLayout) rootView.findViewById(R.id.buscar_espacio_layout_click_filtro);
+            linearLayoutCentral.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialogoMostrarFiltroEspacio dialogoMostrarFiltroEspacio = new DialogoMostrarFiltroEspacio();
+                    dialogoMostrarFiltroEspacio.show(fragmentManager, "filtro_espacio");
+                }
+            });
+            ConexionBuscarEspacio conexionBuscarEspacio = new ConexionBuscarEspacio(activity, mMap);
+            conexionBuscarEspacio.execute();
+
+            //Se carga la imagen del boton de asignarme espacio
+            ImageView imageViewAsignarmeEspacio = (ImageView) rootView.findViewById(R.id.buscar_espacio_boton_asignarme_espacio);
+            AdaptadorSVG.mostrarImagen(imageViewAsignarmeEspacio, activity, R.raw.boton_asisto_centro_deportivo);
+        }
 
         return rootView;
     }

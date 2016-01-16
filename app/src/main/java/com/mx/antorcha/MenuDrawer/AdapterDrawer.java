@@ -23,6 +23,7 @@ import com.mx.antorcha.Activities.Medallas;
 import com.mx.antorcha.Activities.Metas;
 import com.mx.antorcha.Activities.Perfil;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
+import com.mx.antorcha.Conexion.DescargarImagen;
 import com.mx.antorcha.Fragment.FragmentPerfilPerfil;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
@@ -34,23 +35,25 @@ import java.util.ArrayList;
  */
 public class AdapterDrawer extends ArrayAdapter<String> {
     private int resource;
-    ImageView imageViewBuscarActividad;
-    ImageView imageViewActividades;
-    ImageView imageViewPerfil;
-    ImageView imageViewMedallas;
-    ImageView imageViewMetas;
-    ImageView imageViewMas;
-    ImageView imageViewAyudanosMejorar;
+    private ImageView imageViewBuscarActividad;
+    private ImageView imageViewActividades;
+    private ImageView imageViewPerfil;
+    private ImageView imageViewMedallas;
+    private ImageView imageViewMetas;
+    private ImageView imageViewMas;
+    private ImageView imageViewAyudanosMejorar;
 
-    LinearLayout linearLayoutBuscarActividad;
-    LinearLayout linearLayoutActividades;
-    LinearLayout linearLayoutPerfil;
-    LinearLayout linearLayoutMedallas;
-    LinearLayout linearLayoutMetas;
-    LinearLayout linearLayoutAyudanosMejorar;
+    private LinearLayout linearLayoutBuscarActividad;
+    private LinearLayout linearLayoutActividades;
+    private LinearLayout linearLayoutPerfil;
+    private LinearLayout linearLayoutMedallas;
+    private LinearLayout linearLayoutMetas;
+    private LinearLayout linearLayoutAyudanosMejorar;
 
-    Activity activity;
-    String actividad;
+    private Activity activity;
+    private String actividad;
+
+    MiembroSharedPreferences miembroSharedPreferences;
 
     public AdapterDrawer(Activity activity, int resource, ArrayList<String> palabra, String actividad) {
         super(activity, resource, palabra);
@@ -65,6 +68,9 @@ public class AdapterDrawer extends ArrayAdapter<String> {
         LayoutInflater vi;
         vi = LayoutInflater.from(getContext());
         convertView = vi.inflate(resource, null);
+
+        //Se carga el sharedPreferences del miembro
+        miembroSharedPreferences = new MiembroSharedPreferences(activity);
 
         //Se inicializan las imagenes para poder mostrar el icono en svg
         imageViewBuscarActividad = (ImageView)
@@ -188,19 +194,14 @@ public class AdapterDrawer extends ArrayAdapter<String> {
         });
 
         //se obtiene la imagen guardada en el celular
-        Bitmap bitmapImagenPerfil = FragmentPerfilPerfil.obtenerImagen();
+        Bitmap bitmapImagenPerfil = FragmentPerfilPerfil.obtenerImagen(miembroSharedPreferences.getId());
 
         //se carga la imagen de perfil
         ImageView imageViewImagenPerfil = (ImageView)  convertView.findViewById(R.id.drawer_imagen_perfil);
 
-
-
         if (bitmapImagenPerfil != null) {
             imageViewImagenPerfil.setImageBitmap(bitmapImagenPerfil);
         }
-
-        //Se carga el sharedPreferences del miembro
-        final MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
 
         //Se carga la información de usuario
         TextView textViewNombre = (TextView) convertView.findViewById(R.id.drawer_nombre_miembro);
@@ -244,6 +245,8 @@ public class AdapterDrawer extends ArrayAdapter<String> {
                 //Se borra la base de datos
                 activity.deleteDatabase("Antorcha");
 
+                //Se borra la imagen de perfil
+                DescargarImagen.borrarImagen(miembroSharedPreferences.getId());
             }
         });
 

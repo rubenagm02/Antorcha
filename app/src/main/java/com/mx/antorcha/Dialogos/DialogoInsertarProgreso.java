@@ -11,12 +11,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.mx.antorcha.Adaptadores.AdaptadorListaMetas;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
-import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.Modelos.MetaProgreso;
 import com.mx.antorcha.R;
 
@@ -43,9 +41,9 @@ public class DialogoInsertarProgreso extends DialogFragment {
             @Override
             public void onClick(View v) {
                 MetaProgreso metaProgreso = new MetaProgreso(
-                        idMeta,
+                        0, idMeta,
                         Double.parseDouble(editTextNuevoProgreso.getText().toString()),
-                        "2015-11-10");
+                        "2015-11-10", 0);
 
                 ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
                 conexionBaseDatosInsertar.insertarMetaProgreso(metaProgreso);

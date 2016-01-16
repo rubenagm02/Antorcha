@@ -167,4 +167,10 @@ public class DescargarImagen {
             });
         }
     }
+
+    static public void borrarImagen(int id){
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/antorcha/" + id + ".jpg");
+        myDir.delete();
+    }
 }

@@ -24,8 +24,6 @@ import com.mx.antorcha.OtrasFunciones.CalculoFechas;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -39,11 +37,15 @@ public class FragmentPerfilPerfil extends Fragment {
     private Activity activity;
     private FragmentManager fragmentManager;
     private Perfil perfil;
+    private MiembroSharedPreferences miembroSharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_perfil_perfil, container, false);
+
+        //Se iniciaiza el shared prefecrences
+        miembroSharedPreferences = new MiembroSharedPreferences(activity);
 
         /******** VARIABLES TEMPORALES PARA PRUEBAS *******/
         ArrayList<Medalla> medallas = new ArrayList<>();
@@ -96,7 +98,7 @@ public class FragmentPerfilPerfil extends Fragment {
 
         perfil.setImageViewPerfil(imageViewPerfil);
 
-        Bitmap bitmapImagenPerfil = obtenerImagen();
+        Bitmap bitmapImagenPerfil = obtenerImagen(miembroSharedPreferences.getId());
 
         if (bitmapImagenPerfil != null) {
             imageViewPerfil.setImageBitmap(bitmapImagenPerfil);
@@ -128,9 +130,9 @@ public class FragmentPerfilPerfil extends Fragment {
         this.perfil = perfil;
     }
 
-    static public Bitmap obtenerImagen () {
+    static public Bitmap obtenerImagen (int id) {
         String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/antorcha/perfil_antorcha.jpg");
+        File myDir = new File(root + "/antorcha/" + id + ".jpg");
         Bitmap bitmap = null;
 
         try {

@@ -14,7 +14,6 @@ import com.mx.antorcha.Modelos.Meta;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +28,7 @@ import static com.mx.antorcha.Conexion.InfoConexion.URL_META;
 public class ConexionMetas extends AsyncTask<Void, Void, Void>{
 
     private Activity activity;
+    private int id;
 
     public ConexionMetas (Activity activity) {
         this.activity = activity;
@@ -72,7 +72,7 @@ public class ConexionMetas extends AsyncTask<Void, Void, Void>{
                     {
                         Map<String, String>  params = new HashMap<>();
                         // the POST parameters:
-                        params.put("idMiembro", "1");
+                        params.put("idMiembro", id + "");
                         params.put("nombre", meta.getNombre());
                         params.put("fechaInicio", meta.getFechaInicio());
                         params.put("fechaFin", meta.getFechaFin());
@@ -93,5 +93,9 @@ public class ConexionMetas extends AsyncTask<Void, Void, Void>{
     @Override
     protected void onPostExecute(Void v){
 
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

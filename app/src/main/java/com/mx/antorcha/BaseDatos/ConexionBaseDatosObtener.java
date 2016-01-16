@@ -1,7 +1,6 @@
 package com.mx.antorcha.BaseDatos;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -12,7 +11,6 @@ import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.Modelos.MetaProgreso;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -65,8 +63,6 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
         return metas;
     }
 
-
-
     public ArrayList<MetaProgreso> obtenerMetaProgreso (int idMeta) {
         ArrayList<MetaProgreso> metaProgresos = new ArrayList<>();
 
@@ -77,10 +73,11 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()) {
 
             metaProgresos.add(new MetaProgreso(
+                    cursor.getInt(cursor.getColumnIndex("Id")),
                     cursor.getInt(cursor.getColumnIndex("IdMeta")),
                     cursor.getDouble(cursor.getColumnIndex("Progreso")),
-                    cursor.getString(cursor.getColumnIndex("Fecha"))
-            ));
+                    cursor.getString(cursor.getColumnIndex("Fecha")),
+                    cursor.getInt(cursor.getColumnIndex("IdServidor"))));
 
             cursor.moveToNext();
         }

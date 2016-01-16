@@ -96,7 +96,7 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
 
                                     if (idFacebook != null && idFacebook.length() > 0) {
                                         miembroSharedPreferences.setIdFacebook(idFacebook);
-                                        DescargarImagen.guardarImagen(activity, URL_FACEBOOK_IMAGEN_1 + idFacebook + URL_FACEBOOK_IMAGEN_2, "perfil_antorcha.jpg");
+                                        DescargarImagen.guardarImagen(activity, URL_FACEBOOK_IMAGEN_1 + idFacebook + URL_FACEBOOK_IMAGEN_2, miembroSharedPreferences.getId() +".jpg");
 
                                     }
 
@@ -127,15 +127,25 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
                         }
-
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+
+                        if (idFacebook != null) {
+                            ConexionRegistro conexionRegistro= new ConexionRegistro(
+                                    nombre,
+                                    genero.substring(0,1),
+                                    correo,
+                                    "facebook", //No va ningún password
+                                    fechaNacimiento,
+                                    activity);
+                            conexionRegistro.setFacebook(idFacebook);
+                            conexionRegistro.execute();
+                        }
                     }
                 }
         ) {

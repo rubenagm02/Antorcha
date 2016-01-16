@@ -17,7 +17,11 @@ public class InfoConexion {
     final static public String URL_DISCIPLINA = "http://api.antorcha.mx/V0.1/disciplinas";
     final static public String URL_DEPORTE = "http://api.antorcha.mx/V0.1/deportes";
     final static public String URL_RESENIA = "";
-
+    final static public String URL_DESCARGAR_METAS = "http://api.antorcha.mx/V0.1/metas/";
+    final static public String URL_DESCARGAR_PROGRESO_METAS = "http://api.antorcha.mx/V0.1/metaProgresos/";
     final static public String URL_FACEBOOK_IMAGEN_1 = "https://graph.facebook.com/";
     final static public String URL_FACEBOOK_IMAGEN_2 = "/picture?type=large";
+    final static public String URL_DESCARGAR_IMAGEN = "http://asistencias.esy.es/imagenes/";
+    final static public String URL_SUBIR_IMAGEN = "http://asistencias.esy.es/imagenPost.php";
+    //final static public String URL_SUBIR_IMAGEN = "http://api.antorcha.mx/V0.1/miembros/subirImagen";
 }

@@ -1,15 +1,7 @@
 package com.mx.antorcha.Adaptadores;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.net.Uri;
-import android.os.Environment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.util.LruCache;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,21 +12,16 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.mx.antorcha.Activities.Perfil;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Compartir.Compartir;
+import com.mx.antorcha.Conexion.ConexionMetaProgreso;
 import com.mx.antorcha.Dialogos.DialogoMeta;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.Modelos.MetaProgreso;
 import com.mx.antorcha.R;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -132,6 +119,9 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
                 dialogoMeta.show(fragmentManager, "dialogo_meta");
             }
         });
+
+        final ConexionMetaProgreso conexionMetaProgreso = new ConexionMetaProgreso(activity, meta.getId());
+        conexionMetaProgreso.execute();
         return convertView;
     }
 

@@ -15,7 +15,11 @@ public class ConexionBaseDatosActualizar extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL(Querys.CREAR_TABLA_METAS);
+        db.execSQL(Querys.CREAR_TABLA_META_PROGRESO);
+        db.execSQL(Querys.CREAR_TABLA_MEDALLAS);
+        db.execSQL(Querys.CREAR_TABLA_DEPORTES);
+        db.execSQL(Querys.CREAR_TABLA_DISCIPLINAS);
     }
 
     @Override
@@ -33,5 +37,17 @@ public class ConexionBaseDatosActualizar extends SQLiteOpenHelper{
 
         //Actualizamos el registro en la base de datos
         db.update("Meta", valores, "Id=" + idMeta, null);
+    }
+
+    //Actualizar id MetasProgreso
+    public void actualizarMetaProgreso (int IdMetaProgreso, int idServidor) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        //Establecemos los campos-valores a actualizar
+        ContentValues valores = new ContentValues();
+        valores.put("IdServidor", idServidor + "");
+
+        //Actualizamos el registro en la base de datos
+        db.update("MetaProgreso", valores, "Id=" + IdMetaProgreso, null);
     }
 }
