@@ -15,8 +15,8 @@ import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Activities.Principal;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +37,7 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
     private String fechaNacimiento;
     private Activity activity;
     private String facebook;
+    private String google;
     private boolean bandera = false; //Determina si se cambia de actividad o no
 
     public ConexionRegistro(String nombre, String sexo, String correo, String password, String fechaNacimiento, Activity activity) {
@@ -67,7 +68,7 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
                     int id;
 
                     try {
-                        id = new JSONArray(response).getJSONObject(0).getInt("id");
+                        id = new JSONObject(response).getInt("id");
 //Y los decodifico como un json... eso sí lo saben...
                         //Se guardan los cambios en el Shared preferences
                         MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
@@ -111,7 +112,9 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
                 if (facebook != null && facebook != "") {
                     params.put("facebook", facebook);
                     params.put("fechaNacimiento", fechaNacimiento);
-                } else {
+                } else if (google != null && google != "") {
+                    params.put("google", google);
+                }else {
                     params.put("pass", password);
                     params.put("fechaNacimiento", fechaNacimiento);
                 }
@@ -146,5 +149,9 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
 
     public void setFacebook(String facebook) {
         this.facebook = facebook;
+    }
+
+    public void setGoogle(String google) {
+        this.google = google;
     }
 }

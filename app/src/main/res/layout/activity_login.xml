@@ -44,10 +44,10 @@
         <ImageView
             android:src="@drawable/logo_antorcha"
             android:layout_width="wrap_content"
-            android:layout_height="140dp" />
+            android:layout_height="130dp" />
         <TextView
-            android:layout_marginTop="15dp"
-            android:textSize="20sp"
+            android:layout_marginTop="12dp"
+            android:textSize="19sp"
             android:fontFamily="sans-serif-light"
             android:textColor="#FFFFFF"
             android:gravity="center"
@@ -58,7 +58,7 @@
             android:id="@+id/login_campo_correo"
             android:textSize="14sp"
             android:gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="13dp"
             android:background="@drawable/edittext_diseno"
             android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
@@ -66,7 +66,7 @@
             android:layout_height="35dp" />
         <EditText
             android:id="@+id/login_campo_pass"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="7dp"
             android:textSize="14sp"
             android:gravity="center"
             android:inputType="textPassword"
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="39dp" />
         <TextView
-            android:textSize="13sp"
+            android:textSize="12sp"
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:fontFamily="sans-serif-light"
@@ -90,13 +90,23 @@
         <ImageView
             android:id="@+id/login_imagen_o"
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="15dp" />
 
         <com.facebook.login.widget.LoginButton
+            android:paddingLeft="15dp"
+            android:paddingTop="13dp"
+            android:paddingBottom="12dp"
             android:layout_gravity="center"
             android:id="@+id/login_facebook_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <com.google.android.gms.common.SignInButton
+            android:layout_marginTop="15dp"
+            android:id="@+id/sign_in_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 
         <LinearLayout
             android:layout_width="match_parent"

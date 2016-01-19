@@ -51,7 +51,7 @@
         <item>07</item>
         <item>08</item>
         <item>09</item>
-        <item>00</item>
+        <item>10</item>
         <item>11</item>
         <item>12</item>
     </string-array>
@@ -122,4 +122,5 @@
         <item>Masculino</item>
         <item>Femenino</item>
     </string-array>
+    <string name="server_client_id">272806355866-b15alkvvgt7qagln5pj49ilijkieouu0.apps.googleusercontent.com</string>
 </resources>

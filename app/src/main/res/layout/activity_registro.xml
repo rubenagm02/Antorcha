@@ -41,6 +41,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="15">
+            <TextView
+                android:alpha=".87"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif-light"
+                android:textSize="22sp"
+                android:text="Crea una cuenta con nosotros"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <EditText
                 android:inputType="textPersonName"
                 android:id="@+id/registro_nombre"
@@ -126,6 +136,17 @@
                 android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="42dp" />
+
+            <TextView
+                android:alpha=".87"
+                android:layout_marginTop="15dp"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:fontFamily="sans-serif-light"
+                android:text="Al registrarme acepto los términos y condiciones"
+                android:textSize="13sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </LinearLayout>

@@ -115,6 +115,16 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
                                                 activity);
                                         conexionRegistro.setFacebook(idFacebook);
                                         conexionRegistro.execute();
+                                    } else if (idGoogle != null && idGoogle != "") {
+                                        ConexionRegistro conexionRegistro= new ConexionRegistro(
+                                                nombre,
+                                                genero.substring(0,1),
+                                                correo,
+                                                "facebook", //No va ningún password
+                                                fechaNacimiento,
+                                                activity);
+                                        conexionRegistro.setGoogle(idGoogle);
+                                        conexionRegistro.execute();
                                     } else {
                                         //No se pudo acceder con el login
 
@@ -145,6 +155,16 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
                                     activity);
                             conexionRegistro.setFacebook(idFacebook);
                             conexionRegistro.execute();
+                        } else if (idGoogle != null && idGoogle != "") {
+                            ConexionRegistro conexionRegistro= new ConexionRegistro(
+                                    nombre,
+                                    genero.substring(0,1),
+                                    correo,
+                                    "facebook", //No va ningún password
+                                    fechaNacimiento,
+                                    activity);
+                            conexionRegistro.setGoogle(idGoogle);
+                            conexionRegistro.execute();
                         }
                     }
                 }
@@ -157,11 +177,11 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
                 //Dentro de Java aquí agrego los parametros de el regsitro y el login
                 if (correo != null && password != null) {
                     params.put("correo", correo);
-                    params.put("password", password);
+                    params.put("pass", password);
                 } else if (idFacebook != null) {
                     params.put("idFacebook", idFacebook);
                 } else if (idGoogle != null) {
-                    params.put("google", idGoogle);
+                    params.put("idGoogle", idGoogle);
                 } else {
                     Toast.makeText(activity,
                             "Estamos teniendo un problema para iniciar sesión, " +

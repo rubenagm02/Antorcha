@@ -1,33 +1,15 @@
 package com.mx.antorcha.Activities;
 
-import android.content.Intent;
-import android.content.IntentSender;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.plus.Plus;
-import com.google.android.gms.plus.model.people.Person;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Conexion.ConexionRegistro;
 import com.mx.antorcha.R;
@@ -103,10 +85,33 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (editTextNombre.getText().toString().length() > 3
-                        && editTextApellido.getText().toString().length() > 3
-                        && editTextCorreo.getText().toString().length() > 5
-                        && editTextPassword.getText().toString().length() > 3) {
+
+                String mensaje = "";
+                boolean bandera = true;
+
+                if (editTextNombre.getText().toString().length() < 3) {
+                    mensaje += "Te hace falta llenar el campo de nombre, ";
+                    bandera = false;
+                }
+
+                if (editTextApellido.getText().toString().length() < 3) {
+                    mensaje += "Te hace falta llenar el campo de apellidos, ";
+                    bandera = false;
+                }
+
+                if (editTextPassword.getText().toString().length() < 4) {
+                    mensaje += "La contraseña debe ser de al menos 4 caracteres, ";
+                    bandera = false;
+                }
+
+                if (!editTextCorreo.getText().toString()
+                        .matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$")) {
+                    mensaje += "El formato del correo es incorrecto (con este correo te vamos a identificar)";
+                    bandera = false;
+                }
+
+                if (bandera) {
+                    //Correcto
                     ConexionRegistro conexionRegistro = new ConexionRegistro(
                             editTextNombre.getText().toString() + " " + editTextApellido.getText().toString(),
                             spinnerSexo.getSelectedItem().toString().substring(0,1).toUpperCase(),
@@ -120,9 +125,7 @@ public class Registro extends AppCompatActivity {
 
                     conexionRegistro.execute();
                 } else {
-                    Toast.makeText(Registro.this,
-                            "Debes llenar todos los campos para completar el registro",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(Registro.this, mensaje, Toast.LENGTH_LONG).show();
                 }
             }
         });
