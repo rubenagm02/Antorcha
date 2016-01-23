@@ -6,10 +6,10 @@ package com.mx.antorcha.Modelos;
 public class Deporte {
     private int id;
     private String nombre;
-    private String disciplina;
+    private int disciplina;
     private String imagen;
 
-    public Deporte(int id, String nombre, String disciplina, String imagen) {
+    public Deporte(int id, String nombre, int disciplina, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.disciplina = disciplina;
@@ -36,11 +36,11 @@ public class Deporte {
         this.nombre = nombre;
     }
 
-    public String getDisciplina() {
+    public int getDisciplina() {
         return disciplina;
     }
 
-    public void setDisciplina(String disciplina) {
+    public void setDisciplina(int disciplina) {
         this.disciplina = disciplina;
     }
 

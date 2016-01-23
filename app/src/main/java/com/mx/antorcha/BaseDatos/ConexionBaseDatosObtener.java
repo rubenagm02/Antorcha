@@ -149,7 +149,7 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
             deportes.add(new Deporte(
                     cursor.getInt(cursor.getColumnIndex("Id")),
                     cursor.getString(cursor.getColumnIndex("Nombre")),
-                    cursor.getString(cursor.getColumnIndex("Descripcion")),
+                    cursor.getInt(cursor.getColumnIndex("Disciplina")),
                     cursor.getString(cursor.getColumnIndex("Imagen"))
             ));
 
@@ -173,7 +173,7 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
             deportes.add(new Deporte(
                     cursor.getInt(cursor.getColumnIndex("Id")),
                     cursor.getString(cursor.getColumnIndex("Nombre")),
-                    cursor.getString(cursor.getColumnIndex("Disciplina")),
+                    cursor.getInt(cursor.getColumnIndex("Disciplina")),
                     cursor.getString(cursor.getColumnIndex("Imagen"))
             ));
 

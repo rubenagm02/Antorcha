@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 import java.util.ArrayList;
 
 /**
- * Created by Ruben on 06/01/2016.
+ *
  */
 public class DisciplinasDeportesSharedPreferences {
 

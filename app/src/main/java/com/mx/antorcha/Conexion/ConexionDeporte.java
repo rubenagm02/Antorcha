@@ -11,7 +11,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
 import com.mx.antorcha.Modelos.Deporte;
-import com.mx.antorcha.Modelos.Disciplina;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.mx.antorcha.Conexion.InfoConexion.URL_DEPORTE;
-import static com.mx.antorcha.Conexion.InfoConexion.URL_MEDALLA;
 
 /**
  * Created by Ruben on 30/12/2015.
@@ -49,11 +47,11 @@ public class ConexionDeporte extends AsyncTask<Void, Void, Void> {
 
                             for (int x = 0; x < jsonArray.length(); x++) {
 
-                                //Se obtienen los datos y se mandan a la medalla
+                                //Se obtienen los datos y se mandan al deporte
                                 Deporte deporte = new Deporte(
                                         Integer.parseInt(jsonArray.getJSONObject(x).getString("id")),
                                         jsonArray.getJSONObject(x).getString("nombre"),
-                                        jsonArray.getJSONObject(x).getString("disciplina"),
+                                        jsonArray.getJSONObject(x).getInt("disciplina"),
                                         jsonArray.getJSONObject(x).getString("imagen")
                                 );
 
