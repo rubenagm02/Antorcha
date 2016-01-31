@@ -18,7 +18,7 @@ import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.R;
 
 import java.util.ArrayList;
-
+//
 public class Actividades extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
