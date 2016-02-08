@@ -50,13 +50,6 @@ public class NuevoDeporteFavorito extends AppCompatActivity {
         /***********/
 
         ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(this);
-
-        //se ejcutan los hilos para verificar los datos
-        ConexionDisciplinas conexionDisciplinas = new ConexionDisciplinas(this);
-        ConexionDeporte conexionDeporte = new ConexionDeporte(this);
-        conexionDisciplinas.execute();
-        conexionDeporte.execute();
-
         //Se cargan las preferencias del arrayList
         final DisciplinasDeportesSharedPreferences disciplinasDeportesSharedPreferences
                 = new DisciplinasDeportesSharedPreferences(this);
@@ -90,5 +83,14 @@ public class NuevoDeporteFavorito extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        //se ejcutan los hilos para verificar los datos
+        ConexionDisciplinas conexionDisciplinas = new ConexionDisciplinas(this);
+        ConexionDeporte conexionDeporte = new ConexionDeporte(this);
+        conexionDeporte.setListView(listViewDisciplinas);
+        conexionDisciplinas.setListView(listViewDisciplinas);
+        conexionDisciplinas.execute();
+        conexionDeporte.execute();
     }
 }

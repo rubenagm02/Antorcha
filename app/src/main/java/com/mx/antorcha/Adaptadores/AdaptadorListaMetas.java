@@ -64,10 +64,10 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
 
         //Cantidad de la meta
         TextView textViewInicio = (TextView) convertView.findViewById(R.id.item_meta_inicio);
-        textViewInicio.setText(meta.getInicio() + "KG");
+        textViewInicio.setText(meta.getInicio() + obtenerMedida(meta.getTipoMedida()));
 
         TextView textViewFin = (TextView) convertView.findViewById(R.id.item_meta_fin);
-        textViewFin.setText(meta.getFin() + "KG");
+        textViewFin.setText(meta.getFin() + obtenerMedida(meta.getTipoMedida()));
 
         //se coloca la linea
         ImageView imageViewLinea = (ImageView) convertView.findViewById(R.id.item_lista_medalla_linea);
@@ -121,6 +121,7 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
         });
 
         final ConexionMetaProgreso conexionMetaProgreso = new ConexionMetaProgreso(activity, meta.getId());
+        conexionMetaProgreso.setIdServidor(meta.getIdServidor());
         conexionMetaProgreso.execute();
         return convertView;
     }
@@ -163,5 +164,26 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
     public void setListView(ListView listView) {
         this.listView = listView;
     }
+
+    public String obtenerMedida (String medida) {
+        switch (medida) {
+            case "Kilogramo" : {
+                return "KG";
+            }
+            case "Metros" : {
+                return "MT";
+            }
+            case "Centimetros" : {
+                return "CM";
+            }
+            case "Kilometros" : {
+                return "KM";
+            }
+            default : {
+                return "N/A";
+            }
+        }
+    }
+
 
 }

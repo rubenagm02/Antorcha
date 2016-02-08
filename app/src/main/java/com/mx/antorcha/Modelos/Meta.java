@@ -13,8 +13,9 @@ public class Meta {
     private String fechaInicio;
     private String tipoMedida;
     private int idServidor;
+    private int estado;
 
-    public Meta(int id, double inicio, double fin, String nombre, String fechaFin, String fechaInicio, String tipoMedida, int idServidor) {
+    public Meta(int id, double inicio, double fin, String nombre, String fechaFin, String fechaInicio, String tipoMedida, int idServidor, int estado) {
         this.id = id;
         this.inicio = inicio;
         this.fin = fin;
@@ -23,6 +24,7 @@ public class Meta {
         this.nombre = nombre;
         this.tipoMedida = tipoMedida;
         this.idServidor = idServidor;
+        this.estado = estado;
     }
 
     public Meta () {
@@ -91,5 +93,13 @@ public class Meta {
 
     public void setIdServidor(int idServidor) {
         this.idServidor = idServidor;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 }

@@ -1,9 +1,12 @@
 package com.mx.antorcha.Dialogos;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +14,20 @@ import android.view.Window;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.mx.antorcha.Activities.Inicio;
+import com.mx.antorcha.Adaptadores.AdaptadorListaMetas;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosActualizar;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.Modelos.MetaProgreso;
 import com.mx.antorcha.R;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 /**
- * Created by Ruben on 21/12/2015.
+ *
  */
 public class DialogoMeta extends DialogFragment {
 
@@ -53,6 +62,43 @@ public class DialogoMeta extends DialogFragment {
                 getDialog().dismiss();
             }
         });
+
+        //Al dar click en eliminar
+        TextView textViewEliminar = (TextView) view.findViewById(R.id.dialogo_meta_eliminar);
+
+        textViewEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(activity).setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Cuando se responde sí se borra la meta (Lógicamente)
+                        ConexionBaseDatosActualizar conexionBaseDatosActualizar =
+                                new ConexionBaseDatosActualizar(activity);
+
+                        conexionBaseDatosActualizar.borrarMeta(idMeta);
+
+                        if (listView != null) {
+                            //Se actualiza la lista
+                            ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
+                            ArrayList<Meta> metas = conexionBaseDatosObtener.obtenerMetas();
+
+                            AdaptadorListaMetas adaptadorListaMetas = new AdaptadorListaMetas(activity, metas, fragmentManager);
+
+                            listView.setAdapter(adaptadorListaMetas);
+                        }
+
+                        getDialog().dismiss();
+
+                    }
+                }).setNegativeButton("No", null)
+                        .setIcon(R.drawable.logo_antorcha)
+                        .setMessage("¿Seguro que desea eliminar la meta?")
+                        .setTitle("Eliminar meta")
+                        .show();
+            }
+        });
+
         return view;
     }
 

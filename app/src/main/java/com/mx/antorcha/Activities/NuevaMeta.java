@@ -124,6 +124,7 @@ public class NuevaMeta extends AppCompatActivity {
                     meta.setFechaInicio(anio + "-" + mes + "-" + dia);
                     meta.setFechaFin(textViewCalendario.getText().toString());
                     meta.setTipoMedida(spinnerTipo.getSelectedItem().toString());
+                    meta.setEstado(1);
 
                     ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
                     conexionBaseDatosInsertar.insertarMeta(meta);

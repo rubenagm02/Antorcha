@@ -19,7 +19,7 @@ import com.mx.antorcha.Modelos.MetaProgreso;
 import com.mx.antorcha.R;
 
 /**
- * Created by Ruben on 21/12/2015.
+ * C
  */
 public class DialogoInsertarProgreso extends DialogFragment {
 
@@ -27,14 +27,14 @@ public class DialogoInsertarProgreso extends DialogFragment {
     private Activity activity;
     private ListView listView;
     private FragmentManager fragmentManager;
-
+    private EditText editTextNuevoProgreso;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialogo_insertar_progreso, container);
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
-        final EditText editTextNuevoProgreso = (EditText) view.findViewById(R.id.dialogo_nuevo_progreso);
+        editTextNuevoProgreso = (EditText) view.findViewById(R.id.dialogo_nuevo_progreso);
 
         Button button = (Button) view.findViewById(R.id.dialogo_guardar_nuevo_progreso);
         button.setOnClickListener(new View.OnClickListener() {
@@ -48,9 +48,13 @@ public class DialogoInsertarProgreso extends DialogFragment {
                 ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
                 conexionBaseDatosInsertar.insertarMetaProgreso(metaProgreso);
 
-                ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
-                AdaptadorListaMetas adaptadorListaMetas = new AdaptadorListaMetas(activity, conexionBaseDatosObtener.obtenerMetas(), fragmentManager );
-                listView.setAdapter(adaptadorListaMetas);
+
+                if (listView != null) {
+                    ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
+                    AdaptadorListaMetas adaptadorListaMetas = new AdaptadorListaMetas(activity, conexionBaseDatosObtener.obtenerMetas(), fragmentManager );
+
+                    listView.setAdapter(adaptadorListaMetas);
+                }
 
                 getDialog().dismiss();
             }

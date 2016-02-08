@@ -12,13 +12,18 @@ import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.Modelos.MetaProgreso;
 
+import java.util.ArrayList;
+
 /**
- * Created by Ruben on 20/12/2015.
+ *
  */
 public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
+    private Activity activity;
 
     public ConexionBaseDatosInsertar(Activity activity) {
         super(activity, "Antorcha", null, 1);
+
+        this.activity = activity;
     }
 
     @Override
@@ -47,6 +52,8 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
         contentValues.put("FechaInicio", meta.getFechaInicio());
         contentValues.put("FechaFin", meta.getFechaFin());
         contentValues.put("TipoMedida", meta.getTipoMedida());
+        contentValues.put("IdServidor", meta.getIdServidor());
+        contentValues.put("Estado", 1);
 
         long id = sqLiteDatabase.insert("Meta", null, contentValues);
 
@@ -57,18 +64,31 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
 
     //Se insertan datos en la meta
     public void insertarMetaProgreso(MetaProgreso metaProgreso){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
-        ContentValues contentValues   = new ContentValues();
+        ArrayList<MetaProgreso> metaProgresos =
+                new ConexionBaseDatosObtener(activity).obtenerMetaProgreso(metaProgreso.getIdMeta());
 
-        contentValues.put("IdMeta", metaProgreso.getIdMeta());
-        contentValues.put("Progreso",metaProgreso.getProgreso());
-        contentValues.put("Fecha",metaProgreso.getFecha());
-        contentValues.put("IdServidor", 0);
+        ArrayList<Integer> enteros = new ArrayList<>();
 
-        sqLiteDatabase.insert("MetaProgreso", null, contentValues);
+        for (MetaProgreso metaProgreso1 : metaProgresos) {
+            enteros.add(metaProgreso1.getIdServidor());
+        }
 
-        Log.i(Querys.TAG_INSERTAR, "Se ha insertado una meta progreso");
+        if (metaProgreso.getIdServidor() == 0 || (!enteros.contains(metaProgreso.getIdServidor()))) {
+            SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+            ContentValues contentValues   = new ContentValues();
+
+            contentValues.put("IdMeta", metaProgreso.getIdMeta());
+            contentValues.put("Progreso",metaProgreso.getProgreso());
+            contentValues.put("Fecha",metaProgreso.getFecha());
+            contentValues.put("IdServidor", metaProgreso.getIdServidor());
+
+            sqLiteDatabase.insert("MetaProgreso", null, contentValues);
+
+            Log.i(Querys.TAG_INSERTAR, "Se ha insertado una meta progreso");
+        }
+
     }
 
     //Se insertan las medallas

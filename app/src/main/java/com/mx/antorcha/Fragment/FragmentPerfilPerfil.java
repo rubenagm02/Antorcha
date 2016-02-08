@@ -13,15 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mx.antorcha.Activities.Perfil;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaMedallas;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
+import com.mx.antorcha.Dialogos.DialogoActualizarPerfil;
 import com.mx.antorcha.Dialogos.DialogoImagenPerfil;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.OtrasFunciones.CalculoFechas;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MedallasSharedPreferences;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import java.io.File;
@@ -30,7 +34,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
- * Created by Ruben on 09/12/2015.
+ *
  */
 public class FragmentPerfilPerfil extends Fragment {
 
@@ -48,20 +52,16 @@ public class FragmentPerfilPerfil extends Fragment {
         miembroSharedPreferences = new MiembroSharedPreferences(activity);
 
         /******** VARIABLES TEMPORALES PARA PRUEBAS *******/
-        ArrayList<Medalla> medallas = new ArrayList<>();
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
+        ArrayList<Medalla> medallas = new ConexionBaseDatosObtener(activity).obtenerMedallas();
+        MedallasSharedPreferences medallasSharedPreferences = new MedallasSharedPreferences(activity);
+        for (int x = medallas.size() - 1; x >= 0 ; x--) {
 
+            if (medallasSharedPreferences.medallaObtenida(medallas.get(x).getId())) {
+
+            } else {
+                medallas.remove(x);
+            }
+        }
         /*************************************************/
 
         LinearLayoutManager layoutManager
@@ -77,9 +77,11 @@ public class FragmentPerfilPerfil extends Fragment {
         //Se colocan las imagenes de las medallas
         ImageView imageViewFlechaIzquierda = (ImageView) rootView.findViewById(R.id.perfil_flecha_izquierda);
         ImageView imageViewFlechaDerecha = (ImageView) rootView.findViewById(R.id.perfil_flecha_derecha);
+        ImageView imageViewActualizarPerfil = (ImageView) rootView.findViewById(R.id.perfil_actualizar_perfil);
 
-        AdaptadorSVG.mostrarImagen(imageViewFlechaDerecha, activity, R.raw.icono_flecha_derecha);
         AdaptadorSVG.mostrarImagen(imageViewFlechaIzquierda, activity, R.raw.icono_flecha_izquierda);
+        AdaptadorSVG.mostrarImagen(imageViewFlechaDerecha, activity, R.raw.icono_flecha_derecha);
+        AdaptadorSVG.mostrarImagen(imageViewActualizarPerfil, activity, R.raw.icono_mas_opciones_blanco);
 
         //Se carga la imagen para el degradado de la foto, el fondo oscuro
         ImageView imageViewDifuminado = (ImageView) rootView.findViewById(R.id.perfil_imagen_degradado);
@@ -93,6 +95,17 @@ public class FragmentPerfilPerfil extends Fragment {
                 DialogoImagenPerfil dialogoImagenPerfil = new DialogoImagenPerfil();
                 dialogoImagenPerfil.setActivity(activity);
                 dialogoImagenPerfil.show(fragmentManager, "dialogo_imagen_perfil");
+            }
+        });
+
+        //El click para actualizar el perfil
+        RelativeLayout relativeLayoutActualizarPerfil
+                = (RelativeLayout) rootView.findViewById(R.id.perfil_click_actualizar_perfil);
+        relativeLayoutActualizarPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogoActualizarPerfil dialogoActualizarPerfil = new DialogoActualizarPerfil();
+                dialogoActualizarPerfil.show(fragmentManager, "actualizar_perfil");
             }
         });
 
@@ -115,6 +128,53 @@ public class FragmentPerfilPerfil extends Fragment {
         TextView textViewEdad = (TextView) rootView.findViewById(R.id.perfil_edad_miembro);
         textViewEdad.setText(CalculoFechas.calcularEdad(miembroSharedPreferences.getFechaNacimiento()) + " años");
 
+        //Se cargan las medallas obtenidas
+        TextView textViewPrometeo = (TextView) rootView.findViewById(R.id.medallas_cantidad_prometeo);
+        TextView textViewAntorcha = (TextView) rootView.findViewById(R.id.medallas_cantidad_antorcha);
+        TextView textViewFuego = (TextView) rootView.findViewById(R.id.medallas_cantidad_fuego);
+        TextView textViewFlama = (TextView) rootView.findViewById(R.id.medallas_cantidad_flama);
+        TextView textViewChispa = (TextView) rootView.findViewById(R.id.medallas_cantidad_chispa);
+
+        for (Medalla medalla : medallas) {
+
+            switch (medalla.getTipo()) {
+                case 1 : {
+
+                    if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
+                        textViewPrometeo.setText((Integer.parseInt(textViewPrometeo.getText().toString()) + 1) + "");
+                    }
+                    break;
+                }
+                case 2 : {
+
+                    if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
+                        textViewAntorcha.setText((Integer.parseInt(textViewAntorcha.getText().toString()) + 1) + "");
+                    }
+                    break;
+                }
+                case 3 : {
+
+                    if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
+                        textViewFuego.setText((Integer.parseInt(textViewFuego.getText().toString()) + 1)+ "");
+                    }
+                    break;
+                }
+                case 4 : {
+
+                    if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
+                        textViewFlama.setText((Integer.parseInt(textViewFlama.getText().toString()) + 1) + "");
+                    }
+                    break;
+                }
+                case 5 : {
+
+                    if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
+                        textViewChispa.setText((Integer.parseInt(textViewChispa.getText().toString()) + 1) + "");
+                    }
+                    break;
+                }
+            }
+        }
         return rootView;
     }
 

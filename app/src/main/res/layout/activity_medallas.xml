@@ -67,27 +67,31 @@
                         android:textSize="16sp"
                         android:gravity="center"
                         android:id="@+id/medallas_tipo_medalla"
-                        android:text="Chispa"
+                        android:text=""
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="8dp"
                         android:alpha=".7"
                         android:textColor="#000000"
                         android:textSize="16sp"
                         android:gravity="center"
                         android:id="@+id/medallas_nombre_medalla"
-                        android:text="Nombre de medalla"
+                        android:text="Presiona sobre una de las medallas que se muestran abajo para ver los detalles"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="8dp"
                         android:alpha=".7"
                         android:textColor="#000000"
                         android:textSize="14sp"
                         android:gravity="center"
                         android:id="@+id/medallas_descripcion_medalla"
-                        android:text="La descripcion de la medalla obtenida"
+                        android:text=""
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -168,6 +172,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
+                            android:id="@+id/medallas_cantidad_prometeo"
                             android:fontFamily="sans-serif-light"
                             android:alpha=".8"
                             android:textColor="#000000"
@@ -175,7 +180,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="1"
+                            android:text="0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -193,6 +198,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
+                            android:id="@+id/medallas_cantidad_antorcha"
                             android:fontFamily="sans-serif-light"
                             android:alpha=".8"
                             android:textColor="#000000"
@@ -200,7 +206,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="1"
+                            android:text="0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -218,6 +224,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
+                            android:id="@+id/medallas_cantidad_fuego"
                             android:fontFamily="sans-serif-light"
                             android:alpha=".8"
                             android:textColor="#000000"
@@ -225,7 +232,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="1"
+                            android:text="0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -243,6 +250,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
+                            android:id="@+id/medallas_cantidad_flama"
                             android:fontFamily="sans-serif-light"
                             android:alpha=".8"
                             android:textColor="#000000"
@@ -250,7 +258,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="1"
+                            android:text="0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -268,6 +276,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
+                            android:id="@+id/medallas_cantidad_chispa"
                             android:fontFamily="sans-serif-light"
                             android:alpha=".8"
                             android:textColor="#000000"
@@ -275,7 +284,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="1"
+                            android:text="0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>

@@ -66,7 +66,9 @@ public class ConexionDescargarMetas extends AsyncTask<Void, Void, Void>{
                                 meta.setFin(jsonObject.getInt("fin"));
                                 meta.setInicio(jsonObject.getInt("inicio"));
                                 meta.setIdServidor(jsonObject.getInt("id"));
+                                meta.setNombre(jsonObject.getString("nombre"));
                                 meta.setTipoMedida(jsonObject.getString("tipoMedida"));
+                                meta.setEstado(1);
 
                                 final long id = conexionBaseDatosInsertar.insertarMeta(meta);
 

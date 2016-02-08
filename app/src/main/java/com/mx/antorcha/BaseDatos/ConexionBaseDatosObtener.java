@@ -53,7 +53,8 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex("FechaFin")),
                     cursor.getString(cursor.getColumnIndex("FechaInicio")),
                     cursor.getString(cursor.getColumnIndex("TipoMedida")),
-                    cursor.getInt(cursor.getColumnIndex(("IdServidor")))
+                    cursor.getInt(cursor.getColumnIndex(("IdServidor"))),
+                    1
             ));
 
             cursor.moveToNext();

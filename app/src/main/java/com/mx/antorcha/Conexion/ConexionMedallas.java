@@ -2,16 +2,21 @@ package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mx.antorcha.Adaptadores.AdaptadorListaMedallas;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Modelos.Medalla;
-import com.mx.antorcha.Modelos.Meta;
+import com.mx.antorcha.SharedPreferences.MedallasSharedPreferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,15 +25,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.mx.antorcha.Conexion.InfoConexion.URL_MEDALLA;
-import static com.mx.antorcha.Conexion.InfoConexion.URL_META;
-
 /**
  *
  */
 public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
 
     private Activity activity;
+    private RecyclerView recyclerView;
+    private TextView textView;
 
     public ConexionMedallas(Activity activity) {
 
@@ -62,6 +66,20 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
                                 );
 
                                 conexionBaseDatosInsertar.insertarMedalla(medalla);
+
+                                if (recyclerView != null) {
+
+                                    ArrayList<Medalla> medallas =
+                                            new ConexionBaseDatosObtener(activity).obtenerMedallas();
+                                    AdaptadorListaMedallas adaptadorListaMedallas =
+                                            new AdaptadorListaMedallas(activity, medallas);
+                                    recyclerView.setAdapter(adaptadorListaMedallas);
+
+                                     textView.setText(
+                                            new MedallasSharedPreferences(activity).totalObtenidas()
+                                                    + "/" + medallas.size());
+                                }
+
                             }
 
                         } catch (JSONException e) {
@@ -88,5 +106,13 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
         Volley.newRequestQueue(activity).add(postRequest);
 
         return  null;
+    }
+
+    public void setRecyclerView(RecyclerView recyclerView) {
+        this.recyclerView = recyclerView;
+    }
+
+    public void setTextView(TextView textView) {
+        this.textView = textView;
     }
 }

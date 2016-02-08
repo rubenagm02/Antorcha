@@ -3,6 +3,7 @@ package com.mx.antorcha.Conexion;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -21,11 +22,12 @@ import java.util.Map;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_DEPORTE;
 
 /**
- * Created by Ruben on 30/12/2015.
+ *
  */
 public class ConexionDeporte extends AsyncTask<Void, Void, Void> {
 
     private Activity activity;
+    private ListView listView;
 
     public ConexionDeporte(Activity activity) {
         this.activity = activity;
@@ -83,5 +85,9 @@ public class ConexionDeporte extends AsyncTask<Void, Void, Void> {
         Volley.newRequestQueue(activity).add(postRequest);
 
         return null;
+    }
+
+    public void setListView(ListView listView) {
+        this.listView = listView;
     }
 }

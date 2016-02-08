@@ -50,4 +50,18 @@ public class ConexionBaseDatosActualizar extends SQLiteOpenHelper{
         //Actualizamos el registro en la base de datos
         db.update("MetaProgreso", valores, "Id=" + IdMetaProgreso, null);
     }
+
+    //Borra la meta del celular (Lógicamente)
+    public void borrarMeta (int idMeta) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        //Establecemos los campos-valores a actualizar
+        ContentValues valores = new ContentValues();
+        valores.put("Estado", 0);
+
+        //Actualizamos el registro en la base de datos
+        db.update("Meta", valores, "Id=" + idMeta, null);
+    }
+
+
 }

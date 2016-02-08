@@ -201,6 +201,10 @@ public class AdapterDrawer extends ArrayAdapter<String> {
 
         if (bitmapImagenPerfil != null) {
             imageViewImagenPerfil.setImageBitmap(bitmapImagenPerfil);
+        } else {
+            DescargarImagen.guardarImagen(activity, "http://asistencias.esy.es/imagenes/"
+                    + miembroSharedPreferences.getId()
+                    + ".jpg", miembroSharedPreferences.getId() + ".jpg");
         }
 
         //Se carga la información de usuario

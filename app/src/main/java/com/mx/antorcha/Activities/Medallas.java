@@ -1,6 +1,9 @@
 package com.mx.antorcha.Activities;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +27,7 @@ import com.mx.antorcha.Conexion.DescargarImagen;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MedallasSharedPreferences;
 
 import java.util.ArrayList;
 
@@ -61,32 +65,22 @@ public class Medallas extends AppCompatActivity {
             }
         });
 
+        /********** Agregar medallas para pruebas ***********/
+
+        MedallasSharedPreferences medallasSharedPreferences = new MedallasSharedPreferences(this);
+        medallasSharedPreferences.agregarMedalla(3);
+        /****************************************************/
+
         //Se obtienen los textview de las descripciones
         TextView textViewNombre = (TextView) findViewById(R.id.medallas_nombre_medalla);
         TextView textViewDescripcion = (TextView) findViewById(R.id.medallas_descripcion_medalla);
         TextView textViewTipo = (TextView) findViewById(R.id.medallas_tipo_medalla);
 
+        //Se colocan las imagenes de las medallas
+        ImageView imageViewFlechaIzquierda = (ImageView) findViewById(R.id.medallas_flecha_izquierda);
+        ImageView imageViewFlechaDerecha = (ImageView) findViewById(R.id.medallas_flecha_derecha);
+        ImageView imageViewMedallaPrincipal = (ImageView) findViewById(R.id.medallas_medalla_principal);
 
-        /******** VARIABLES TEMPORALES PARA PRUEBAS *******
-        ArrayList<Medalla> medallas = new ArrayList<>();
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-        medallas.add(new Medalla());
-
-        /*************************************************/
-
-        //Se obtienen las medallas
-        ConexionMedallas conexionMedallas = new ConexionMedallas(this);
-        conexionMedallas.execute();
         ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(this);
         ArrayList<Medalla> medallas = conexionBaseDatosObtener.obtenerMedallas();
 
@@ -100,12 +94,8 @@ public class Medallas extends AppCompatActivity {
         adaptadorListaMedallas.setTextViewNombre(textViewNombre);
         adaptadorListaMedallas.setTextViewDescripcion(textViewDescripcion);
         adaptadorListaMedallas.setTextViewTipo(textViewTipo);
+        adaptadorListaMedallas.setImageViewMedallaPrincipal(imageViewMedallaPrincipal);
         recyclerView.setAdapter(adaptadorListaMedallas);
-
-        //Se colocan las imagenes de las medallas
-        ImageView imageViewFlechaIzquierda = (ImageView) findViewById(R.id.medallas_flecha_izquierda);
-        ImageView imageViewFlechaDerecha = (ImageView) findViewById(R.id.medallas_flecha_derecha);
-        ImageView imageViewMedallaPrincipal = (ImageView) findViewById(R.id.medallas_medalla_principal);
 
         AdaptadorSVG.mostrarImagen(imageViewFlechaDerecha, this, R.raw.icono_flecha_derecha);
         AdaptadorSVG.mostrarImagen(imageViewFlechaIzquierda, this, R.raw.icono_flecha_izquierda);
@@ -124,5 +114,65 @@ public class Medallas extends AppCompatActivity {
                 compartir.compartir();
             }
         });
+
+        TextView textViewCantidadMedallas = (TextView) findViewById(R.id.medallas_cantidad_medallas);
+        textViewCantidadMedallas.setText(medallasSharedPreferences.totalObtenidas() + "/" + medallas.size());
+
+        //Se obtienen las medallas
+        ConexionMedallas conexionMedallas = new ConexionMedallas(this);
+        conexionMedallas.setRecyclerView(recyclerView);
+        conexionMedallas.setTextView(textViewCantidadMedallas);
+        conexionMedallas.execute();
+
+        //Se cargan las medallas obtenidas
+        TextView textViewPrometeo = (TextView) findViewById(R.id.medallas_cantidad_prometeo);
+        TextView textViewAntorcha = (TextView) findViewById(R.id.medallas_cantidad_antorcha);
+        TextView textViewFuego = (TextView) findViewById(R.id.medallas_cantidad_fuego);
+        TextView textViewFlama = (TextView) findViewById(R.id.medallas_cantidad_flama);
+        TextView textViewChispa = (TextView) findViewById(R.id.medallas_cantidad_chispa);
+
+        for (Medalla medalla : medallas) {
+
+            switch (medalla.getTipo()) {
+                case 1 : {
+
+                    if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
+                        textViewPrometeo.setText((Integer.parseInt(textViewPrometeo.getText().toString()) + 1) + "");
+                    }
+                    break;
+                }
+                case 2 : {
+
+                    if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
+                        textViewAntorcha.setText((Integer.parseInt(textViewAntorcha.getText().toString()) + 1) + "");
+                    }
+                    break;
+                }
+                case 3 : {
+
+                    if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
+                        textViewFuego.setText((Integer.parseInt(textViewFuego.getText().toString()) + 1)+ "");
+                    }
+                    break;
+                }
+                case 4 : {
+
+                    if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
+                        textViewFlama.setText((Integer.parseInt(textViewFlama.getText().toString()) + 1) + "");
+                    }
+                    break;
+                }
+                case 5 : {
+
+                    if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
+                        textViewChispa.setText((Integer.parseInt(textViewChispa.getText().toString()) + 1) + "");
+                    }
+                    break;
+                }
+            }
+        }
     }
+
+
+
 }

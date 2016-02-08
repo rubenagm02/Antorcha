@@ -29,6 +29,7 @@ public class ConexionMetaProgreso extends AsyncTask<Void, Void, Void> {
 
     private Activity activity;
     private int idMeta;
+    private int idServidor;
 
     private ConexionBaseDatosActualizar conexionBaseDatosActualizar;
 
@@ -75,7 +76,7 @@ public class ConexionMetaProgreso extends AsyncTask<Void, Void, Void> {
                     {
                         Map<String, String>  params = new HashMap<>();
                         // the POST parameters:
-                        params.put("idMeta", idMeta + "");
+                        params.put("idMeta", idServidor + "");
                         params.put("progreso", metaProgreso.getProgreso() + "");
                         params.put("fecha", metaProgreso.getFecha());
 
@@ -93,5 +94,9 @@ public class ConexionMetaProgreso extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void v){
 
+    }
+
+    public void setIdServidor(int idServidor) {
+        this.idServidor = idServidor;
     }
 }

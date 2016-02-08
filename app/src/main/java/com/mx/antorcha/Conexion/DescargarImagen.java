@@ -20,7 +20,7 @@ import java.io.FileOutputStream;
  */
 public class DescargarImagen {
 
-    static public String URL = "http://html.rincondelvago.com/";
+    static public String URL = "http://asistencias.esy.es/imagenes/186.jpg";
 
     //Poner la imagen visible
     static public void cargarImagen (Activity activity, String nombre, final ImageView imageView) {

@@ -9,8 +9,8 @@ public class Querys {
     static String TAG_INSERTAR = "Insertando dato";
 
     /* QUERYS DE CREACION DE TABLAS */
-    static String CREAR_TABLA_METAS = "CREATE TABLE Meta (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Nombre TEXT, Inicio DECIMAL, Fin DECIMAL, FechaInicio DATE, FechaFin DATE, TipoMedida TEXT, IdServidor INTEGER UNIQUE)";
-    static String CREAR_TABLA_META_PROGRESO = "CREATE TABLE MetaProgreso (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, IdMeta INTEGER, Progreso DECIMAL, Fecha DATE, IdServidor INTEGER UNIQUE)";
+    static String CREAR_TABLA_METAS = "CREATE TABLE Meta (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Nombre TEXT, Inicio DECIMAL, Fin DECIMAL, FechaInicio DATE, FechaFin DATE, TipoMedida TEXT, IdServidor INTEGER UNIQUE, Estado INTEGER)";
+    static String CREAR_TABLA_META_PROGRESO = "CREATE TABLE MetaProgreso (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, IdMeta INTEGER, Progreso DECIMAL, Fecha DATE, IdServidor INTEGER)";
     static String CREAR_TABLA_MEDALLAS = "CREATE TABLE Medalla (Id INTEGER PRIMARY KEY, Nombre TEXT, Tipo INTEGER, Descripcion TEXT, ComoSeLogra TEXT, Imagen TEXT);";
     static String CREAR_TABLA_DISCIPLINAS = "CREATE TABLE Disciplina (Id INTEGER PRIMARY KEY, Nombre TEXT, Descripcion TEXT);";
     static String CREAR_TABLA_DEPORTES = "CREATE TABLE Deporte (Id INTEGER PRIMARY KEY, Nombre TEXT, Disciplina INTEGER, Imagen TEXT)";
@@ -18,7 +18,7 @@ public class Querys {
     /* QUERYS PARA OBTENER DATOS */
 
     //Metas
-    static String OBTENER_METAS = "SELECT * FROM Meta";
+    static String OBTENER_METAS = "SELECT * FROM Meta WHERE Estado = 1";
     static String OBTENER_METAS_PROGRESO = "SELECT * FROM MetaProgreso WHERE IdMeta = ";
     static String OBTENER_MEDALLAS = "SELECT * FROM Medalla";
     static String OBTENER_DISCIPLINAS = "SELECT * FROM Disciplina";

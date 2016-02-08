@@ -10,22 +10,27 @@ import android.widget.TextView;
 
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MedallasSharedPreferences;
 
 import java.util.ArrayList;
 
 /**
- * Created by Ruben on 18/12/2015.
+ *
  */
 public class AdaptadorListaMedallas extends RecyclerView.Adapter<AdaptadorListaMedallas.ViewHolder> {
 
     private ArrayList<Medalla> medallas;
+    static public Activity activity;
     static TextView textViewNombre;
     static TextView textViewTipo;
     static TextView textViewDescripcion;
     static ImageView imageViewMedallaPrincipal;
+    static MedallasSharedPreferences medallasSharedPreferences;
 
     public AdaptadorListaMedallas (Activity activity, ArrayList<Medalla> medallas) {
         this.medallas = medallas;
+        this.activity = activity;
+        medallasSharedPreferences = new MedallasSharedPreferences(activity);
     }
 
     @Override
@@ -35,6 +40,7 @@ public class AdaptadorListaMedallas extends RecyclerView.Adapter<AdaptadorListaM
                 .inflate(R.layout.item_lista_medalla, parent, false);
 
         AdaptadorListaMedallas.ViewHolder viewHolder = new AdaptadorListaMedallas.ViewHolder(view);
+
 
         return viewHolder;
     }
@@ -73,6 +79,7 @@ public class AdaptadorListaMedallas extends RecyclerView.Adapter<AdaptadorListaM
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             //Del itemView se jalan los elementos del xml
             imageViewMedalla = (ImageView) itemView.findViewById(R.id.item_medallas_medalla);
 
@@ -81,15 +88,89 @@ public class AdaptadorListaMedallas extends RecyclerView.Adapter<AdaptadorListaM
                 @Override
                 public void onClick(View v) {
                     if (textViewNombre != null) {
-                        textViewNombre.setText(medalla.getNombre());
-                        textViewDescripcion.setText(medalla.getComoSeLogra());
+
+                        if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
+                            textViewNombre.setText(medalla.getNombre());
+                            textViewDescripcion.setText(medalla.getDescripcion());
+                            mostrarMedalla(imageViewMedallaPrincipal, medalla.getTipo(), activity, textViewTipo);
+                        } else {
+                            textViewNombre.setText(medalla.getNombre());
+                            textViewDescripcion.setText(medalla.getComoSeLogra());
+                            textViewTipo.setText("");
+                            imageViewMedallaPrincipal.setImageDrawable(activity.getResources().getDrawable(R.drawable.oculta));
+                        }
                     }
                 }
             });
+
         }
 
         public void setMedalla (Medalla medalla) {
             this.medalla = medalla;
+
+            if (medallasSharedPreferences.medallaObtenida(this.medalla.getId())) {
+                mostrarMedallaPequeña(imageViewMedalla, medalla.getTipo(), activity);
+                imageViewMedalla.setAlpha(1.0f);
+            }
+        }
+    }
+
+    static public void mostrarMedallaPequeña(ImageView imageView, int tipo, Activity activity){
+
+        switch (tipo) {
+            case 1 : {
+                imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.prometeo_s));
+                break;
+            }
+            case 2 : {
+                imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.antorcha_s));
+                break;
+            }
+            case 3 : {
+                imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.fuego_s));
+                break;
+            }
+            case 4 : {
+                imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.flama_s));
+                break;
+            }
+            case 5 : {
+                imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.chispa_s));
+                break;
+            }
+
+        }
+    }
+
+    static public void mostrarMedalla(ImageView imageView, int tipo, Activity activity, TextView textView){
+
+        switch (tipo) {
+            case 1 : {
+                imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.prometeo_s));
+                textView.setText("Prometeo");
+                break;
+            }
+            case 2 : {
+                imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.antorcha_s));
+                textView.setText("Antorcha");
+                break;
+            }
+            case 3 : {
+                imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.fuego_s));
+                textView.setText("Fuego");
+                break;
+            }
+            case 4 : {
+                imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.flama_s));
+                textView.setText("Flama");
+                break;
+            }
+            case 5 : {
+                imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.chispa_s));
+                textView.setText("Chispa");
+                break;
+            }
+
         }
     }
 }
