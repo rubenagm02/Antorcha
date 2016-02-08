@@ -19,12 +19,32 @@ public class MiembroSharedPreferences {
     private String LLAVE_ID_FACEBOOK = "llave_facebook";
     private String LLAVE_ID_GOOGLE = "llave_google";
     private String LLAVE_CORREO = "llave_correo";
+    private String LLAVE_DESCRIPCION = "llave_descripcion";
+    private String LLAVE_INTERESES = "llave_intereses";
     private String DEFAULT = "default";
     private String LLAVE_FECHA_NACIMIENTO = "fecha_nacimiento";
 
     public MiembroSharedPreferences(Activity activity) {
         sharedPreferences = activity.getSharedPreferences(NOMBRE_SP, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+    }
+
+    public void setDescripcion (String descripcion){
+        editor.putString(LLAVE_DESCRIPCION, descripcion);
+        editor.apply();
+    }
+
+    public void setIntereses (String intereses) {
+        editor.putString(LLAVE_INTERESES, intereses);
+        editor.apply();
+    }
+
+    public String getIntereses () {
+        return sharedPreferences.getString(LLAVE_INTERESES, "");
+    }
+
+    public String getDescripcion () {
+        return sharedPreferences.getString(LLAVE_DESCRIPCION, "");
     }
 
     public void setNombre (String nombre) {

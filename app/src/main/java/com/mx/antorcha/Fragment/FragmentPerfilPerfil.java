@@ -1,6 +1,7 @@
 package com.mx.antorcha.Fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mx.antorcha.Activities.ActualizarPerfil;
 import com.mx.antorcha.Activities.Perfil;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaMedallas;
@@ -104,8 +106,8 @@ public class FragmentPerfilPerfil extends Fragment {
         relativeLayoutActualizarPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogoActualizarPerfil dialogoActualizarPerfil = new DialogoActualizarPerfil();
-                dialogoActualizarPerfil.show(fragmentManager, "actualizar_perfil");
+                Intent intent = new Intent(activity, ActualizarPerfil.class);
+                activity.startActivity(intent);
             }
         });
 
@@ -127,6 +129,13 @@ public class FragmentPerfilPerfil extends Fragment {
         //se coloca la edad
         TextView textViewEdad = (TextView) rootView.findViewById(R.id.perfil_edad_miembro);
         textViewEdad.setText(CalculoFechas.calcularEdad(miembroSharedPreferences.getFechaNacimiento()) + " años");
+
+        //Se carga la descripción y los intereses
+        TextView textViewDescripcion = (TextView) rootView.findViewById(R.id.perfil_perfil_descripcion);
+        TextView textViewIntereses = (TextView) rootView.findViewById(R.id.perfil_perfil_intereses);
+
+        textViewDescripcion.setText(miembroSharedPreferences.getDescripcion());
+        textViewIntereses.setText(miembroSharedPreferences.getIntereses());
 
         //Se cargan las medallas obtenidas
         TextView textViewPrometeo = (TextView) rootView.findViewById(R.id.medallas_cantidad_prometeo);

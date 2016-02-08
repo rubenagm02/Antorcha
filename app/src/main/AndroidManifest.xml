@@ -61,7 +61,11 @@
         <activity android:name=".Activities.NuevaMeta" />
         <activity android:name=".Activities.Actividades" />
         <activity android:name=".Activities.Compartir" />
-        <activity android:name=".Activities.NuevoDeporteFavorito"></activity>
+        <activity android:name=".Activities.NuevoDeporteFavorito" />
+        <activity
+            android:name=".Activities.ActualizarPerfil"
+            android:label="@string/title_activity_actualizar_perfil"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

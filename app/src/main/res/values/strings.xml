@@ -9,7 +9,7 @@
     <string name="loading">Loading…</string>
     <string name="signed_in_fmt">Signed in as: %s</string>
     <string name="title_activity_maps">Map</string>
-    <string-array name="dias" >
+    <string-array name="dias">
         <item>01</item>
         <item>02</item>
         <item>03</item>
@@ -123,4 +123,5 @@
         <item>Femenino</item>
     </string-array>
     <string name="server_client_id">272806355866-b15alkvvgt7qagln5pj49ilijkieouu0.apps.googleusercontent.com</string>
+    <string name="title_activity_actualizar_perfil">ActualizarPerfil</string>
 </resources>

@@ -69,6 +69,7 @@
                     </RelativeLayout>
                 </RelativeLayout>
                 <TextView
+                    android:id="@+id/perfil_perfil_descripcion"
                     android:fontFamily="sans-serif"
                     android:layout_marginTop="20dp"
                     android:alpha=".8"
@@ -98,6 +99,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp" />
                 <TextView
+                    android:id="@+id/perfil_perfil_intereses"
                     android:fontFamily="sans-serif"
                     android:alpha=".8"
                     android:textColor="#000000"
