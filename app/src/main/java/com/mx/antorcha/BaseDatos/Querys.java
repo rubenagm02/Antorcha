@@ -19,6 +19,7 @@ public class Querys {
 
     //Metas
     static String OBTENER_METAS = "SELECT * FROM Meta WHERE Estado = 1";
+    static String OBTENER_METAS_ELIMINAR = "SELECT * FROM Meta WHERE Estado = 0";
     static String OBTENER_METAS_PROGRESO = "SELECT * FROM MetaProgreso WHERE IdMeta = ";
     static String OBTENER_MEDALLAS = "SELECT * FROM Medalla";
     static String OBTENER_DISCIPLINAS = "SELECT * FROM Disciplina";

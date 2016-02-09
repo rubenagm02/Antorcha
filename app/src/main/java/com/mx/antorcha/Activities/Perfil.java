@@ -1,5 +1,6 @@
 package com.mx.antorcha.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -19,6 +20,7 @@ import android.widget.ListView;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorPerfilTabs;
+import com.mx.antorcha.Conexion.ConexionActualizarPerfil;
 import com.mx.antorcha.Conexion.SubirImagen;
 import com.mx.antorcha.Dialogos.DialogoImagenPerfil;
 import com.mx.antorcha.LibreriaTabsSliding.SlidingTabLayout;
@@ -38,6 +40,18 @@ public class Perfil extends AppCompatActivity {
     private ImageView imageViewPerfil;
     private Perfil activity;
     private MiembroSharedPreferences miembroSharedPreferences;
+    private SlidingTabLayout slidingTabLayout;
+    private ViewPager viewPager;
+    private AdaptadorPerfilTabs adaptadorPerfilTabs;
+
+    @Override
+    public void onResume () {
+        super.onResume();
+
+        if (viewPager != null && adaptadorPerfilTabs != null) {
+            viewPager.setAdapter(adaptadorPerfilTabs);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +63,15 @@ public class Perfil extends AppCompatActivity {
         //Se inicializa el shared preferences
         miembroSharedPreferences = new MiembroSharedPreferences(this);
 
+
+        //Se comprueba si está actualizado el perfil en la nube
+        if (miembroSharedPreferences.getActualizar() == 1) {
+            ConexionActualizarPerfil.actualizar(miembroSharedPreferences.getNombre(),
+                    miembroSharedPreferences.getFechaNacimiento(),
+                    miembroSharedPreferences.getDescripcion(),
+                    miembroSharedPreferences.getIntereses(),
+                    this);
+        }
         //se carga la barra de android por el xml
         Toolbar toolbar = (Toolbar) findViewById(R.id.perfil_toolbar);
         setSupportActionBar(toolbar);
@@ -75,16 +98,16 @@ public class Perfil extends AppCompatActivity {
             }
         });
 
-        AdaptadorPerfilTabs adaptadorPerfilTabs = new AdaptadorPerfilTabs(getSupportFragmentManager(), this, imageViewAgregar);
+        adaptadorPerfilTabs = new AdaptadorPerfilTabs(getSupportFragmentManager(), this, imageViewAgregar);
         adaptadorPerfilTabs.setPerfil(this);
 
         //se carga el fragment para los dialog fragment
         adaptadorPerfilTabs.setFragmentManager(getSupportFragmentManager());
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.perfil_pager);
+        viewPager = (ViewPager) findViewById(R.id.perfil_pager);
         viewPager.setAdapter(adaptadorPerfilTabs);
 
-        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.perfil_tabs);
+         slidingTabLayout = (SlidingTabLayout) findViewById(R.id.perfil_tabs);
         slidingTabLayout.setDistributeEvenly(true);
         slidingTabLayout.setSelectedIndicatorColors(Color.WHITE);
         slidingTabLayout.setViewPager(viewPager);

@@ -15,6 +15,7 @@ import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaMetas;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Conexion.ConexionDescargarMetas;
+import com.mx.antorcha.Conexion.ConexionEliminarMeta;
 import com.mx.antorcha.Conexion.ConexionMetas;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.Modelos.Meta;
@@ -83,8 +84,16 @@ public class Metas extends AppCompatActivity {
         metas.add(new Meta());
         /**************/
 
+
         ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(this);
         ArrayList<Meta> metas = conexionBaseDatosObtener.obtenerMetas();
+
+        //Se comprueban las metas que se eliminaron
+        ArrayList<Meta> metasEliminar = conexionBaseDatosObtener.obtenerMetasEliminar();
+
+        for (Meta meta : metasEliminar) {
+            ConexionEliminarMeta.eliminarMeta(meta.getId(), meta.getIdServidor(), this);
+        }
 
         //Se carga el adapter para listar las metas
         ListView listViewMetas = (ListView) findViewById(R.id.metas_lista_metas);

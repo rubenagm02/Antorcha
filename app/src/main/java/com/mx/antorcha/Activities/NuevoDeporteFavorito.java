@@ -20,7 +20,8 @@ import com.mx.antorcha.SharedPreferences.DisciplinasDeportesSharedPreferences;
 import java.util.ArrayList;
 
 public class NuevoDeporteFavorito extends AppCompatActivity {
-
+    private ArrayList<String> stringDisciplinas;
+    private ArrayList<String> stringDeportes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +56,8 @@ public class NuevoDeporteFavorito extends AppCompatActivity {
                 = new DisciplinasDeportesSharedPreferences(this);
 
         //Se crean los dos arrays que guardarán los deportes favoritos seleccionados y las disciplinas
-        final ArrayList<String> stringDeportes = disciplinasDeportesSharedPreferences.getDeportes();
-        final ArrayList<String> stringDisciplinas = disciplinasDeportesSharedPreferences.getDisciplinas();
+        stringDeportes = disciplinasDeportesSharedPreferences.getDeportes();
+        stringDisciplinas = disciplinasDeportesSharedPreferences.getDisciplinas();
 
         //Se obitnene los datos guardados
         ArrayList<Disciplina> disciplinas = conexionBaseDatosObtener.obtenerDisciplinas();
@@ -90,6 +91,8 @@ public class NuevoDeporteFavorito extends AppCompatActivity {
         ConexionDeporte conexionDeporte = new ConexionDeporte(this);
         conexionDeporte.setListView(listViewDisciplinas);
         conexionDisciplinas.setListView(listViewDisciplinas);
+        conexionDisciplinas.setStringDisciplinas(stringDisciplinas);
+        conexionDisciplinas.setStringDeportes(stringDeportes);
         conexionDisciplinas.execute();
         conexionDeporte.execute();
     }

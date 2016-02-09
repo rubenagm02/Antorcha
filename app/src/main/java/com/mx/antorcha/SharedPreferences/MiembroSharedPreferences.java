@@ -23,10 +23,21 @@ public class MiembroSharedPreferences {
     private String LLAVE_INTERESES = "llave_intereses";
     private String DEFAULT = "default";
     private String LLAVE_FECHA_NACIMIENTO = "fecha_nacimiento";
+    private String LLAVE_ACTUALIZAR = "llave_actualizar";
 
     public MiembroSharedPreferences(Activity activity) {
         sharedPreferences = activity.getSharedPreferences(NOMBRE_SP, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+    }
+
+    //0 NO - 1 SI
+    public void setActualizar (int actualizar) {
+        editor.putInt(LLAVE_ACTUALIZAR, actualizar);
+        editor.apply();
+    }
+
+    public int getActualizar () {
+        return sharedPreferences.getInt(LLAVE_ACTUALIZAR, 0);
     }
 
     public void setDescripcion (String descripcion){

@@ -35,6 +35,8 @@ public class ConexionDisciplinas extends AsyncTask<Void, Void, Void> {
 
     private Activity activity;
     private ListView listView;
+    private ArrayList<String> stringDisciplinas;
+    private ArrayList<String> stringDeportes;
 
     public ConexionDisciplinas(Activity activity) {
         this.activity = activity;
@@ -73,14 +75,14 @@ public class ConexionDisciplinas extends AsyncTask<Void, Void, Void> {
                             AdaptadorListaNuevosDeportes adaptadorListaNuevosDeportes
                                     = new AdaptadorListaNuevosDeportes(activity, disciplinas);
 
-                            ArrayList<String> stringsDisciplinas
+                            stringDisciplinas
                                     = new DisciplinasDeportesSharedPreferences(activity).getDisciplinas();
 
-                            ArrayList<String> stringsDeportes
+                            stringDeportes
                                     = new DisciplinasDeportesSharedPreferences(activity).getDeportes();
 
-                            adaptadorListaNuevosDeportes.setStringDeportes(stringsDeportes);
-                            adaptadorListaNuevosDeportes.setStringDisciplinas(stringsDisciplinas);
+                            adaptadorListaNuevosDeportes.setStringDeportes(stringDeportes);
+                            adaptadorListaNuevosDeportes.setStringDisciplinas(stringDisciplinas);
 
                             listView.setAdapter(adaptadorListaNuevosDeportes);
                         } catch (JSONException e) {
@@ -113,5 +115,13 @@ public class ConexionDisciplinas extends AsyncTask<Void, Void, Void> {
 
     public void setListView(ListView listView) {
         this.listView = listView;
+    }
+
+    public void setStringDisciplinas(ArrayList<String> stringDisciplinas) {
+        this.stringDisciplinas = stringDisciplinas;
+    }
+
+    public void setStringDeportes(ArrayList<String> stringDeportes) {
+        this.stringDeportes = stringDeportes;
     }
 }

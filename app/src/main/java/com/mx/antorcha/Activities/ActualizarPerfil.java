@@ -100,6 +100,7 @@ public class ActualizarPerfil extends AppCompatActivity {
                     miembroSharedPreferences.setDescripcion(
                             editTextDescripcion.getText().toString());
                     miembroSharedPreferences.setIntereses(editTextIntereses.getText().toString());
+                    miembroSharedPreferences.setActualizar(1);
                     finish();
                 } else {
                     Toast.makeText(ActualizarPerfil.this,

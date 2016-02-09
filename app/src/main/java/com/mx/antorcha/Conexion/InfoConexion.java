@@ -23,5 +23,7 @@ public class InfoConexion {
     final static public String URL_FACEBOOK_IMAGEN_2 = "/picture?type=large";
     final static public String URL_DESCARGAR_IMAGEN = "http://asistencias.esy.es/imagenes/";
     final static public String URL_SUBIR_IMAGEN = "http://asistencias.esy.es/imagenPost.php";
+    final static public String URL_ACTUALIZAR_MIEMBRO = "http://api.antorcha.mx/V0.1/miembros/";
+    final static public String URL_ELIMINAR_META = "http://api.antorcha.mx/V0.1/metas/";
     //final static public String URL_SUBIR_IMAGEN = "http://api.antorcha.mx/V0.1/miembros/subirImagen";
 }
