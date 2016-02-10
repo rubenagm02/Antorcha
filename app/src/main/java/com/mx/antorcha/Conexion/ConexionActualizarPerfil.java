@@ -34,7 +34,7 @@ public class ConexionActualizarPerfil {
         this.activity = activity;
     }
 
-    static public void actualizar (final String nombre, final String fechaNacimiento, final String descripcion, final String intereses, final Activity activity) {
+    static public void actualizar (final String nombre, final String fechaNacimiento, final String descripcion, final String intereses, final Activity activity, final String gcm) {
         StringRequest postRequest = new StringRequest(Request.Method.PUT, InfoConexion.URL_ACTUALIZAR_MIEMBRO
                 + (new MiembroSharedPreferences(activity).getId()),
                 new Response.Listener<String>() {
@@ -44,7 +44,12 @@ public class ConexionActualizarPerfil {
 
                         try {
                             if ((new JSONObject(response).getString("actualizado")).equals("true")) {
-                                new MiembroSharedPreferences(activity).setActualizar(0);
+                                MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
+                                miembroSharedPreferences.setActualizar(0);
+
+                                if (miembroSharedPreferences.getGCM().length() > 1) {
+                                    miembroSharedPreferences.setRegistrado(2);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -68,6 +73,7 @@ public class ConexionActualizarPerfil {
                 params.put("fechaNacimiento", fechaNacimiento);
                 params.put("queBusco", intereses);
                 params.put("descripcion", descripcion);
+                params.put("gcm", gcm);
                 return params;
             }
         };

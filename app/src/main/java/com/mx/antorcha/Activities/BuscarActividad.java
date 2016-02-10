@@ -1,5 +1,6 @@
 package com.mx.antorcha.Activities;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
@@ -16,9 +17,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorBuscarActividadTabs;
+import com.mx.antorcha.Conexion.ConexionActualizarPerfil;
+import com.mx.antorcha.GCM.ServicioRegistro;
 import com.mx.antorcha.LibreriaTabsSliding.SlidingTabLayout;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import java.util.ArrayList;
 
@@ -34,6 +38,24 @@ public class BuscarActividad extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        //Se inicializa el shared preferences
+        MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(this);
+
+        //Se comprueba si está actualizado el perfil en la nube
+        if (miembroSharedPreferences.getActualizar() == 1 || (miembroSharedPreferences.getRegistrado() == 0)) {
+            startService(new Intent(this, ServicioRegistro.class));
+            ConexionActualizarPerfil.actualizar(miembroSharedPreferences.getNombre(),
+                    miembroSharedPreferences.getFechaNacimiento(),
+                    miembroSharedPreferences.getDescripcion(),
+                    miembroSharedPreferences.getIntereses(),
+                    this, miembroSharedPreferences.getGCM());
+        } else if (miembroSharedPreferences.getRegistrado() == 1) {
+            ConexionActualizarPerfil.actualizar(miembroSharedPreferences.getNombre(),
+                    miembroSharedPreferences.getFechaNacimiento(),
+                    miembroSharedPreferences.getDescripcion(),
+                    miembroSharedPreferences.getIntereses(),
+                    this, miembroSharedPreferences.getGCM());
+        }
         //se carga la barra de android por el xml
         Toolbar toolbar = (Toolbar) findViewById(R.id.buscar_actividad_toolbar);
         setSupportActionBar(toolbar);

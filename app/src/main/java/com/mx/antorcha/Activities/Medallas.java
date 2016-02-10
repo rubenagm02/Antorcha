@@ -1,6 +1,7 @@
 package com.mx.antorcha.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -22,12 +23,15 @@ import com.mx.antorcha.Adaptadores.AdaptadorListaMedallas;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Compartir.*;
 import com.mx.antorcha.Compartir.Compartir;
+import com.mx.antorcha.Conexion.ConexionActualizarPerfil;
 import com.mx.antorcha.Conexion.ConexionMedallas;
 import com.mx.antorcha.Conexion.DescargarImagen;
+import com.mx.antorcha.GCM.ServicioRegistro;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.MedallasSharedPreferences;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import java.util.ArrayList;
 
@@ -42,6 +46,19 @@ public class Medallas extends AppCompatActivity {
         setContentView(R.layout.activity_medallas);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        //Se inicializa el shared preferences
+        MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(this);
+
+        //Se comprueba si está actualizado el perfil en la nube
+        if (miembroSharedPreferences.getActualizar() == 1 || miembroSharedPreferences.getRegistrado() == 1) {
+
+            ConexionActualizarPerfil.actualizar(miembroSharedPreferences.getNombre(),
+                    miembroSharedPreferences.getFechaNacimiento(),
+                    miembroSharedPreferences.getDescripcion(),
+                    miembroSharedPreferences.getIntereses(),
+                    this, miembroSharedPreferences.getGCM());
+        }
 
         //se carga la barra de android por el xml
         Toolbar toolbar = (Toolbar) findViewById(R.id.medallas_toolbar);

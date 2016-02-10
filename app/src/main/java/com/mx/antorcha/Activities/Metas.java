@@ -14,9 +14,11 @@ import android.widget.ListView;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaMetas;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
+import com.mx.antorcha.Conexion.ConexionActualizarPerfil;
 import com.mx.antorcha.Conexion.ConexionDescargarMetas;
 import com.mx.antorcha.Conexion.ConexionEliminarMeta;
 import com.mx.antorcha.Conexion.ConexionMetas;
+import com.mx.antorcha.GCM.ServicioRegistro;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.R;
@@ -93,6 +95,19 @@ public class Metas extends AppCompatActivity {
 
         for (Meta meta : metasEliminar) {
             ConexionEliminarMeta.eliminarMeta(meta.getId(), meta.getIdServidor(), this);
+        }
+
+        //Se inicializa el shared preferences
+        MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(this);
+
+        //Se comprueba si está actualizado el perfil en la nube
+        if (miembroSharedPreferences.getActualizar() == 1 || miembroSharedPreferences.getRegistrado() == 1) {
+
+            ConexionActualizarPerfil.actualizar(miembroSharedPreferences.getNombre(),
+                    miembroSharedPreferences.getFechaNacimiento(),
+                    miembroSharedPreferences.getDescripcion(),
+                    miembroSharedPreferences.getIntereses(),
+                    this, miembroSharedPreferences.getGCM());
         }
 
         //Se carga el adapter para listar las metas

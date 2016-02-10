@@ -24,10 +24,30 @@ public class MiembroSharedPreferences {
     private String DEFAULT = "default";
     private String LLAVE_FECHA_NACIMIENTO = "fecha_nacimiento";
     private String LLAVE_ACTUALIZAR = "llave_actualizar";
+    private String LLAVE_GCM = "llave_gcm";
+    private String LLAVE_REGISTRADO = "llave_registrado";
 
-    public MiembroSharedPreferences(Activity activity) {
-        sharedPreferences = activity.getSharedPreferences(NOMBRE_SP, Context.MODE_PRIVATE);
+    public MiembroSharedPreferences(Context context) {
+        sharedPreferences = context.getSharedPreferences(NOMBRE_SP, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+    }
+
+    public void setGCM (String gcm) {
+        editor.putString(LLAVE_GCM, gcm);
+        editor.apply();
+    }
+
+    public String getGCM () {
+        return sharedPreferences.getString(LLAVE_GCM, "");
+    }
+
+    public void setRegistrado (int registrado) {
+        editor.putInt(LLAVE_REGISTRADO, registrado);
+        editor.apply();
+    }
+
+    public int getRegistrado () {
+        return sharedPreferences.getInt(LLAVE_REGISTRADO, 0);
     }
 
     //0 NO - 1 SI
