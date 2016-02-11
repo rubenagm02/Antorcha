@@ -26,6 +26,7 @@ public class Notificacion {
         builder.setContentTitle(notificacion.getTitulo());
         builder.setContentText(notificacion.getTexto());
         builder.setContentIntent(pendingIntent);
+        builder.setVibrate(new long[] {500, 500, 500, 500, 500});
 
         NotificationManager notificationManager =
                 (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -41,6 +42,7 @@ public class Notificacion {
         builder.setContentText(notificacion.getTexto());
         builder.setContentIntent(ObtenerNotificacion.obtenerPending(notificacion, context));
         builder.setSmallIcon(ObtenerNotificacion.obtenerIcono(notificacion));
+        builder.setVibrate(new long[] {500, 500, 500, 500, 500});
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

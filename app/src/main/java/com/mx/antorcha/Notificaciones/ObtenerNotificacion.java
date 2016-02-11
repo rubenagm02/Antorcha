@@ -8,6 +8,7 @@ import android.content.Intent;
 import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Modelos.Notificacion;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MedallasSharedPreferences;
 
 /**
  *
@@ -31,6 +32,14 @@ public class ObtenerNotificacion {
                 return PendingIntent.getActivity(context, 0, intent, 0);
             }
             case "medalla" : {
+                MedallasSharedPreferences medallasSharedPreferences
+                        = new MedallasSharedPreferences(context);
+
+                if (medallasSharedPreferences.obtenerMedallas().contains(notificacion.getId())) {
+                    //Si ya se contiene no se puede volver a insertar la medalla
+                } else {
+                    medallasSharedPreferences.agregarMedalla(Integer.parseInt(notificacion.getId()));
+                }
                 Intent intent = new Intent(context, BuscarActividad.class);
                 intent.putExtra("id", notificacion.getId());
 
@@ -46,10 +55,16 @@ public class ObtenerNotificacion {
 
         switch (notificacion.getIcono()) {
             case "medalla" : {
-                return R.drawable.antorcha_s;
+                return R.drawable.notificacion_medalla;
+            }
+            case "espacio" : {
+                return R.drawable.notificacion_espacio_deportivo;
+            }
+            case "evento" : {
+                return R.drawable.notificacion_evento;
             }
             default : {
-                return R.drawable.icono_agregar;
+                return R.drawable.notificacion_evento;
             }
 
         }

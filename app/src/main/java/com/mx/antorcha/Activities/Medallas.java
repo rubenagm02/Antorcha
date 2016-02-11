@@ -98,6 +98,17 @@ public class Medallas extends AppCompatActivity {
         ImageView imageViewFlechaDerecha = (ImageView) findViewById(R.id.medallas_flecha_derecha);
         ImageView imageViewMedallaPrincipal = (ImageView) findViewById(R.id.medallas_medalla_principal);
 
+        //en caso de que se reciba la medalla se pone por defecto
+
+        if (getIntent().getExtras() != null) {
+            if (getIntent().getExtras().containsKey("id")) {
+                Medalla medalla = new ConexionBaseDatosObtener(this).obtenerMedallas(Integer.parseInt(getIntent().getExtras().getString("id")));
+                textViewNombre.setText(medalla.getNombre());
+                textViewDescripcion.setText(medalla.getDescripcion());
+                AdaptadorListaMedallas.mostrarMedalla(imageViewMedallaPrincipal, medalla.getTipo(), this , textViewTipo);
+            }
+        }
+
         ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(this);
         ArrayList<Medalla> medallas = conexionBaseDatosObtener.obtenerMedallas();
 

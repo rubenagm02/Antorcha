@@ -1,6 +1,7 @@
 package com.mx.antorcha.GCM;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmListenerService;
@@ -13,9 +14,15 @@ public class ServicioGCM extends GcmListenerService {
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String mensaje = data.getString("message");
-
-        Notificacion.normal(this, Notificacion.obtenerObjeto(mensaje));
+        com.mx.antorcha.Modelos.Notificacion notificacion = new com.mx.antorcha.Modelos.Notificacion();
+        notificacion.setTexto(data.getString("mensaje"));
+        notificacion.setTitulo(data.getString("titulo"));
+        notificacion.setActivity(data.getString("activity"));
+        notificacion.setAccion(data.getString("accion"));
+        notificacion.setId(data.getString("identificador"));
+        notificacion.setIcono(data.getString("icono"));
+        Log.i("GCM", data.toString());
+        Notificacion.normal(this, notificacion);
 
     }
 }

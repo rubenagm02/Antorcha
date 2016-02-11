@@ -140,6 +140,25 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
         return medallas;
     }
 
+    public Medalla obtenerMedallas (int id) {
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_UNA_MEDALLA + id, null);
+        cursor.moveToFirst();
+
+        Medalla medalla =  new Medalla(
+                cursor.getInt(cursor.getColumnIndex("Id")),
+                cursor.getString(cursor.getColumnIndex("Nombre")),
+                cursor.getInt(cursor.getColumnIndex("Tipo")),
+                cursor.getString(cursor.getColumnIndex("Descripcion")),
+                cursor.getString(cursor.getColumnIndex("ComoSeLogra")),
+                cursor.getString(cursor.getColumnIndex("Imagen"))
+        );
+        cursor.close();
+
+        return medalla;
+    }
+
 
     //Se obtienen todas las disciplinas
     public ArrayList<Disciplina> obtenerDisciplinas () {

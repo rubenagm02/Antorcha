@@ -25,4 +25,5 @@ public class Querys {
     static String OBTENER_DISCIPLINAS = "SELECT * FROM Disciplina";
     static String OBTENER_DEPORTES = "SELECT * FROM Deporte";
     static String OBTENER_DEPORTE_POR_DISCPLINA = "SELECT * FROM Deporte WHERE Disciplina = ";
+    static String OBTENER_UNA_MEDALLA = "SELECT * FROM Medalla WHERE Id = ";
 }

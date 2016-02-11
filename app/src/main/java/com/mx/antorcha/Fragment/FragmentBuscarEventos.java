@@ -23,7 +23,7 @@ import com.mx.antorcha.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 /**
- * Created by Ruben on 15/12/2015.
+ *
  */
 public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener{
 

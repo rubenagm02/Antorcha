@@ -81,7 +81,6 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             mMap.animateCamera(CameraUpdateFactory.zoomTo(2000000f));
             mMap.setMyLocationEnabled(true);
 
-
             //Onclick del Marker
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
@@ -91,9 +90,6 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
                     return false;
                 }
             });
-
-            //Cambio de fecha
-
 
             //Onclick del mapa
             mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -123,7 +119,6 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(20.699359689441785,-103.29570472240448))
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-
 
             //El on click de layout
             linearLayoutCentral = (LinearLayout) rootView.findViewById(R.id.buscar_espacio_layout_click_filtro);

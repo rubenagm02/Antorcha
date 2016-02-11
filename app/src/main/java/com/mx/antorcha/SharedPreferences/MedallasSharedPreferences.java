@@ -17,8 +17,8 @@ public class MedallasSharedPreferences {
     private String LLAVE_MEDALLAS = "llave_medallas";
     private ArrayList<String> medallas;
 
-    public MedallasSharedPreferences (Activity activity) {
-        sharedPreferences = activity.getSharedPreferences(NOMBRE_SP, Context.MODE_PRIVATE);
+    public MedallasSharedPreferences (Context context) {
+        sharedPreferences = context.getSharedPreferences(NOMBRE_SP, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         medallas = obtenerMedallas();
     }
