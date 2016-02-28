@@ -150,7 +150,7 @@ public class FragmentPerfilPerfil extends Fragment {
                 case 1 : {
 
                     if (medallasSharedPreferences.medallaObtenida(medalla.getId())) {
-                        textViewPrometeo.setText((Integer.parseInt(textViewPrometeo.getText().toString()) + 1) + "");
+//                        textViewPrometeo.setText((Integer.parseInt(textViewPrometeo.getText().toString()) + 1) + "");
                     }
                     break;
                 }

@@ -44,6 +44,9 @@ public class AdaptadorEventoCard extends RecyclerView.Adapter<AdaptadorEventoCar
     @Override
     public void onBindViewHolder(AdaptadorEventoCard.ViewHolder holder, int position) {
         holder.setEvento(eventos.get(position));
+        holder.setTextViewNombre(eventos.get(position).getNombre());
+        holder.setTextViewFecha(eventos.get(position).getFechaInicio());
+        holder.onClickInvitar(eventos.get(position).getId());
     }
 
     @Override
@@ -51,10 +54,12 @@ public class AdaptadorEventoCard extends RecyclerView.Adapter<AdaptadorEventoCar
         return eventos.size();
     }
 
-    public static class ViewHolder
-            extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private Evento evento;
+        private TextView textViewNombre;
+        private TextView textViewFecha;
+        private TextView textViewInvitar;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -62,18 +67,34 @@ public class AdaptadorEventoCard extends RecyclerView.Adapter<AdaptadorEventoCar
             ImageView imageViewCompartir = (ImageView) itemView.findViewById(R.id.item_card_evento_compartir);
             AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_mas_opciones);
 
-            TextView textViewInvitar = (TextView) itemView.findViewById(R.id.item_evento_invitar);
-            textViewInvitar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(activity, Compartir.class);
-                    activity.startActivity(intent);
-                }
-            });
+            textViewInvitar = (TextView) itemView.findViewById(R.id.item_evento_invitar);
+            textViewNombre = (TextView) itemView.findViewById(R.id.item_card_actividades_evento_nombre);
+            textViewFecha = (TextView) itemView.findViewById(R.id.item_card_actividades_evento_fecha);
+
         }
 
         public void setEvento (Evento evento) {
             this.evento = evento;
+        }
+
+        public void setTextViewNombre (String nombre) {
+            this.textViewNombre.setText(nombre);
+        }
+
+        public void setTextViewFecha (String fecha) {
+            this.textViewFecha.setText(fecha);
+        }
+
+        public void onClickInvitar (final int idEvento) {
+            textViewInvitar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(activity, Compartir.class);
+                    intent.putExtra("tipo", "evento");
+                    intent.putExtra("id", idEvento);
+                    activity.startActivity(intent);
+                }
+            });
         }
     }
 }

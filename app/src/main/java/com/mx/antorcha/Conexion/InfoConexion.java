@@ -9,7 +9,7 @@ public class InfoConexion {
     final static public String URL_META_PROGRESO = "http://api.antorcha.mx/V0.1/metaProgresos";
     final static public String URL_LOGIN = "http://api.antorcha.mx/login";
     final static public String URL_REGISTRO = "http://api.antorcha.mx/V0.1/miembros";
-    final static public String URL_BUSCAR_ESPACIO = "http://api.antorcha.mx/V0.1/espaciosDeportivos/cercanos";
+    final static public String URL_BUSCAR_ESPACIO = "http://api.antorcha.mx/V0.1/espaciosDeportivos/";
     final static public String URL_INFORMACION_ESPACIO = "http://api.antorcha.mx/V0.1/espaciosDeportivos/";
     final static public String URL_BUSCAR_EVENTO = "";
     final static public String URL_INFORMACION_EVENTO = "";
@@ -25,5 +25,7 @@ public class InfoConexion {
     final static public String URL_SUBIR_IMAGEN = "http://asistencias.esy.es/imagenPost.php";
     final static public String URL_ACTUALIZAR_MIEMBRO = "http://api.antorcha.mx/V0.1/miembros/";
     final static public String URL_ELIMINAR_META = "http://api.antorcha.mx/V0.1/metas/";
+    final static public String URL_BUSCAR_UN_ESPACIO = "http://api.antorcha.mx/V0.1/espaciosDeportivos/";
+    final static public String URL_OBTENER_MEDALLAS = "http://api.antorcha.mx/V0.1/miembroMedalla/";
     //final static public String URL_SUBIR_IMAGEN = "http://api.antorcha.mx/V0.1/miembros/subirImagen";
 }

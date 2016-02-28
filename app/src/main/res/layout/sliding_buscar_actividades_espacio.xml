@@ -31,6 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/sliding_buscar_actividades_espacio_nombre"
                     android:textSize="14sp"
                     android:alpha=".8"
                     android:textColor="#000000"
@@ -46,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/sliding_buscar_actividades_espacio_descripcion"
                     android:layout_marginTop="7dp"
                     android:text="Descripcion breve"
                     android:alpha=".8"
@@ -298,7 +300,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-            <ImageButton
+            <ImageView
+                android:layout_marginBottom="50dp"
                 android:id="@+id/buscar_espacio_boton_asignarme_espacio"
                 android:layout_width="match_parent"
                 android:layout_height="42dp" />

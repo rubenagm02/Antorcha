@@ -35,14 +35,14 @@
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
-                <ImageView
+                <!--<ImageView
                     android:alpha=".4"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_alignParentRight="true"
                     android:id="@+id/item_card_espacio_compartir"
                     android:layout_width="25dp"
-                    android:layout_height="25dp" />
+                    android:layout_height="25dp" />-->
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -57,10 +57,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:layout_marginRight="15dp"
                         android:id="@+id/item_card_actividades_espacio_descripcion"
                         android:layout_marginTop="5dp"
                         android:textSize="13sp"
-                        android:text="Descripcion del espacio"
+                        android:text="Descripcion del espacio para así poder ver el "
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>

@@ -66,9 +66,10 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         mapView = (MapView) rootView.findViewById(R.id.map_fragment_evento);
         mapView.onCreate(savedInstanceState);
         MapsInitializer.initialize(activity);
+        mMap = mapView.getMap();
 
         if (mMap != null) {
-            mMap = mapView.getMap();
+
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             mMap.animateCamera(CameraUpdateFactory.zoomTo(2000000f));
             mMap.setMyLocationEnabled(true);

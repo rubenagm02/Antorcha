@@ -1,6 +1,5 @@
 package com.mx.antorcha.Activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -13,23 +12,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.iid.InstanceID;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorPerfilTabs;
 import com.mx.antorcha.Conexion.ConexionActualizarPerfil;
 import com.mx.antorcha.Conexion.SubirImagen;
 import com.mx.antorcha.Dialogos.DialogoImagenPerfil;
-import com.mx.antorcha.GCM.ServicioRegistro;
 import com.mx.antorcha.LibreriaTabsSliding.SlidingTabLayout;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
-import com.mx.antorcha.Notificaciones.Notificacion;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
@@ -43,7 +36,6 @@ public class Perfil extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ListView listView;
     private ImageView imageViewPerfil;
-    private Perfil activity;
     private MiembroSharedPreferences miembroSharedPreferences;
     private SlidingTabLayout slidingTabLayout;
     private ViewPager viewPager;

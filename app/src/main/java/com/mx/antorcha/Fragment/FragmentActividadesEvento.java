@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.mx.antorcha.Adaptadores.AdaptadorEspacioCard;
 import com.mx.antorcha.Adaptadores.AdaptadorEventoCard;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.R;
 
@@ -29,10 +30,7 @@ public class FragmentActividadesEvento extends Fragment{
         View rootView = inflater.inflate(R.layout.fragment_actividades_evento, container, false);
 
         /******************************/
-        ArrayList<Evento> eventos = new ArrayList<>();
-        eventos.add(new Evento());
-        eventos.add(new Evento());
-        eventos.add(new Evento());
+        ArrayList<Evento> eventos = new ConexionBaseDatosObtener(activity).obtenerEventos();
         /******************************/
 
         //se carga la parte del recycler view

@@ -87,7 +87,7 @@ public class BuscarActividad extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.buscar_actividad_pager);
 
         viewPager.setAdapter(adaptadorBuscarActividadTabs);
-        viewPager.setCurrentItem(1);
+        //viewPager.setCurrentItem(1);
 
         //Sliding
         SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.buscar_actividad_tabs);

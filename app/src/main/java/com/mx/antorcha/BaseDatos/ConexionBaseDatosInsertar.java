@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.mx.antorcha.Modelos.Deporte;
 import com.mx.antorcha.Modelos.Disciplina;
+import com.mx.antorcha.Modelos.EspacioDeportivo;
+import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.Modelos.MetaProgreso;
@@ -33,6 +35,8 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
         db.execSQL(Querys.CREAR_TABLA_MEDALLAS);
         db.execSQL(Querys.CREAR_TABLA_DEPORTES);
         db.execSQL(Querys.CREAR_TABLA_DISCIPLINAS);
+        db.execSQL(Querys.CREAR_TABLA_ESPACIOS);
+        db.execSQL(Querys.CREAR_TABLA_EVENTO);
     }
 
     @Override
@@ -139,4 +143,54 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
 
         Log.i(Querys.TAG_INSERTAR, "Se ha insertado un Deporte");
     }
+
+    public void insertarEvento (Evento evento) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues contentValues   = new ContentValues();
+
+        contentValues.put("Id", evento.getId());
+        contentValues.put("Nombre", evento.getNombre());
+        contentValues.put("Descripcion", evento.getDescripcion());
+        contentValues.put("Domicilio", evento.getDomicilio());
+        contentValues.put("Colonia", evento.getColonia());
+        contentValues.put("Ciudad", evento.getCiudad());
+        contentValues.put("CodigoPostal", evento.getCodigoPostal());
+        contentValues.put("Estado", evento.getEstado());
+        contentValues.put("Municipio", evento.getMunicipio());
+        contentValues.put("Telefono", evento.getTelefono());
+        contentValues.put("FechaInicio", evento.getFechaInicio());
+        contentValues.put("FechaFin", evento.getFechaFin());
+        contentValues.put("Latitud", evento.getLatitud());
+        contentValues.put("Longitud", evento.getLongitud());
+
+        sqLiteDatabase.insert("Evento", null, contentValues);
+
+        Log.i(Querys.TAG_INSERTAR, "Se ha insertado un Evento");
+    }
+
+
+    public void insertarEspacioDeportivo (EspacioDeportivo espacioDeportivo) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues contentValues   = new ContentValues();
+
+        contentValues.put("Id", espacioDeportivo.getId());
+        contentValues.put("Nombre", espacioDeportivo.getNombre());
+        contentValues.put("Descripcion", espacioDeportivo.getDescripcion());
+        contentValues.put("Domicilio", espacioDeportivo.getDomicilio());
+        contentValues.put("Colonia", espacioDeportivo.getColonia());
+        contentValues.put("Ciudad", espacioDeportivo.getCiudad());
+        contentValues.put("CodigoPostal", espacioDeportivo.getCodigoPostal());
+        contentValues.put("Estado", espacioDeportivo.getEstado());
+        contentValues.put("Municipio", espacioDeportivo.getMunicipio());
+        contentValues.put("Telefono", espacioDeportivo.getTelefono());
+        contentValues.put("Latitud", espacioDeportivo.getLatitud());
+        contentValues.put("Longitud", espacioDeportivo.getLongitud());
+
+        sqLiteDatabase.insert("EspacioDeportivo", null, contentValues);
+
+        Log.i(Querys.TAG_INSERTAR, "Se ha insertado un Espacio deportivo");
+    }
+
 }

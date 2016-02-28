@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.mx.antorcha.Modelos.Deporte;
 import com.mx.antorcha.Modelos.Disciplina;
+import com.mx.antorcha.Modelos.EspacioDeportivo;
+import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.Modelos.MetaProgreso;
@@ -29,6 +31,8 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
         db.execSQL(Querys.CREAR_TABLA_MEDALLAS);
         db.execSQL(Querys.CREAR_TABLA_DEPORTES);
         db.execSQL(Querys.CREAR_TABLA_DISCIPLINAS);
+        db.execSQL(Querys.CREAR_TABLA_ESPACIOS);
+        db.execSQL(Querys.CREAR_TABLA_EVENTO);
     }
 
     @Override
@@ -230,6 +234,127 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
         cursor.close();
 
         return deportes;
+    }
+
+    public ArrayList<Evento> obtenerEventos(){
+        ArrayList<Evento> eventos = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_EVENTOS, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+
+            eventos.add(new Evento(
+                    cursor.getInt(cursor.getColumnIndex("Id")),
+                    cursor.getString(cursor.getColumnIndex("Nombre")),
+                    cursor.getString(cursor.getColumnIndex("Descripcion")),
+                    cursor.getString(cursor.getColumnIndex("Domicilio")),
+                    cursor.getString(cursor.getColumnIndex("Colonia")),
+                    cursor.getString(cursor.getColumnIndex("CodigoPostal")),
+                    cursor.getString(cursor.getColumnIndex("Municipio")),
+                    cursor.getString(cursor.getColumnIndex("Ciudad")),
+                    cursor.getString(cursor.getColumnIndex("Estado")),
+                    cursor.getString(cursor.getColumnIndex("Telefono")),
+                    cursor.getString(cursor.getColumnIndex("FechaInicio")),
+                    cursor.getString(cursor.getColumnIndex("FechaFin")),
+                    cursor.getDouble(cursor.getColumnIndex("Latitud")),
+                    cursor.getDouble(cursor.getColumnIndex("Longitud"))
+                    ));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return eventos;
+    }
+
+    public Evento obtenerUnEvento (int idEvento) {
+        Evento evento;
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_UN_EVENTO + idEvento, null);
+        cursor.moveToFirst();
+
+        evento = new Evento(
+                cursor.getInt(cursor.getColumnIndex("Id")),
+                cursor.getString(cursor.getColumnIndex("Nombre")),
+                cursor.getString(cursor.getColumnIndex("Descripcion")),
+                cursor.getString(cursor.getColumnIndex("Domicilio")),
+                cursor.getString(cursor.getColumnIndex("Colonia")),
+                cursor.getString(cursor.getColumnIndex("CodigoPostal")),
+                cursor.getString(cursor.getColumnIndex("Municipio")),
+                cursor.getString(cursor.getColumnIndex("Ciudad")),
+                cursor.getString(cursor.getColumnIndex("Estado")),
+                cursor.getString(cursor.getColumnIndex("Telefono")),
+                cursor.getString(cursor.getColumnIndex("FechaInicio")),
+                cursor.getString(cursor.getColumnIndex("FechaFin")),
+                cursor.getDouble(cursor.getColumnIndex("Latitud")),
+                cursor.getDouble(cursor.getColumnIndex("Longitud"))
+        );
+
+        cursor.moveToNext();
+
+        cursor.close();
+
+        return evento;
+    }
+
+    public ArrayList<EspacioDeportivo> obtenerEspacios () {
+        ArrayList<EspacioDeportivo> espacioDeportivos = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_ESPACIOS_DEPORTIVOS, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+
+            espacioDeportivos.add(new EspacioDeportivo(
+                    cursor.getInt(cursor.getColumnIndex("Id")),
+                    cursor.getString(cursor.getColumnIndex("Nombre")),
+                    cursor.getString(cursor.getColumnIndex("Descripcion")),
+                    cursor.getString(cursor.getColumnIndex("Domicilio")),
+                    cursor.getString(cursor.getColumnIndex("Colonia")),
+                    cursor.getString(cursor.getColumnIndex("CodigoPostal")),
+                    cursor.getString(cursor.getColumnIndex("Municipio")),
+                    cursor.getString(cursor.getColumnIndex("Ciudad")),
+                    cursor.getString(cursor.getColumnIndex("Estado")),
+                    cursor.getString(cursor.getColumnIndex("Telefono")),
+                    cursor.getDouble(cursor.getColumnIndex("Latitud")),
+                    cursor.getDouble(cursor.getColumnIndex("Longitud"))
+            ));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return espacioDeportivos;
+    }
+
+    public EspacioDeportivo obtenerUnEspacio (int idEspacio) {
+        EspacioDeportivo espacioDeportivo;
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_UN_ESPACIO + idEspacio, null);
+        cursor.moveToFirst();
+
+        espacioDeportivo = new EspacioDeportivo(
+                cursor.getInt(cursor.getColumnIndex("Id")),
+                cursor.getString(cursor.getColumnIndex("Nombre")),
+                cursor.getString(cursor.getColumnIndex("Descripcion")),
+                cursor.getString(cursor.getColumnIndex("Domicilio")),
+                cursor.getString(cursor.getColumnIndex("Colonia")),
+                cursor.getString(cursor.getColumnIndex("CodigoPostal")),
+                cursor.getString(cursor.getColumnIndex("Municipio")),
+                cursor.getString(cursor.getColumnIndex("Ciudad")),
+                cursor.getString(cursor.getColumnIndex("Estado")),
+                cursor.getString(cursor.getColumnIndex("Telefono")),
+                cursor.getDouble(cursor.getColumnIndex("Latitud")),
+                cursor.getDouble(cursor.getColumnIndex("Longitud"))
+        );
+        cursor.close();
+
+        return espacioDeportivo;
     }
 
 }

@@ -25,6 +25,7 @@ import com.mx.antorcha.Compartir.*;
 import com.mx.antorcha.Compartir.Compartir;
 import com.mx.antorcha.Conexion.ConexionActualizarPerfil;
 import com.mx.antorcha.Conexion.ConexionMedallas;
+import com.mx.antorcha.Conexion.ConexionObtenerMedallas;
 import com.mx.antorcha.Conexion.DescargarImagen;
 import com.mx.antorcha.GCM.ServicioRegistro;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
@@ -85,7 +86,7 @@ public class Medallas extends AppCompatActivity {
         /********** Agregar medallas para pruebas ***********/
 
         MedallasSharedPreferences medallasSharedPreferences = new MedallasSharedPreferences(this);
-        medallasSharedPreferences.agregarMedalla(3);
+        //medallasSharedPreferences.agregarMedalla(3);
         /****************************************************/
 
         //Se obtienen los textview de las descripciones
@@ -199,6 +200,9 @@ public class Medallas extends AppCompatActivity {
                 }
             }
         }
+
+        ConexionObtenerMedallas conexionObtenerMedallas = new ConexionObtenerMedallas(Medallas.this);
+        conexionObtenerMedallas.obtenerMedallas();
     }
 
 

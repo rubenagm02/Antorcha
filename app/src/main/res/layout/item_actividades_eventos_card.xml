@@ -53,6 +53,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:layout_marginRight="15dp"
                         android:id="@+id/item_card_actividades_evento_fecha"
                         android:layout_marginTop="5dp"
                         android:textSize="13sp"

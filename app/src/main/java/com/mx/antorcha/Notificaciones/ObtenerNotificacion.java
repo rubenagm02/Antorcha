@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.mx.antorcha.Activities.BuscarActividad;
+import com.mx.antorcha.Activities.Medallas;
 import com.mx.antorcha.Modelos.Notificacion;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.MedallasSharedPreferences;
@@ -40,7 +41,7 @@ public class ObtenerNotificacion {
                 } else {
                     medallasSharedPreferences.agregarMedalla(Integer.parseInt(notificacion.getId()));
                 }
-                Intent intent = new Intent(context, BuscarActividad.class);
+                Intent intent = new Intent(context, Medallas.class);
                 intent.putExtra("id", notificacion.getId());
 
                 return PendingIntent.getActivity(context, 0, intent, 0);
@@ -66,7 +67,6 @@ public class ObtenerNotificacion {
             default : {
                 return R.drawable.notificacion_evento;
             }
-
         }
     }
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,10 +24,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
 import com.mx.antorcha.Conexion.ConexionBuscarEspacio;
 import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
+import com.mx.antorcha.Modelos.EspacioDeportivo;
 import com.mx.antorcha.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -35,11 +40,13 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
 
     private Activity activity;
     GoogleMap mMap;
+    private ImageView imageViewAsignarmeEspacio;
     MapView mapView;
     public LinearLayout linearLayoutSliding;
     LinearLayout linearLayoutCentral;
     private FragmentManager fragmentManager;
     private ConexionBuscarEspacio conexionBuscarEspacio;
+    public ArrayList<EspacioDeportivo> espacioDeportivos;
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
@@ -50,9 +57,9 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_buscar_espacio, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_buscar_espacio, container, false);
 
-
+        espacioDeportivos = new ArrayList<>();
         //
         DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
         float dp = 100f;
@@ -75,10 +82,16 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         mapView.onCreate(savedInstanceState);
         MapsInitializer.initialize(getContext());
 
+        //Se cargan las imagenes en vectores
+        AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_compartir);
+        AdaptadorSVG.mostrarImagen(imageViewContacto, activity, R.raw.icono_llamada);
+        AdaptadorSVG.mostrarImagen(imageViewLapiz, activity, R.raw.icono_lapiz);
+        AdaptadorSVG.mostrarImagen(imageViewMarkerCentral, activity, R.raw.icono_marker_naranja);
+        mMap = mapView.getMap();
+
         if (mMap != null) {
-            mMap = mapView.getMap();
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(2000000f));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(2));
             mMap.setMyLocationEnabled(true);
 
             //Onclick del Marker
@@ -87,6 +100,14 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
                 public boolean onMarkerClick(Marker marker) {
                     slidingUpPanelLayout.setPanelHeight(pixels);
                     linearLayoutCentral.setVisibility(View.INVISIBLE);
+
+                    //Cuando se da click se busca el espacio
+                    EspacioDeportivo espacioDeportivo = obtenerEspacio(marker.getTitle());
+
+                    if (espacioDeportivo != null) {
+                        mostrarInformacionEspacio(espacioDeportivo, rootView);
+                    }
+
                     return false;
                 }
             });
@@ -103,17 +124,13 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
                 @Override
                 public void onCameraChange(CameraPosition cameraPosition) {
-                    Log.i("Google", cameraPosition.target.toString());
+                    Log.i("Google", cameraPosition.target.toString() +  "///" + cameraPosition.zoom);
                 }
             });
 
             mMap.setInfoWindowAdapter(new MyInfoWindowAdapter(activity, linearLayoutSliding));
 
-            //Se cargan las imagenes en vectores
-            AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_compartir);
-            AdaptadorSVG.mostrarImagen(imageViewContacto, activity, R.raw.icono_llamada);
-            AdaptadorSVG.mostrarImagen(imageViewLapiz, activity, R.raw.icono_lapiz);
-            AdaptadorSVG.mostrarImagen(imageViewMarkerCentral, activity, R.raw.icono_marker_naranja);
+
 
             //marker de prueba
             mMap.addMarker(new MarkerOptions()
@@ -130,10 +147,11 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
                 }
             });
             ConexionBuscarEspacio conexionBuscarEspacio = new ConexionBuscarEspacio(activity, mMap);
+            conexionBuscarEspacio.setEspacioDeportivos(espacioDeportivos);
             conexionBuscarEspacio.execute();
 
             //Se carga la imagen del boton de asignarme espacio
-            ImageView imageViewAsignarmeEspacio = (ImageView) rootView.findViewById(R.id.buscar_espacio_boton_asignarme_espacio);
+            imageViewAsignarmeEspacio = (ImageView) rootView.findViewById(R.id.buscar_espacio_boton_asignarme_espacio);
             AdaptadorSVG.mostrarImagen(imageViewAsignarmeEspacio, activity, R.raw.boton_asisto_centro_deportivo);
         }
 
@@ -204,6 +222,41 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             // TODO Auto-generated method stub
             return null;
         }
+    }
 
+    public EspacioDeportivo obtenerEspacio (String titulo) {
+
+        for (EspacioDeportivo espacioDeportivo : espacioDeportivos) {
+
+            if (espacioDeportivo.getNombre().equals(titulo)) {
+
+                return espacioDeportivo;
+            }
+        }
+
+        return null;
+    }
+
+    public void mostrarInformacionEspacio(final EspacioDeportivo espacioDeportivo, View view){
+        TextView textViewNombre = (TextView) view.findViewById(R.id.sliding_buscar_actividades_espacio_nombre);
+        TextView textViewDescripciom = (TextView) view.findViewById(R.id.sliding_buscar_actividades_espacio_descripcion);
+
+        String descripcion = "";
+
+        if (espacioDeportivo.getDescripcion().length() > 40) {
+            descripcion = espacioDeportivo.getDescripcion().substring(0, 37) + "...";
+        } else {
+            descripcion = espacioDeportivo.getDescripcion();
+        }
+        textViewDescripciom.setText(descripcion);
+        textViewNombre.setText(espacioDeportivo.getNombre());
+
+        imageViewAsignarmeEspacio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ConexionBaseDatosInsertar(activity).insertarEspacioDeportivo(espacioDeportivo);
+                Toast.makeText(activity, "Se ha asignado este espacio a tus actividades", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

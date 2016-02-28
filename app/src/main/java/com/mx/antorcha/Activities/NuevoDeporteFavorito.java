@@ -11,8 +11,6 @@ import android.widget.Toast;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaNuevosDeportes;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
-import com.mx.antorcha.Conexion.ConexionDeporte;
-import com.mx.antorcha.Conexion.ConexionDisciplinas;
 import com.mx.antorcha.Modelos.Disciplina;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.DisciplinasDeportesSharedPreferences;
@@ -41,14 +39,6 @@ public class NuevoDeporteFavorito extends AppCompatActivity {
                 finish();
             }
         });
-
-        /****** VARIABLES DE PRUEBAS ******
-        ArrayList<Disciplina> disciplinas = new ArrayList<>();
-        disciplinas.add(new Disciplina());
-        disciplinas.add(new Disciplina());
-        disciplinas.add(new Disciplina());
-
-        /***********/
 
         ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(this);
         //Se cargan las preferencias del arrayList
@@ -85,15 +75,5 @@ public class NuevoDeporteFavorito extends AppCompatActivity {
             }
         });
 
-
-        //se ejcutan los hilos para verificar los datos
-        ConexionDisciplinas conexionDisciplinas = new ConexionDisciplinas(this);
-        ConexionDeporte conexionDeporte = new ConexionDeporte(this);
-        conexionDeporte.setListView(listViewDisciplinas);
-        conexionDisciplinas.setListView(listViewDisciplinas);
-        conexionDisciplinas.setStringDisciplinas(stringDisciplinas);
-        conexionDisciplinas.setStringDeportes(stringDeportes);
-        conexionDisciplinas.execute();
-        conexionDeporte.execute();
     }
 }

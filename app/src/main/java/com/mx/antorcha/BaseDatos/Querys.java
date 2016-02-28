@@ -14,7 +14,8 @@ public class Querys {
     static String CREAR_TABLA_MEDALLAS = "CREATE TABLE Medalla (Id INTEGER PRIMARY KEY, Nombre TEXT, Tipo INTEGER, Descripcion TEXT, ComoSeLogra TEXT, Imagen TEXT);";
     static String CREAR_TABLA_DISCIPLINAS = "CREATE TABLE Disciplina (Id INTEGER PRIMARY KEY, Nombre TEXT, Descripcion TEXT);";
     static String CREAR_TABLA_DEPORTES = "CREATE TABLE Deporte (Id INTEGER PRIMARY KEY, Nombre TEXT, Disciplina INTEGER, Imagen TEXT)";
-
+    static String CREAR_TABLA_ESPACIOS = "CREATE TABLE EspacioDeportivo (Id INTEGER PRIMARY KEY, Nombre TEXT, Descripcion TEXT, Domicilio TEXT, Colonia TEXT, CodigoPostal TEXT, Municipio TEXT, Ciudad TEXT, Estado TEXT, Telefono TEXT, Latitud FLOAT, Longitud FLOAT);";
+    static String CREAR_TABLA_EVENTO = "CREATE TABLE Evento (Id INTEGER PRIMARY KEY, Nombre TEXT, Descripcion TEXT, Domicilio TEXT, Colonia TEXT, CodigoPostal TEXT, Municipio TEXT, Ciudad TEXT, Estado TEXT, Telefono TEXT, Latitud FLOAT, Longitud FLOAT, FechaInicio DATE, FechaFin DATE);";
     /* QUERYS PARA OBTENER DATOS */
 
     //Metas
@@ -26,4 +27,8 @@ public class Querys {
     static String OBTENER_DEPORTES = "SELECT * FROM Deporte";
     static String OBTENER_DEPORTE_POR_DISCPLINA = "SELECT * FROM Deporte WHERE Disciplina = ";
     static String OBTENER_UNA_MEDALLA = "SELECT * FROM Medalla WHERE Id = ";
+    static String OBTENER_EVENTOS = "SELECT * FROM Evento";
+    static String OBTENER_ESPACIOS_DEPORTIVOS = "SELECT * FROM EspacioDeportivo";
+    static String OBTENER_UN_EVENTO = "SELECT * FROM Evento WHERE Id = ";
+    static String OBTENER_UN_ESPACIO = "SELECT * FROM EspacioDeportivo WHERE Id = ";
 }

@@ -44,6 +44,19 @@ public class AdaptadorEspacioCard extends RecyclerView.Adapter<AdaptadorEspacioC
     @Override
     public void onBindViewHolder(AdaptadorEspacioCard.ViewHolder holder, int position) {
         holder.setEspacioDeportivo(espacioDeportivos.get(position));
+        holder.setTextViewNombre(espacioDeportivos.get(position).getNombre());
+
+        //Se calcula la descripcion por si es muy larga
+        String descripcion;
+
+        if (espacioDeportivos.get(position).getDescripcion().length() > 107) {
+            descripcion = espacioDeportivos.get(position).getDescripcion().substring(0, 110) + "...";
+        } else {
+            descripcion = espacioDeportivos.get(position).getDescripcion();
+        }
+
+        holder.setTextViewDescripcion(descripcion);
+        holder.onClickInvitar(espacioDeportivos.get(position).getId());
     }
 
     @Override
@@ -51,29 +64,46 @@ public class AdaptadorEspacioCard extends RecyclerView.Adapter<AdaptadorEspacioC
         return espacioDeportivos.size();
     }
 
-    public static class ViewHolder
-            extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private EspacioDeportivo espacioDeportivo;
+        private TextView textViewNombre;
+        private TextView textViewDescripcion;
+        private TextView textViewInvitar;
 
         public ViewHolder(View itemView) {
             super(itemView);
             //Del itemView se jalan los elementos del xml
-            ImageView imageViewCompartir = (ImageView) itemView.findViewById(R.id.item_card_espacio_compartir);
-            AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_mas_opciones);
+            //ImageView imageViewCompartir = (ImageView) itemView.findViewById(R.id.item_card_espacio_compartir);
+            //AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_mas_opciones);
 
-            TextView textViewInvitar = (TextView) itemView.findViewById(R.id.item_espacio_invitar);
+            textViewInvitar = (TextView) itemView.findViewById(R.id.item_espacio_invitar);
+            textViewNombre = (TextView) itemView.findViewById(R.id.item_card_actividades_espacio_nombre);
+            textViewDescripcion = (TextView) itemView.findViewById(R.id.item_card_actividades_espacio_descripcion);
+        }
+
+        public void setEspacioDeportivo (EspacioDeportivo espacioDeportivo) {
+            this.espacioDeportivo = espacioDeportivo;
+        }
+
+        public void onClickInvitar(final int idEspacio){
             textViewInvitar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(activity, Compartir.class);
+                    intent.putExtra("tipo", "espacio");
+                    intent.putExtra("id", idEspacio);
                     activity.startActivity(intent);
                 }
             });
         }
 
-        public void setEspacioDeportivo (EspacioDeportivo espacioDeportivo) {
-            this.espacioDeportivo = espacioDeportivo;
+        public void setTextViewNombre(String nombre) {
+            this.textViewNombre.setText(nombre);
+        }
+
+        public void setTextViewDescripcion(String descripcion) {
+            this.textViewDescripcion.setText(descripcion);
         }
     }
 }

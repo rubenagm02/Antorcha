@@ -10,13 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mx.antorcha.Adaptadores.AdaptadorEspacioCard;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
 import com.mx.antorcha.R;
 
 import java.util.ArrayList;
 
 /**
- * Created by Ruben on 19/12/2015.
+ *
  */
 public class FragmentActividadesEspacio extends Fragment{
 
@@ -28,11 +29,7 @@ public class FragmentActividadesEspacio extends Fragment{
         View rootView = inflater.inflate(R.layout.fragment_actividades_espacio, container, false);
 
         /*************** VARIABLES TEMPORALES PARA PRUEBAS ***************/
-        ArrayList<EspacioDeportivo> espacioDeportivos = new ArrayList<>();
-        espacioDeportivos.add(new EspacioDeportivo());
-        espacioDeportivos.add(new EspacioDeportivo());
-        espacioDeportivos.add(new EspacioDeportivo());
-        espacioDeportivos.add(new EspacioDeportivo());
+        ArrayList<EspacioDeportivo> espacioDeportivos = new ConexionBaseDatosObtener(activity).obtenerEspacios();
         /******************************/
 
         LinearLayoutManager layoutManager

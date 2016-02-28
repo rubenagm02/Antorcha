@@ -19,6 +19,8 @@ import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +32,7 @@ import static com.mx.antorcha.Conexion.InfoConexion.URL_BUSCAR_ESPACIO;
 public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
 
     private String latitud;
+    private  ArrayList<EspacioDeportivo> espacioDeportivos;
     private String longitud;
     private String idMiembro;
     private String cercania;
@@ -71,6 +74,7 @@ public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
 
                         try {
                             JSONArray jsonArray = new JSONArray(response);
+                            espacioDeportivos.clear();
 
                             for (int x = 0; x < jsonArray.length(); x++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(x);
@@ -79,16 +83,18 @@ public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
                                         jsonObject.getInt("id"),
                                         jsonObject.getString("nombre"),
                                         jsonObject.getString("descripcion"),
-                                        jsonObject.getString("domicilio"),
-                                        jsonObject.getString("colonia"),
-                                        jsonObject.getString("codigoPostal"),
-                                        jsonObject.getString("municipio"),
-                                        jsonObject.getString("ciudad"),
-                                        jsonObject.getString("estado"),
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
                                         jsonObject.getString("telefono"),
                                         jsonObject.getDouble("latitud"),
                                         jsonObject.getDouble("longitud")
                                         );
+
+                                espacioDeportivos.add(espacioDeportivo);
 
                                 //Se agrega el mapa a la vista
                                 googleMap.addMarker(
@@ -137,4 +143,25 @@ public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
                 .position(new LatLng(latitud, longitud))
         );
     }
+
+    public void setEspacioDeportivos(ArrayList<EspacioDeportivo> espacioDeportivos) {
+        this.espacioDeportivos = espacioDeportivos;
+    }
 }
+
+/*
+EspacioDeportivo espacioDeportivo = new EspacioDeportivo(
+                                        jsonObject.getInt("id"),
+                                        jsonObject.getString("nombre"),
+                                        jsonObject.getString("descripcion"),
+                                        jsonObject.getString("domicilio"),
+                                        jsonObject.getString("colonia"),
+                                        jsonObject.getString("codigoPostal"),
+                                        jsonObject.getString("municipio"),
+                                        jsonObject.getString("ciudad"),
+                                        jsonObject.getString("estado"),
+                                        jsonObject.getString("telefono"),
+                                        jsonObject.getDouble("latitud"),
+                                        jsonObject.getDouble("longitud")
+                                        );
+ */

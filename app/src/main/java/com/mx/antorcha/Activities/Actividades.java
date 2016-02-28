@@ -13,8 +13,12 @@ import android.widget.ListView;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorActividadesTabs;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.LibreriaTabsSliding.SlidingTabLayout;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
+import com.mx.antorcha.Modelos.EspacioDeportivo;
+import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.R;
 
 import java.util.ArrayList;
@@ -49,7 +53,7 @@ public class Actividades extends AppCompatActivity {
             public void onClick(View v) {
                 drawerLayout.openDrawer(Gravity.LEFT);
             }
-        });;
+        });
 
         AdaptadorActividadesTabs adaptadorActividadesTabs = new AdaptadorActividadesTabs(getSupportFragmentManager(), this);
 
