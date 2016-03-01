@@ -91,8 +91,10 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
                                     miembroSharedPreferences.setId(jsonObject.getInt("id"));
                                     miembroSharedPreferences.setNombre(jsonObject.getString("nombre"));
                                     miembroSharedPreferences.setCorreo(jsonObject.getString("correo"));
-                                    miembroSharedPreferences.setFechaNacimiento(jsonObject.getString("fechaNacimiento"));
+                                    miembroSharedPreferences.setFechaNacimiento(jsonObject.getString("fechaNacimiento").replace(" 00:00:00", ""));
                                     miembroSharedPreferences.setSexo(jsonObject.getString("sexo"));
+                                    miembroSharedPreferences.setIntereses(jsonObject.getString("queBusco"));
+                                    miembroSharedPreferences.setDescripcion(jsonObject.getString("descripcion"));
 
                                     if (idFacebook != null && idFacebook.length() > 0) {
                                         miembroSharedPreferences.setIdFacebook(idFacebook);

@@ -25,7 +25,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
+import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Conexion.ConexionBuscarEspacio;
+import com.mx.antorcha.Conexion.ConexionInformacionEspacio;
+import com.mx.antorcha.Dialogos.DialogoInsertarResenia;
 import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
 import com.mx.antorcha.R;
@@ -40,6 +43,8 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
 
     private Activity activity;
     GoogleMap mMap;
+    private View view;
+    private Bundle bundle;
     private ImageView imageViewAsignarmeEspacio;
     MapView mapView;
     public LinearLayout linearLayoutSliding;
@@ -58,7 +63,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_buscar_espacio, container, false);
-
+        view = rootView;
         espacioDeportivos = new ArrayList<>();
         //
         DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
@@ -130,8 +135,6 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
 
             mMap.setInfoWindowAdapter(new MyInfoWindowAdapter(activity, linearLayoutSliding));
 
-
-
             //marker de prueba
             mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(20.699359689441785,-103.29570472240448))
@@ -153,6 +156,12 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             //Se carga la imagen del boton de asignarme espacio
             imageViewAsignarmeEspacio = (ImageView) rootView.findViewById(R.id.buscar_espacio_boton_asignarme_espacio);
             AdaptadorSVG.mostrarImagen(imageViewAsignarmeEspacio, activity, R.raw.boton_asisto_centro_deportivo);
+        }
+
+        if (bundle != null && bundle.containsKey("idEspacio")) {
+            mostrarEspacio(bundle.getInt("idEspacio"), rootView);
+            slidingUpPanelLayout.setPanelHeight(pixels);
+            slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         }
 
         return rootView;
@@ -194,6 +203,10 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
 
     public void setFragmentManager(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
+    }
+
+    public void setBundle(Bundle bundle) {
+        this.bundle = bundle;
     }
 
     class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
@@ -240,6 +253,9 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
     public void mostrarInformacionEspacio(final EspacioDeportivo espacioDeportivo, View view){
         TextView textViewNombre = (TextView) view.findViewById(R.id.sliding_buscar_actividades_espacio_nombre);
         TextView textViewDescripciom = (TextView) view.findViewById(R.id.sliding_buscar_actividades_espacio_descripcion);
+        ImageView imageViewInsertarResenia = (ImageView) view.findViewById(R.id.sliding_buscar_actividades_espacio_lapiz);
+        TextView textViewValoracion = (TextView) view.findViewById(R.id.sliding_buscar_espacio_valoracion);
+        TextView textViewHorario = (TextView) view.findViewById(R.id.sliding_buscar_espacio_horario);
 
         String descripcion = "";
 
@@ -248,9 +264,25 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         } else {
             descripcion = espacioDeportivo.getDescripcion();
         }
+
+        textViewValoracion.setText((espacioDeportivo.getValoracion() + "").substring(0, 3));
         textViewDescripciom.setText(descripcion);
         textViewNombre.setText(espacioDeportivo.getNombre());
+        textViewHorario.setText(espacioDeportivo.getHorario());
 
+        //Se coloca el click para guardar una reseña
+        imageViewInsertarResenia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogoInsertarResenia dialogoInsertarResenia = new DialogoInsertarResenia();
+                dialogoInsertarResenia.setActivity(activity);
+                dialogoInsertarResenia.setId(espacioDeportivo.getId());
+                dialogoInsertarResenia.setTipo(1);
+                dialogoInsertarResenia.show(fragmentManager, "dialogo_insertar_resenia");
+            }
+        });
+
+        //Se manda el view para cargar todos los datos desde el hilo
         imageViewAsignarmeEspacio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -258,5 +290,21 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
                 Toast.makeText(activity, "Se ha asignado este espacio a tus actividades", Toast.LENGTH_LONG).show();
             }
         });
+
+        ConexionInformacionEspacio conexionInformacionEspacio = new ConexionInformacionEspacio(activity, espacioDeportivo.getId() + "");
+        conexionInformacionEspacio.setView(view);
+        conexionInformacionEspacio.obtenerEspacio();
+    }
+
+    public void mostrarEspacio (int idEspacio, View view) {
+
+        ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
+
+        EspacioDeportivo espacioDeportivo = conexionBaseDatosObtener.obtenerUnEspacio(idEspacio);
+
+        if (espacioDeportivo != null) {
+            mostrarInformacionEspacio(espacioDeportivo, view);
+
+        }
     }
 }

@@ -9,15 +9,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mx.antorcha.Modelos.Evento;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static com.mx.antorcha.Conexion.InfoConexion.URL_INFORMACION_EVENTO;
 import java.util.HashMap;
 import java.util.Map;
 
 
 /**
- * Created by Ruben on 27/12/2015.
+ *
  */
-public class ConexionInformacionEvento extends AsyncTask<Void, Void, Void> {
+public class ConexionInformacionEvento {
 
     private Activity activity;
     private String idEvento;
@@ -27,14 +32,36 @@ public class ConexionInformacionEvento extends AsyncTask<Void, Void, Void> {
         this.idEvento = idEvento;
     }
 
-    @Override
-    protected Void doInBackground(Void... params) {
+    public void obtenerEvento (){
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, URL_INFORMACION_EVENTO + idEvento,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.i("InformacionEvento", response);
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Evento evento = new Evento (
+                                    jsonObject.getInt("id"),
+                                    jsonObject.getString("nombre"),
+                                    jsonObject.getString("descripcion"),
+                                    jsonObject.getString("domicilio"),
+                                    jsonObject.getString("colonia"),
+                                    jsonObject.getString("codigoPostal"),
+                                    jsonObject.getString("municipio"),
+                                    jsonObject.getString("ciudad"),
+                                    jsonObject.getString("estado"),
+                                    jsonObject.getString("telefono"),
+                                    jsonObject.getString("fechaIncio"),
+                                    jsonObject.getString("fechaFin"),
+                                    jsonObject.getDouble("latitud"),
+                                    jsonObject.getDouble("longitud"));
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -54,6 +81,5 @@ public class ConexionInformacionEvento extends AsyncTask<Void, Void, Void> {
         };
         Volley.newRequestQueue(activity).add(postRequest);
 
-        return null;
     }
 }

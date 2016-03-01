@@ -16,7 +16,7 @@ public class InfoConexion {
     final static public String URL_MEDALLA = "http://api.antorcha.mx/V0.1/medallas";
     final static public String URL_DISCIPLINA = "http://api.antorcha.mx/V0.1/disciplinas";
     final static public String URL_DEPORTE = "http://api.antorcha.mx/V0.1/deportes";
-    final static public String URL_RESENIA = "";
+    final static public String URL_RESENIA = "http://api.antorcha.mx/V0.1/resenia";
     final static public String URL_DESCARGAR_METAS = "http://api.antorcha.mx/V0.1/metas/";
     final static public String URL_DESCARGAR_PROGRESO_METAS = "http://api.antorcha.mx/V0.1/metaProgresos/";
     final static public String URL_FACEBOOK_IMAGEN_1 = "https://graph.facebook.com/";

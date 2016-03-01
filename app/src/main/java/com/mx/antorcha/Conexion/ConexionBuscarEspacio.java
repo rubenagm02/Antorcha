@@ -91,8 +91,9 @@ public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
                                         "",
                                         jsonObject.getString("telefono"),
                                         jsonObject.getDouble("latitud"),
-                                        jsonObject.getDouble("longitud")
-                                        );
+                                        jsonObject.getDouble("longitud"),
+                                        jsonObject.getString("valoracion"),
+                                        jsonObject.getString("horario"));
 
                                 espacioDeportivos.add(espacioDeportivo);
 

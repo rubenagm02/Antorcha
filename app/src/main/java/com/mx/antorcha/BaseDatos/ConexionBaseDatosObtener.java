@@ -321,8 +321,9 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex("Estado")),
                     cursor.getString(cursor.getColumnIndex("Telefono")),
                     cursor.getDouble(cursor.getColumnIndex("Latitud")),
-                    cursor.getDouble(cursor.getColumnIndex("Longitud"))
-            ));
+                    cursor.getDouble(cursor.getColumnIndex("Longitud")),
+                    cursor.getString(cursor.getColumnIndex("Valoracion")),
+                    cursor.getString(cursor.getColumnIndex("Horario"))));
 
             cursor.moveToNext();
         }
@@ -350,8 +351,9 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
                 cursor.getString(cursor.getColumnIndex("Estado")),
                 cursor.getString(cursor.getColumnIndex("Telefono")),
                 cursor.getDouble(cursor.getColumnIndex("Latitud")),
-                cursor.getDouble(cursor.getColumnIndex("Longitud"))
-        );
+                cursor.getDouble(cursor.getColumnIndex("Longitud")),
+                cursor.getString(cursor.getColumnIndex("Valoracion")),
+                cursor.getString(cursor.getColumnIndex("Horario")));
         cursor.close();
 
         return espacioDeportivo;

@@ -1,6 +1,7 @@
 package com.mx.antorcha.Adaptadores;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -9,16 +10,18 @@ import com.mx.antorcha.Fragment.FragmentBuscarEspacio;
 import com.mx.antorcha.Fragment.FragmentBuscarEventos;
 
 /**
- * Created by Ruben on 15/12/2015.
+ *
  */
 public class AdaptadorBuscarActividadTabs extends FragmentStatePagerAdapter {
 
     private Activity activity;
     private FragmentManager fragmentManager;
+    private Bundle bundle;
 
-    public AdaptadorBuscarActividadTabs(FragmentManager fm, Activity activity) {
+    public AdaptadorBuscarActividadTabs(FragmentManager fm, Activity activity, Bundle bundle) {
         super(fm);
         this.activity = activity;
+        this.bundle = bundle;
     }
 
     @Override
@@ -28,6 +31,7 @@ public class AdaptadorBuscarActividadTabs extends FragmentStatePagerAdapter {
             case 0 :
                 FragmentBuscarEspacio fragmentBuscarEspacio = new FragmentBuscarEspacio();
                 fragmentBuscarEspacio.setActivity(activity);
+                fragmentBuscarEspacio.setBundle(bundle);
                 fragmentBuscarEspacio.setFragmentManager(fragmentManager);
                 return fragmentBuscarEspacio;
             case 1 :

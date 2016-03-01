@@ -62,9 +62,7 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
         TextView textViewNombre = (TextView) convertView.findViewById(R.id.item_meta_nombre_meta);
         textViewNombre.setText(meta.getNombre());
 
-        //Cantidad de la meta
-        TextView textViewInicio = (TextView) convertView.findViewById(R.id.item_meta_inicio);
-        textViewInicio.setText(meta.getInicio() + obtenerMedida(meta.getTipoMedida()));
+
 
         TextView textViewFin = (TextView) convertView.findViewById(R.id.item_meta_fin);
         textViewFin.setText(meta.getFin() + obtenerMedida(meta.getTipoMedida()));
@@ -91,9 +89,19 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
         ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
         ArrayList<MetaProgreso> metaProgresos = conexionBaseDatosObtener.obtenerMetaProgreso(meta.getId());
         MetaProgreso metaProgreso = null;
+
         //Se crea un meta progreso para guardar el último
         if (metaProgresos.size() != 0) {
             metaProgreso = metaProgresos.get(metaProgresos.size() - 1);
+        }
+
+        //Cantidad de la meta
+        TextView textViewInicio = (TextView) convertView.findViewById(R.id.item_meta_inicio);
+
+        if (metaProgreso != null) {
+            textViewInicio.setText(metaProgreso.getProgreso() + obtenerMedida(meta.getTipoMedida()));
+        } else {
+            textViewInicio.setText(meta.getInicio() + obtenerMedida(meta.getTipoMedida()));
         }
 
         ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.item_meta_progress);

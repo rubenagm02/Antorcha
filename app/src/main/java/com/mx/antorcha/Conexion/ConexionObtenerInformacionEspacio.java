@@ -54,8 +54,9 @@ public class ConexionObtenerInformacionEspacio {
                                         jsonObject.getString("estado"),
                                         jsonObject.getString("telefono"),
                                         jsonObject.getDouble("latitud"),
-                                        jsonObject.getDouble("longitud")
-                                );
+                                        jsonObject.getDouble("longitud"),
+                                        jsonObject.getString("valoracion"),
+                                        jsonObject.getString("horario"));
 
 
                             }

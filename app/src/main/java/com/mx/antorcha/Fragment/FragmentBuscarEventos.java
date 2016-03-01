@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,9 +19,14 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
+import com.mx.antorcha.Conexion.ConexionBuscarEvento;
 import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
+import com.mx.antorcha.Modelos.EspacioDeportivo;
+import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -30,6 +36,7 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
     private Activity activity;
     GoogleMap mMap;
     MapView mapView;
+    private ArrayList<Evento> eventos;
     LinearLayout linearLayoutCentral;
     private FragmentManager fragmentManager;
     SlidingUpPanelLayout slidingUpPanelLayout;
@@ -43,7 +50,7 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_buscar_evento, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_buscar_evento, container, false);
 
         //
         DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
@@ -87,6 +94,12 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
+                    Evento evento = obtenerEvento(marker.getTitle());
+
+                    if (evento != null) {
+                        mostrarEvento(evento, rootView);
+                    }
+
                     slidingUpPanelLayout.setPanelHeight(pixels);
                     linearLayoutCentral.setVisibility(View.INVISIBLE);
                     return false;
@@ -102,6 +115,10 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
                     dialogoMostrarFiltroEspacio.show(fragmentManager, "filtro_espacio");
                 }
             });
+
+            //Se buscan los eventos
+            //ConexionBuscarEvento conexionBuscarEvento = new ConexionBuscarEvento(activity, mMap);
+            //conexionBuscarEvento.execute();
         }
 
         return rootView;
@@ -174,6 +191,34 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
             // TODO Auto-generated method stub
             return null;
         }
+
+    }
+    public Evento obtenerEvento (String titulo) {
+
+        for (Evento evento : eventos) {
+
+            if (evento.getNombre().equals(titulo)) {
+
+                return evento;
+            }
+        }
+
+        return null;
+    }
+
+    public void mostrarEvento(Evento evento, View view){
+        TextView textViewNombre = (TextView) view.findViewById(R.id.sliding_buscar_evento_nombre_principal);
+        TextView textViewFecha = (TextView) view.findViewById(R.id.sliding_buscar_evento_fecha_evento);
+        TextView textViewCantidadPersonas = (TextView) view.findViewById(R.id.sliding_buscar_evento_cantidad_personas);
+        TextView textViewLugar = (TextView) view.findViewById(R.id.sliding_buscar_evento_lugar);
+        TextView textViewDescripcion = (TextView) view.findViewById(R.id.sliding_buscar_evento_descripcion);
+
+        //Se muestra la información;
+        textViewNombre.setText(evento.getNombre());
+        textViewFecha.setText(evento.getFechaInicio());
+        textViewCantidadPersonas.setText(10 + "");
+        textViewLugar.setText(evento.getDomicilio());
+        textViewDescripcion.setText(evento.getDescripcion());
 
     }
 }

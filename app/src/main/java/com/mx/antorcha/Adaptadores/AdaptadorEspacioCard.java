@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mx.antorcha.Activities.Actividades;
+import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Activities.Compartir;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
@@ -18,7 +21,7 @@ import com.mx.antorcha.R;
 import java.util.ArrayList;
 
 /**
- * Created by Ruben on 20/12/2015.
+ *
  */
 public class AdaptadorEspacioCard extends RecyclerView.Adapter<AdaptadorEspacioCard.ViewHolder> {
     ArrayList<EspacioDeportivo> espacioDeportivos;
@@ -55,6 +58,8 @@ public class AdaptadorEspacioCard extends RecyclerView.Adapter<AdaptadorEspacioC
             descripcion = espacioDeportivos.get(position).getDescripcion();
         }
 
+        holder.setLinearLayout(espacioDeportivos.get(position).getId());
+
         holder.setTextViewDescripcion(descripcion);
         holder.onClickInvitar(espacioDeportivos.get(position).getId());
     }
@@ -70,16 +75,28 @@ public class AdaptadorEspacioCard extends RecyclerView.Adapter<AdaptadorEspacioC
         private TextView textViewNombre;
         private TextView textViewDescripcion;
         private TextView textViewInvitar;
+        private LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             //Del itemView se jalan los elementos del xml
             //ImageView imageViewCompartir = (ImageView) itemView.findViewById(R.id.item_card_espacio_compartir);
             //AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_mas_opciones);
-
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.item_espacio_mostrar_espacio);
             textViewInvitar = (TextView) itemView.findViewById(R.id.item_espacio_invitar);
             textViewNombre = (TextView) itemView.findViewById(R.id.item_card_actividades_espacio_nombre);
             textViewDescripcion = (TextView) itemView.findViewById(R.id.item_card_actividades_espacio_descripcion);
+        }
+
+        public void setLinearLayout (final int idEspacio) {
+            linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(activity, BuscarActividad.class);
+                    intent.putExtra("idEspacio", idEspacio);
+                    activity.startActivity(intent);
+                }
+            });
         }
 
         public void setEspacioDeportivo (EspacioDeportivo espacioDeportivo) {

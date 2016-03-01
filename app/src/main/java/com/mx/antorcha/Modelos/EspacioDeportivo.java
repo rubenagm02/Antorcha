@@ -16,10 +16,11 @@ public class EspacioDeportivo {
     private String estado;
     private String telefono;
     private double latitud;
+    private String valoracion;
     private double longitud;
+    private String horario;
 
-
-    public EspacioDeportivo(int id, String nombre, String descripcion, String domicilio, String colonia, String codigoPostal, String municipio, String ciudad, String estado, String telefono, double latitud, double longitud) {
+    public EspacioDeportivo(int id, String nombre, String descripcion, String domicilio, String colonia, String codigoPostal, String municipio, String ciudad, String estado, String telefono, double latitud, double longitud, String valoracion, String horario) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -31,7 +32,9 @@ public class EspacioDeportivo {
         this.estado = estado;
         this.telefono = telefono;
         this.latitud = latitud;
+        this.valoracion = valoracion;
         this.longitud = longitud;
+        this.horario = horario;
     }
 
     public EspacioDeportivo () {
@@ -133,5 +136,21 @@ public class EspacioDeportivo {
 
     public void setLongitud(double longitud) {
         this.longitud = longitud;
+    }
+
+    public String getValoracion() {
+        return valoracion;
+    }
+
+    public void setValoracion(String valoracion) {
+        this.valoracion = valoracion;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 }

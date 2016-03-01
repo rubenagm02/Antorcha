@@ -10,12 +10,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +27,7 @@ import static com.mx.antorcha.Conexion.InfoConexion.URL_BUSCAR_EVENTO;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_META;
 
 /**
- * Created by Ruben on 27/12/2015.
+ *
  */
 public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
 
@@ -66,6 +69,43 @@ public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
                     @Override
                     public void onResponse(String response) {
                         Log.i("ConexionBuscarEvento", response);
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            for (int x = 0; x < jsonArray.length(); x++) {
+                                try {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(x);
+                                    Evento evento = new Evento (
+                                            jsonObject.getInt("id"),
+                                            jsonObject.getString("nombre"),
+                                            jsonObject.getString("descripcion"),
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            "",
+                                            jsonObject.getString("fechaIncio"),
+                                            "",
+                                            jsonObject.getDouble("latitud"),
+                                            jsonObject.getDouble("longitud"));
+
+                                    googleMap.addMarker(
+                                            new MarkerOptions().position(
+                                                    new LatLng(evento.getLatitud(),
+                                                            evento.getLongitud()))
+                                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                                                    .title(evento.getNombre())
+                                    );
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {

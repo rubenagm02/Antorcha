@@ -187,6 +187,8 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
         contentValues.put("Telefono", espacioDeportivo.getTelefono());
         contentValues.put("Latitud", espacioDeportivo.getLatitud());
         contentValues.put("Longitud", espacioDeportivo.getLongitud());
+        contentValues.put("Valoracion", espacioDeportivo.getValoracion());
+        contentValues.put("Horario", espacioDeportivo.getHorario());
 
         sqLiteDatabase.insert("EspacioDeportivo", null, contentValues);
 

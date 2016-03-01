@@ -39,6 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/sliding_buscar_espacio_horario"
                     android:layout_marginTop="5dp"
                     android:text="Horarios:"
                     android:alpha=".5"
@@ -60,12 +61,26 @@
                 android:layout_weight="5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/sliding_buscar_espacio_valoracion"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="19sp"
+                    android:layout_marginLeft="35dp"
+                    android:text="N"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:alpha=".87"
+                    android:src="@drawable/icono_estrella_llena"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp" />
+                <!-- Temporalmente fuera
                 <RatingBar
 
                     android:numStars="5"
                     style="@style/estrella"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content" />-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -130,6 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/sliding_buscar_espacio_descripcion"
                 android:layout_marginTop="10dp"
                 android:alpha=".57"
                 android:textColor="#000000"

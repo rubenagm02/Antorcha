@@ -31,6 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/sliding_buscar_evento_nombre_principal"
                     android:textSize="14sp"
                     android:alpha=".8"
                     android:textColor="#000000"
@@ -38,6 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/sliding_buscar_evento_cantidad_personas"
                     android:layout_marginTop="5dp"
                     android:text="Personas que asistirán"
                     android:alpha=".5"
@@ -46,6 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/sliding_buscar_evento_fecha_evento"
                     android:layout_marginTop="8dp"
                     android:text="Fecha del evento"
                     android:alpha=".8"
@@ -104,6 +107,7 @@
                     android:layout_height="23dp" />
             </RelativeLayout>
             <TextView
+                android:id="@+id/sliding_buscar_evento_lugar"
                 android:layout_marginTop="10dp"
                 android:alpha=".6"
                 android:textColor="#000000"
@@ -127,6 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/sliding_buscar_evento_descripcion"
                 android:layout_marginTop="10dp"
                 android:alpha=".6"
                 android:textColor="#000000"

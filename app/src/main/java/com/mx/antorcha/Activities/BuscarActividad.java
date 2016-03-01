@@ -80,7 +80,7 @@ public class BuscarActividad extends AppCompatActivity {
 
         //se crea el adaptador para las tabs de la activity
         AdaptadorBuscarActividadTabs adaptadorBuscarActividadTabs = new AdaptadorBuscarActividadTabs(
-                getSupportFragmentManager(), this);
+                getSupportFragmentManager(), this, getIntent().getExtras());
         adaptadorBuscarActividadTabs.setFragmentManager(getSupportFragmentManager());
 
         //las páginas de las tabs

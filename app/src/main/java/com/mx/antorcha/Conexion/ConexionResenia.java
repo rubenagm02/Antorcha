@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +17,7 @@ import java.util.Map;
 import static com.mx.antorcha.Conexion.InfoConexion.URL_RESENIA;
 
 /**
- * Created by Ruben on 28/12/2015.
+ *
  */
 public class ConexionResenia extends AsyncTask<Void, Void, Void>{
 
@@ -58,6 +59,7 @@ public class ConexionResenia extends AsyncTask<Void, Void, Void>{
                 // the POST parameters:
                 params.put("resenia", resenia);
                 params.put("id", id);
+                params.put("idMiembro", (new MiembroSharedPreferences(activity).getId()) + "");
                 params.put("tipo", tipo);
 
                 return params;
