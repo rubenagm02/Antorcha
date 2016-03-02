@@ -14,6 +14,8 @@ import com.mx.antorcha.Activities.Actividades;
 import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Activities.Compartir;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
+import com.mx.antorcha.Conexion.DescargarImagen;
+import com.mx.antorcha.Conexion.InfoConexion;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.R;
@@ -59,7 +61,7 @@ public class AdaptadorEspacioCard extends RecyclerView.Adapter<AdaptadorEspacioC
         }
 
         holder.setLinearLayout(espacioDeportivos.get(position).getId());
-
+        holder.setImageView(espacioDeportivos.get(position).getId());
         holder.setTextViewDescripcion(descripcion);
         holder.onClickInvitar(espacioDeportivos.get(position).getId());
     }
@@ -76,7 +78,7 @@ public class AdaptadorEspacioCard extends RecyclerView.Adapter<AdaptadorEspacioC
         private TextView textViewDescripcion;
         private TextView textViewInvitar;
         private LinearLayout linearLayout;
-
+        private ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
             //Del itemView se jalan los elementos del xml
@@ -86,6 +88,7 @@ public class AdaptadorEspacioCard extends RecyclerView.Adapter<AdaptadorEspacioC
             textViewInvitar = (TextView) itemView.findViewById(R.id.item_espacio_invitar);
             textViewNombre = (TextView) itemView.findViewById(R.id.item_card_actividades_espacio_nombre);
             textViewDescripcion = (TextView) itemView.findViewById(R.id.item_card_actividades_espacio_descripcion);
+            imageView = (ImageView) itemView.findViewById(R.id.item_actividades_card_espacio_imagen);
         }
 
         public void setLinearLayout (final int idEspacio) {
@@ -121,6 +124,10 @@ public class AdaptadorEspacioCard extends RecyclerView.Adapter<AdaptadorEspacioC
 
         public void setTextViewDescripcion(String descripcion) {
             this.textViewDescripcion.setText(descripcion);
+        }
+
+        public void setImageView(int idEspacio) {
+            DescargarImagen.imagenGuardada(activity, "espacio_" + idEspacio + ".png", this.imageView, InfoConexion.URL_DESCARGAR_IMAGEN_ESPACIO + idEspacio + "_1_.png");
         }
     }
 }

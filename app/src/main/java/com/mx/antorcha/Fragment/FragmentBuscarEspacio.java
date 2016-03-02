@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -28,6 +29,8 @@ import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Conexion.ConexionBuscarEspacio;
 import com.mx.antorcha.Conexion.ConexionInformacionEspacio;
+import com.mx.antorcha.Conexion.DescargarImagen;
+import com.mx.antorcha.Conexion.InfoConexion;
 import com.mx.antorcha.Dialogos.DialogoInsertarResenia;
 import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
@@ -74,6 +77,16 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         //se inicializa el Linear del sliding
         linearLayoutSliding = (LinearLayout) rootView.findViewById(R.id.dragView);
 
+        //Se cargan las flechas para reseña y para imagenes
+        ImageView imageViewFlechaIzquierdaResenia = (ImageView) rootView.findViewById(R.id.sliding_buscar_actividad_espacio_flecha_izquierda);
+        ImageView imageViewFlechaDerechaResenia = (ImageView) rootView.findViewById(R.id.sliding_buscar_actividad_espacio_flecha_derecha);
+        ImageView imageViewFlechaIzquierdaImagen = (ImageView) rootView.findViewById(R.id.sliding_buscar_espacio_imagen_flecha_izquierda);
+        ImageView imageViewFlechaDerechaImagen = (ImageView) rootView.findViewById(R.id.sliding_buscar_espacio_imagen_flecha_derecha);
+
+        AdaptadorSVG.mostrarImagen(imageViewFlechaIzquierdaResenia, activity, R.raw.icono_flecha_izquierda);
+        AdaptadorSVG.mostrarImagen(imageViewFlechaDerechaResenia, activity, R.raw.icono_flecha_derecha);
+        AdaptadorSVG.mostrarImagen(imageViewFlechaIzquierdaImagen, activity, R.raw.icono_flecha_izquierda);
+        AdaptadorSVG.mostrarImagen(imageViewFlechaDerechaImagen, activity, R.raw.icono_flecha_derecha);
         //Se cargan las imagenes de los icono de contacto
         ImageView imageViewCompartir = (ImageView) rootView.findViewById(R.id.sliding_buscar_actividades_espacio_compartir);
         ImageView imageViewContacto = (ImageView) rootView.findViewById(R.id.sliding_buscar_actividades_espacio_contacto);
@@ -82,6 +95,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
 
         final SlidingUpPanelLayout slidingUpPanelLayout = (SlidingUpPanelLayout) rootView.findViewById(R.id.buscar_espacio_sliding_layout);
         slidingUpPanelLayout.setPanelHeight(0);
+
         //Inicializar el mapa
         mapView = (MapView) rootView.findViewById(R.id.map_fragment_espacio);
         mapView.onCreate(savedInstanceState);
@@ -95,9 +109,21 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         mMap = mapView.getMap();
 
         if (mMap != null) {
+
+
+
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(2));
+            //mMap.animateCamera(CameraUpdateFactory.zoomTo(2));
             mMap.setMyLocationEnabled(true);
+
+
+            CameraUpdate center=
+                    CameraUpdateFactory.newLatLng(new LatLng(20.699359689441785,
+                            -103.29570472240448));
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(14f);
+
+            mMap.moveCamera(center);
+            mMap.animateCamera(zoom);
 
             //Onclick del Marker
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -134,11 +160,6 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             });
 
             mMap.setInfoWindowAdapter(new MyInfoWindowAdapter(activity, linearLayoutSliding));
-
-            //marker de prueba
-            mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(20.699359689441785,-103.29570472240448))
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
             //El on click de layout
             linearLayoutCentral = (LinearLayout) rootView.findViewById(R.id.buscar_espacio_layout_click_filtro);
@@ -217,7 +238,6 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             v = activity.getLayoutInflater().inflate(R.layout.etiqueta_marker,
                     null);
             this.linearLayout = linearLayout;
-
         }
 
         @Override
@@ -256,7 +276,9 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         ImageView imageViewInsertarResenia = (ImageView) view.findViewById(R.id.sliding_buscar_actividades_espacio_lapiz);
         TextView textViewValoracion = (TextView) view.findViewById(R.id.sliding_buscar_espacio_valoracion);
         TextView textViewHorario = (TextView) view.findViewById(R.id.sliding_buscar_espacio_horario);
+        ImageView imageViewImagenPrincipal = (ImageView) view.findViewById(R.id.sliding_buscar_espacio_imagen_principal);
 
+        DescargarImagen.imagenGuardada(activity, "espacio_" + espacioDeportivo.getId() + ".png", imageViewImagenPrincipal, InfoConexion.URL_DESCARGAR_IMAGEN_ESPACIO + espacioDeportivo.getId() + "_1_.png");
         String descripcion = "";
 
         if (espacioDeportivo.getDescripcion().length() > 40) {

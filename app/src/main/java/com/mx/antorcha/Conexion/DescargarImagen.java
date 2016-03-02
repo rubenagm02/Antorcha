@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -23,22 +24,43 @@ public class DescargarImagen {
     static public String URL = "http://asistencias.esy.es/imagenes/186.jpg";
 
     //Poner la imagen visible
-    static public void cargarImagen (Activity activity, String nombre, final ImageView imageView) {
+    static public void cargarImagen (final Activity activity, final String url, final ImageView imageView) {
 
-        Picasso.with(activity).load(URL + nombre).into(new Target() {
+        Picasso.with(activity).load(url).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 // cache is now warmed up
                 imageView.setImageBitmap(bitmap);
+                imageView.setAlpha(1f);
             }
 
             @Override
             public void onBitmapFailed(Drawable errorDrawable) {
-
+                Log.e("Error IMAGE","ERROR");
             }
 
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
+                Log.i("Image", "Precarga");
+
+                Picasso.with(activity).load(url).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        // cache is now warmed up
+                        imageView.setImageBitmap(bitmap);
+                        imageView.setAlpha(1f);
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+                        Log.e("Error IMAGE","ERROR");
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        Log.i("Image", "Precarga");
+                    }
+                });
             }
         });
     }
@@ -116,7 +138,7 @@ public class DescargarImagen {
         });
     }
 
-    static public void imagenGuardada (Activity activity, final String nombre, final ImageView imageView) {
+    static public void imagenGuardada (Activity activity, final String nombre, final ImageView imageView, String url) {
 
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/antorcha/" + nombre);
@@ -133,7 +155,7 @@ public class DescargarImagen {
             imageView.setImageBitmap(bitmap);
         } else {
             //Sino se descarga
-            Picasso.with(activity).load(URL + nombre).into(new Target() {
+            Picasso.with(activity).load(url).into(new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     // Se guarda la imagen

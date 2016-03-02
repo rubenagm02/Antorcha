@@ -23,9 +23,8 @@
                     android:layout_marginBottom="7dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginLeft="7dp"
-                    android:alpha=".2"
-                    android:background="#000000"
-                    android:id="@+id/item_actividades_card_espacio"
+                    android:src="@drawable/default_espacio"
+                    android:id="@+id/item_actividades_card_espacio_imagen"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>

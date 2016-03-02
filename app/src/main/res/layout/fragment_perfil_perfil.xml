@@ -19,7 +19,7 @@
                     <ImageView
                         android:scaleType="centerCrop"
                         android:id="@+id/perfil_imagen_miembro"
-                        android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+                        android:src="@drawable/default_perfil_hombre"
                         android:layout_width="match_parent"
                         android:layout_height="230dp" />
                     <ImageView

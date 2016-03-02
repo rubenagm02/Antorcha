@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ import static com.mx.antorcha.Conexion.InfoConexion.URL_META;
  */
 public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
 
+    private ArrayList<Evento> eventos;
     private String latitud;
     private String longitud;
     private String idMiembro;
@@ -59,6 +61,7 @@ public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
         this.espacios = "si";
         this.idMiembro = miembroSharedPreferences.getId() + "";
         this.googleMap = googleMap;
+        this.activity = activity;
     }
 
     @Override
@@ -72,6 +75,7 @@ public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
 
                         try {
                             JSONArray jsonArray = new JSONArray(response);
+                            eventos = new ArrayList<>();
 
                             for (int x = 0; x < jsonArray.length(); x++) {
                                 try {
@@ -87,11 +91,12 @@ public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
                                             "",
                                             "",
                                             "",
-                                            jsonObject.getString("fechaIncio"),
+                                            jsonObject.getString("fechaInicio"),
                                             "",
                                             jsonObject.getDouble("latitud"),
                                             jsonObject.getDouble("longitud"));
 
+                                    eventos.add(evento);
                                     googleMap.addMarker(
                                             new MarkerOptions().position(
                                                     new LatLng(evento.getLatitud(),
@@ -138,5 +143,9 @@ public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
         googleMap.addMarker(new MarkerOptions()
                         .position(new LatLng(latitud, longitud))
         );
+    }
+
+    public void setEventos(ArrayList<Evento> eventos) {
+        this.eventos = eventos;
     }
 }

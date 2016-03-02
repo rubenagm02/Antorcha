@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -50,6 +51,8 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        eventos = new ArrayList<>();
         final View rootView = inflater.inflate(R.layout.fragment_buscar_evento, container, false);
 
         //
@@ -77,8 +80,15 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
 
         if (mMap != null) {
 
+            CameraUpdate center=
+                    CameraUpdateFactory.newLatLng(new LatLng(20.699359689441785,
+                            -103.29570472240448));
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(14f);
+
+            mMap.moveCamera(center);
+            mMap.animateCamera(zoom);
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(2000000f));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f));
             mMap.setMyLocationEnabled(true);
 
             //Onclick del mapa
@@ -117,8 +127,9 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
             });
 
             //Se buscan los eventos
-            //ConexionBuscarEvento conexionBuscarEvento = new ConexionBuscarEvento(activity, mMap);
-            //conexionBuscarEvento.execute();
+            ConexionBuscarEvento conexionBuscarEvento = new ConexionBuscarEvento(activity, mMap);
+            conexionBuscarEvento.setEventos(eventos);
+            conexionBuscarEvento.execute();
         }
 
         return rootView;

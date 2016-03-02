@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
+        android:elevation="5dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
@@ -19,8 +20,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:alpha=".2"
-                    android:background="#000000"
+                    android:id="@+id/sliding_buscar_espacio_imagen_principal"
+                    android:src="@drawable/default_espacio"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -218,6 +219,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:alpha=".4"
                     android:id="@+id/sliding_buscar_actividad_espacio_flecha_izquierda"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -228,27 +230,29 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/sliding_buscar_espacio_titulo_resenia"
                         android:layout_marginTop="10dp"
                         android:textSize="15sp"
                         android:alpha=".8"
                         android:textColor="#000000"
                         android:textStyle="bold"
-                        android:text="Titulo de la reseña"
+                        android:text="Escribe una reseña!"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/sliding_buscar_espacio_resenia"
                         android:layout_marginTop="15dp"
                         android:alpha=".6"
                         android:textColor="#000000"
                         android:textSize="14sp"
-                        android:text="Todo el texto que se quiera introducir al momento de escribir una reseña de algun espacio deportivo"
+                        android:text="Cuentanos que te pareció este espacio deportivo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                     <RelativeLayout
                         android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <TextView
+                        <!--<TextView
                             android:layout_alignParentRight="true"
                             android:alpha=".8"
                             android:textColor="#000000"
@@ -256,11 +260,12 @@
                             android:textSize="15sp"
                             android:text="Samuel L. Jackson"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content" />-->
                     </RelativeLayout>
 
                 </LinearLayout>
                 <ImageView
+                    android:alpha=".4"
                     android:id="@+id/sliding_buscar_actividad_espacio_flecha_derecha"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -276,8 +281,22 @@
             <RelativeLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="160dp">
                 <ImageView
+                    android:alpha=".4"
+                    android:id="@+id/sliding_buscar_espacio_imagen_flecha_izquierda"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:alpha=".4"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/sliding_buscar_espacio_imagen_flecha_derecha"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/sliding_buscar_espacio_imagen_galeria"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/nadar"
                     android:layout_width="match_parent"
@@ -290,6 +309,7 @@
                 android:background="#000000"
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />
+            <!--
             <TextView
                 android:alpha=".87"
                 android:textColor="#000000"
@@ -297,7 +317,7 @@
                 android:text="Precio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <!-- la parte de precios-->
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -315,8 +335,9 @@
                     android:text="$00.00"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-            </LinearLayout>
+            </LinearLayout>-->
             <ImageView
+                android:layout_marginTop="40dp"
                 android:layout_marginBottom="50dp"
                 android:id="@+id/buscar_espacio_boton_asignarme_espacio"
                 android:layout_width="match_parent"

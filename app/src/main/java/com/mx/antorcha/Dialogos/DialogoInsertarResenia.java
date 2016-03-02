@@ -45,8 +45,11 @@ public class DialogoInsertarResenia extends DialogFragment {
         textViewEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getDialog();
+
                 ConexionResenia conexionResenia = new ConexionResenia(activity,
-                        editTextResenia.getText().toString(), id + "", tipo + "");
+                        editTextResenia.getText().toString(), id + "", tipo + "", editTextTitulo.getText().toString());
+                conexionResenia.setDialogoInsertarResenia(getDialog());
                 conexionResenia.execute();
             }
         });
