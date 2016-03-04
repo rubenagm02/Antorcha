@@ -75,7 +75,7 @@ public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
 
                         try {
                             JSONArray jsonArray = new JSONArray(response);
-                            eventos = new ArrayList<>();
+                            eventos.clear();
 
                             for (int x = 0; x < jsonArray.length(); x++) {
                                 try {

@@ -37,10 +37,11 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
     private Activity activity;
     GoogleMap mMap;
     MapView mapView;
-    private ArrayList<Evento> eventos;
+    public ArrayList<Evento> eventos;
     LinearLayout linearLayoutCentral;
     private FragmentManager fragmentManager;
     SlidingUpPanelLayout slidingUpPanelLayout;
+    LinearLayout linearLayoutSliding;
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
@@ -52,9 +53,8 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        eventos = new ArrayList<>();
         final View rootView = inflater.inflate(R.layout.fragment_buscar_evento, container, false);
-
+        eventos = new ArrayList<>();
         //
         DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
         float dp = 100f;
@@ -62,6 +62,7 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         final int pixels = (int) (fpixels + 0.5f);
 
         slidingUpPanelLayout = (SlidingUpPanelLayout) rootView.findViewById(R.id.buscar_evento_sliding_layout);
+        slidingUpPanelLayout.setPanelHeight(0);
 
         //Se cargan las imagenes de los icono de contacto
         ImageView imageViewCompartir = (ImageView) rootView.findViewById(R.id.sliding_buscar_actividades_evento_compartir);
@@ -71,6 +72,20 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_compartir);
         AdaptadorSVG.mostrarImagen(imageViewContacto, activity, R.raw.icono_llamada);
         AdaptadorSVG.mostrarImagen(imageViewMarkerCentral, activity, R.raw.icono_marker_naranja);
+
+        //El on click de layout
+        linearLayoutCentral = (LinearLayout) rootView.findViewById(R.id.buscar_evento_layout_click_filtro);
+        linearLayoutCentral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogoMostrarFiltroEspacio dialogoMostrarFiltroEspacio = new DialogoMostrarFiltroEspacio();
+                dialogoMostrarFiltroEspacio.show(fragmentManager, "filtro_espacio");
+            }
+        });
+
+
+        //se inicializa el Linear del sliding
+        linearLayoutSliding = (LinearLayout) rootView.findViewById(R.id.dragView);
 
         //Inicializar el mapa
         mapView = (MapView) rootView.findViewById(R.id.map_fragment_evento);
@@ -88,7 +103,7 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
             mMap.moveCamera(center);
             mMap.animateCamera(zoom);
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15f));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(14f));
             mMap.setMyLocationEnabled(true);
 
             //Onclick del mapa
@@ -99,6 +114,8 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
                     linearLayoutCentral.setVisibility(View.VISIBLE);
                 }
             });
+
+            mMap.setInfoWindowAdapter(new MyInfoWindowAdapter(activity, linearLayoutSliding));
 
             //Onclick del Marker
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -116,15 +133,7 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
                 }
             });
 
-            //El on click de layout
-            linearLayoutCentral = (LinearLayout) rootView.findViewById(R.id.buscar_evento_layout_click_filtro);
-            linearLayoutCentral.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DialogoMostrarFiltroEspacio dialogoMostrarFiltroEspacio = new DialogoMostrarFiltroEspacio();
-                    dialogoMostrarFiltroEspacio.show(fragmentManager, "filtro_espacio");
-                }
-            });
+
 
             //Se buscan los eventos
             ConexionBuscarEvento conexionBuscarEvento = new ConexionBuscarEvento(activity, mMap);
@@ -179,7 +188,7 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         mapView.onPause();
     }
 
-    class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+    private class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
         private final View v;
         LinearLayout linearLayout;
@@ -194,6 +203,9 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         public View getInfoContents(Marker marker) {
             // set some bitmap to the imageview
             linearLayout.setVisibility(View.VISIBLE);
+
+            TextView textViewNombre = (TextView) v.findViewById(R.id.etiqueta_marquer_nombre);
+            textViewNombre.setText(marker.getTitle());
             return v;
         }
 
@@ -206,11 +218,11 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
     }
     public Evento obtenerEvento (String titulo) {
 
-        for (Evento evento : eventos) {
+        for (int x = 0; x < eventos.size(); x++) {
 
-            if (evento.getNombre().equals(titulo)) {
+            if (titulo.equals(eventos.get(x).getNombre())) {
 
-                return evento;
+                return eventos.get(x);
             }
         }
 

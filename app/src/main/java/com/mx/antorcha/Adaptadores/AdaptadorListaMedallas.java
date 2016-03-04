@@ -41,13 +41,15 @@ public class AdaptadorListaMedallas extends RecyclerView.Adapter<AdaptadorListaM
 
         AdaptadorListaMedallas.ViewHolder viewHolder = new AdaptadorListaMedallas.ViewHolder(view);
 
-
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(AdaptadorListaMedallas.ViewHolder holder, int position) {
+        holder.setIsRecyclable(false);
+
         holder.setMedalla(medallas.get(position));
+
     }
 
     @Override

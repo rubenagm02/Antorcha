@@ -57,7 +57,6 @@
 
         <!-- SLIDING LAYOUT AQUÍ NO VA NADA DEL MAPA-->
         <LinearLayout
-            android:visibility="gone"
             android:background="#FFFFFF"
             android:id="@+id/dragView"
             android:layout_width="match_parent"

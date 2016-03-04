@@ -34,8 +34,11 @@ import com.mx.antorcha.Conexion.InfoConexion;
 import com.mx.antorcha.Dialogos.DialogoInsertarResenia;
 import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
+import com.mx.antorcha.Modelos.Resenia;
 import com.mx.antorcha.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -43,7 +46,7 @@ import java.util.ArrayList;
  *
  */
 public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarkerDragListener {
-
+    private int indice = 0;
     private Activity activity;
     GoogleMap mMap;
     private View view;
@@ -55,6 +58,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
     private FragmentManager fragmentManager;
     private ConexionBuscarEspacio conexionBuscarEspacio;
     public ArrayList<EspacioDeportivo> espacioDeportivos;
+    private ArrayList<Resenia> resenias;
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
@@ -68,6 +72,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         final View rootView = inflater.inflate(R.layout.fragment_buscar_espacio, container, false);
         view = rootView;
         espacioDeportivos = new ArrayList<>();
+
         //
         DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
         float dp = 100f;
@@ -109,8 +114,6 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         mMap = mapView.getMap();
 
         if (mMap != null) {
-
-
 
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             //mMap.animateCamera(CameraUpdateFactory.zoomTo(2));
@@ -184,6 +187,39 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             slidingUpPanelLayout.setPanelHeight(pixels);
             slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         }
+
+        final TextView textViewResenia = (TextView) view.findViewById(R.id.sliding_buscar_espacio_resenia);
+        final TextView textViewTituloResenia = (TextView) view.findViewById(R.id.sliding_buscar_espacio_titulo_resenia);
+
+        //Se colocan los click de las flechas para las reseñas
+        imageViewFlechaIzquierdaResenia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                textViewResenia.setText(resenias.get(indice).getResenia());
+                textViewTituloResenia.setText(resenias.get(indice).getTitulo());
+
+                if (indice == 0) {
+                    indice = resenias.size() - 1;
+                } else {
+                    indice--;
+                }
+            }
+        });
+
+        imageViewFlechaIzquierdaResenia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewResenia.setText(resenias.get(indice).getResenia());
+                textViewTituloResenia.setText(resenias.get(indice).getTitulo());
+
+                if (indice == resenias.size() - 1) {
+                    indice = 0;
+                } else {
+                    indice++;
+                }
+            }
+        });
 
         return rootView;
     }

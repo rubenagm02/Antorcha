@@ -38,6 +38,7 @@ public class ConexionResenia extends AsyncTask<Void, Void, Void>{
         this.titulo = titulo;
     }
 
+
     @Override
     protected Void doInBackground(Void... params) {
 

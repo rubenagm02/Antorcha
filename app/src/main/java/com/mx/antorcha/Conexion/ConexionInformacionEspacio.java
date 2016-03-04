@@ -12,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
+import com.mx.antorcha.Modelos.Resenia;
 import com.mx.antorcha.R;
 
 import org.json.JSONArray;
@@ -32,6 +33,7 @@ public class ConexionInformacionEspacio {
     private Activity activity;
     private String idEspacio;
     private View view;
+    private ArrayList<Resenia> resenias;
 
     public ConexionInformacionEspacio(Activity activity, String idEspacio) {
         this.activity = activity;
@@ -73,10 +75,14 @@ public class ConexionInformacionEspacio {
 
                                     //Se obtienen las reseñas
                                     JSONArray jsonArrayResenias = jsonObject.getJSONArray("resenias");
+                                    resenias = new ArrayList<>();
 
                                     for (int y = 0; y < jsonArrayResenias.length(); y++) {
-                                        ((TextView) view.findViewById(R.id.sliding_buscar_espacio_resenia)).setText(jsonArrayResenias.getJSONObject(y).getString("resenia"));
-                                        ((TextView) view.findViewById(R.id.sliding_buscar_espacio_titulo_resenia)).setText(jsonArrayResenias.getJSONObject(y).getString("titulo"));
+                                        JSONObject jsonObjectResenia = jsonArrayResenias.getJSONObject(y);
+
+                                        ((TextView) view.findViewById(R.id.sliding_buscar_espacio_resenia)).setText(jsonObjectResenia.getString("resenia"));
+                                        ((TextView) view.findViewById(R.id.sliding_buscar_espacio_titulo_resenia)).setText(jsonObjectResenia.getString("titulo"));
+                                        resenias.add(new Resenia(jsonObjectResenia.getString("titulo"), jsonObjectResenia.getString("resenia"), jsonObjectResenia.getString("nombre")));
                                     }
 
                                     //Se obtienen los nombres de los deportes
