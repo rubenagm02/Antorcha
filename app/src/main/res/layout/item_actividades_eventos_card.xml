@@ -18,11 +18,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <ImageView
+                    android:src="@drawable/default_evento"
                     android:layout_marginBottom="7dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginLeft="7dp"
-                    android:alpha=".2"
-                    android:background="#000000"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -31,15 +30,17 @@
                 android:layout_weight="5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
-                <ImageView
+                <!--<ImageView
                     android:alpha=".4"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_alignParentRight="true"
                     android:id="@+id/item_card_evento_compartir"
                     android:layout_width="25dp"
-                    android:layout_height="25dp" />
+                    android:layout_height="25dp" />-->
                 <LinearLayout
+                    android:id="@+id/card_evento_click_evento"
+                    android:layout_marginBottom="30dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -69,13 +70,13 @@
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                    <TextView
+                    <!--<TextView
                         android:textStyle="bold"
                         android:textSize="13sp"
                         android:textColor="@color/wallet_holo_blue_light"
                         android:text="CALIFICAR"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content" />-->
                     <TextView
                         android:id="@+id/item_evento_invitar"
                         android:textStyle="bold"

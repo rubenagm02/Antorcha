@@ -57,6 +57,7 @@ public class Actividades extends AppCompatActivity {
         });
 
         AdaptadorActividadesTabs adaptadorActividadesTabs = new AdaptadorActividadesTabs(getSupportFragmentManager(), this);
+        adaptadorActividadesTabs.setFragmentManager(getSupportFragmentManager());
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.actividades_pager);
         viewPager.setAdapter(adaptadorActividadesTabs);

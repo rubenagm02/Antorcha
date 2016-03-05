@@ -11,6 +11,7 @@ import com.mx.antorcha.Fragment.FragmentActividadesEvento;
 public class AdaptadorActividadesTabs extends FragmentStatePagerAdapter{
 
     private Activity activity;
+    private FragmentManager fragmentManager;
 
     public AdaptadorActividadesTabs(FragmentManager fm, Activity activity) {
         super(fm);
@@ -24,6 +25,7 @@ public class AdaptadorActividadesTabs extends FragmentStatePagerAdapter{
             case 0 :
                 FragmentActividadesEspacio fragmentActividadesEspacio = new FragmentActividadesEspacio();
                 fragmentActividadesEspacio.setActivity(activity);
+                fragmentActividadesEspacio.setFragmentManager(fragmentManager);
                 return fragmentActividadesEspacio;
             case 1 :
                 FragmentActividadesEvento fragmentActividadesEvento = new FragmentActividadesEvento();
@@ -51,5 +53,9 @@ public class AdaptadorActividadesTabs extends FragmentStatePagerAdapter{
             default:
                 return "Tab";
         }
+    }
+
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
     }
 }

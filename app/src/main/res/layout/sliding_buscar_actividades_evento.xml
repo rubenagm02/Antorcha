@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
+        android:elevation="5dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
@@ -19,8 +20,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:alpha=".2"
-                    android:background="#000000"
+                    android:id="@+id/sliding_buscar_espacio_imagen_principal"
+                    android:src="@drawable/default_espacio"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -35,13 +36,13 @@
                     android:textSize="14sp"
                     android:alpha=".8"
                     android:textColor="#000000"
-                    android:text="Nombre del evento"
+                    android:text="Nombre del espacio deportivo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/sliding_buscar_evento_cantidad_personas"
                     android:layout_marginTop="5dp"
-                    android:text="Personas que asistirán"
+                    android:text="Horarios:"
                     android:alpha=".5"
                     android:textColor="#000000"
                     android:textSize="12sp"
@@ -49,35 +50,39 @@
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/sliding_buscar_evento_fecha_evento"
-                    android:layout_marginTop="8dp"
-                    android:text="Fecha del evento"
+                    android:layout_marginTop="7dp"
+                    android:text="Descripcion breve"
                     android:alpha=".8"
                     android:textColor="#000000"
                     android:textSize="13sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-            <LinearLayout
+            <RelativeLayout
                 android:layout_weight="5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/sliding_buscar_actividades_evento_contacto"
-                    android:alpha=".4"
-                    android:layout_weight="2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
                 <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"></LinearLayout>
-                <ImageView
-                    android:id="@+id/sliding_buscar_actividades_evento_compartir"
-                    android:alpha=".4"
-                    android:layout_weight="2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/sliding_buscar_actividades_evento_contacto"
+                        android:alpha=".4"
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp" />
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"></LinearLayout>
+                    <ImageView
+                        android:id="@+id/sliding_buscar_actividades_evento_compartir"
+                        android:alpha=".4"
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp" />
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
     <ScrollView
@@ -148,8 +153,10 @@
                 android:layout_height="1dp" />
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="160dp">
                 <ImageView
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp"
                     android:alpha=".2"
                     android:background="#000000"
                     android:layout_width="match_parent"
@@ -170,6 +177,12 @@
                 android:text="Precio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="40dp"
+                android:id="@+id/sliding_buscar_evento_asisto_evento"
+                android:layout_width="match_parent"
+                android:layout_height="42dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

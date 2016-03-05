@@ -84,7 +84,7 @@ public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
                                             jsonObject.getInt("id"),
                                             jsonObject.getString("nombre"),
                                             jsonObject.getString("descripcion"),
-                                            "",
+                                            jsonObject.getString("direccion"),
                                             "",
                                             "",
                                             "",

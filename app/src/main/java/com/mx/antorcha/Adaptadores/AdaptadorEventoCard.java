@@ -7,22 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Activities.Compartir;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
-import com.mx.antorcha.Modelos.EspacioDeportivo;
 import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.R;
 
 import java.util.ArrayList;
 
 /**
- * Created by Ruben on 20/12/2015.
+ *
  */
 public class AdaptadorEventoCard extends RecyclerView.Adapter<AdaptadorEventoCard.ViewHolder> {
     ArrayList<Evento> eventos;
-    static Activity activity;
+    static public Activity activity;
 
     public AdaptadorEventoCard (Activity activity, ArrayList<Evento> eventos) {
         this.eventos = eventos;
@@ -35,10 +36,7 @@ public class AdaptadorEventoCard extends RecyclerView.Adapter<AdaptadorEventoCar
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_actividades_eventos_card, parent, false);
 
-        AdaptadorEventoCard.ViewHolder viewHolder = new AdaptadorEventoCard.ViewHolder(view);
-
-
-        return viewHolder;
+        return new AdaptadorEventoCard.ViewHolder(view);
     }
 
     @Override
@@ -47,6 +45,7 @@ public class AdaptadorEventoCard extends RecyclerView.Adapter<AdaptadorEventoCar
         holder.setTextViewNombre(eventos.get(position).getNombre());
         holder.setTextViewFecha(eventos.get(position).getFechaInicio());
         holder.onClickInvitar(eventos.get(position).getId());
+        holder.setLinearLayoutClick(eventos.get(position).getId());
     }
 
     @Override
@@ -60,13 +59,14 @@ public class AdaptadorEventoCard extends RecyclerView.Adapter<AdaptadorEventoCar
         private TextView textViewNombre;
         private TextView textViewFecha;
         private TextView textViewInvitar;
+        private LinearLayout linearLayoutClick;
 
         public ViewHolder(View itemView) {
             super(itemView);
             //Del itemView se jalan los elementos del xml
-            ImageView imageViewCompartir = (ImageView) itemView.findViewById(R.id.item_card_evento_compartir);
-            AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_mas_opciones);
-
+            /*ImageView imageViewCompartir = (ImageView) itemView.findViewById(R.id.item_card_evento_compartir);
+            AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_mas_opciones);*/
+            linearLayoutClick = (LinearLayout) itemView.findViewById(R.id.card_evento_click_evento);
             textViewInvitar = (TextView) itemView.findViewById(R.id.item_evento_invitar);
             textViewNombre = (TextView) itemView.findViewById(R.id.item_card_actividades_evento_nombre);
             textViewFecha = (TextView) itemView.findViewById(R.id.item_card_actividades_evento_fecha);
@@ -92,6 +92,18 @@ public class AdaptadorEventoCard extends RecyclerView.Adapter<AdaptadorEventoCar
                     Intent intent = new Intent(activity, Compartir.class);
                     intent.putExtra("tipo", "evento");
                     intent.putExtra("id", idEvento);
+                    activity.startActivity(intent);
+                }
+            });
+        }
+
+        public void setLinearLayoutClick(final int idEvento) {
+            this.linearLayoutClick.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(activity, BuscarActividad.class);
+                    intent.putExtra("idEvento", idEvento);
+
                     activity.startActivity(intent);
                 }
             });
