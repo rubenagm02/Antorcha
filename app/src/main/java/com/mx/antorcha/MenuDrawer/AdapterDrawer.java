@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.mx.antorcha.Activities.Actividades;
 import com.mx.antorcha.Activities.BuscarActividad;
+import com.mx.antorcha.Activities.Especialistas;
 import com.mx.antorcha.Activities.Inicio;
 import com.mx.antorcha.Activities.Medallas;
 import com.mx.antorcha.Activities.Metas;
@@ -42,6 +43,7 @@ public class AdapterDrawer extends ArrayAdapter<String> {
     private ImageView imageViewMetas;
     private ImageView imageViewMas;
     private ImageView imageViewAyudanosMejorar;
+    private ImageView imageViewEspecialistas;
 
     private LinearLayout linearLayoutBuscarActividad;
     private LinearLayout linearLayoutActividades;
@@ -49,6 +51,7 @@ public class AdapterDrawer extends ArrayAdapter<String> {
     private LinearLayout linearLayoutMedallas;
     private LinearLayout linearLayoutMetas;
     private LinearLayout linearLayoutAyudanosMejorar;
+    private LinearLayout linearLayoutEspecialistas;
 
     private Activity activity;
     private String actividad;
@@ -81,6 +84,7 @@ public class AdapterDrawer extends ArrayAdapter<String> {
         imageViewMetas = (ImageView) convertView.findViewById(R.id.drawer_icono_metas);
         imageViewMas = (ImageView) convertView.findViewById(R.id.drawer_mas);
         imageViewAyudanosMejorar = (ImageView) convertView.findViewById(R.id.drawer_icono_ayudano_mejorar);
+        imageViewEspecialistas = (ImageView) convertView.findViewById(R.id.drawer_icono_especialistas);
 
         //se muestran los iconos
         AdaptadorSVG.mostrarImagen(imageViewBuscarActividad, activity, R.raw.icono_buscar_actividad);
@@ -88,7 +92,7 @@ public class AdapterDrawer extends ArrayAdapter<String> {
         AdaptadorSVG.mostrarImagen(imageViewPerfil, activity, R.raw.icono_perfil);
         AdaptadorSVG.mostrarImagen(imageViewMedallas, activity, R.raw.icono_medallas);
         AdaptadorSVG.mostrarImagen(imageViewMetas, activity, R.raw.icono_metas);
-
+        AdaptadorSVG.mostrarImagen(imageViewEspecialistas, activity, R.raw.icono_especialistas);
 
         //Se cargan los textview para pintarlos
         TextView textViewBuscarActividad = (TextView) convertView.findViewById(R.id.drawer_texto_buscar_actividad);
@@ -97,6 +101,7 @@ public class AdapterDrawer extends ArrayAdapter<String> {
         TextView textViewMedallas = (TextView) convertView.findViewById(R.id.drawer_texto_medallas);
         TextView textViewMetas = (TextView) convertView.findViewById(R.id.drawer_texto_metas);
         TextView textViewAyudanosMejorar = (TextView) convertView.findViewById(R.id.drawer_texto_ayudanos_mejorar);
+        TextView textViewEspecialistas = (TextView) convertView.findViewById(R.id.drawer_texto_especialistas);
 
         //para pintar el icono seleccionado y el textview
         switch (actividad) {
@@ -128,6 +133,11 @@ public class AdapterDrawer extends ArrayAdapter<String> {
             case "AyudanosMejorar" :
                 textViewAyudanosMejorar.setTextColor(Color.parseColor("#FF9522"));
                 break;
+            case "Especialistas" :
+                imageViewEspecialistas.setAlpha(1f);
+                textViewEspecialistas.setTextColor(Color.parseColor("#FF9522"));
+                AdaptadorSVG.mostrarImagen(imageViewEspecialistas, activity, R.raw.icono_especialistas_seleccionado);
+                break;
         }
 
 
@@ -138,6 +148,7 @@ public class AdapterDrawer extends ArrayAdapter<String> {
         linearLayoutMedallas = (LinearLayout) convertView.findViewById(R.id.drawer_layout_medallas);
         linearLayoutMetas = (LinearLayout) convertView.findViewById(R.id.drawer_layout_metas);
         linearLayoutAyudanosMejorar = (LinearLayout) convertView.findViewById(R.id.drawer_layout_ayudanos_mejorar);
+        linearLayoutEspecialistas = (LinearLayout) convertView.findViewById(R.id.drawer_layout_especialistas);
 
         //Se agregan los clics del menú
         linearLayoutPerfil.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +192,15 @@ public class AdapterDrawer extends ArrayAdapter<String> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, Actividades.class);
+                activity.startActivity(intent);
+                activity.finish();
+            }
+        });
+
+        linearLayoutEspecialistas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, Especialistas.class);
                 activity.startActivity(intent);
                 activity.finish();
             }

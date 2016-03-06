@@ -77,7 +77,7 @@
                     <TextView
                         android:id="@+id/item_espacio_calificar"
                         android:textStyle="bold"
-                        android:textSize="13sp"
+                        android:textSize="14sp"
                         android:textColor="@color/wallet_holo_blue_light"
                         android:text="CALIFICAR"
                         android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
                         android:id="@+id/item_espacio_invitar"
                         android:textStyle="bold"
                         android:layout_marginLeft="20dp"
-                        android:textSize="13sp"
+                        android:textSize="14sp"
                         android:textColor="@color/wallet_holo_blue_light"
                         android:text="INVITAR"
                         android:layout_width="wrap_content"

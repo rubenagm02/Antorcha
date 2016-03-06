@@ -9,7 +9,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mx.antorcha.SharedPreferences.MedallasSharedPreferences;
-import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,27 +17,19 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.mx.antorcha.Conexion.InfoConexion.URL_OBTENER_MEDALLAS;
+import static com.mx.antorcha.Conexion.InfoConexion.URL_OBTENER_ESPECIALIDADES;
 
 /**
- *
+ * Created by Ruben on 06/03/2016
  */
-public class ConexionObtenerMedallas {
+public class ConexionEspecialistas {
 
-    private Activity activity;
-
-    public ConexionObtenerMedallas(Activity activity) {
-        this.activity = activity;
-    }
-
-    public void obtenerMedallas () {
-        int idMiembro = new MiembroSharedPreferences(activity).getId();
-
-        StringRequest postRequest = new StringRequest(Request.Method.GET, URL_OBTENER_MEDALLAS + idMiembro,
+    static public void obtenerEspecialistas (final Activity activity) {
+        StringRequest postRequest = new StringRequest(Request.Method.GET, URL_OBTENER_ESPECIALIDADES,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.i("ObtenerMedallas", response);
+                        Log.i("ObtenerEspecialidades", response);
 
                         try {
                             JSONArray jsonArray = new JSONArray(response);
@@ -46,8 +37,7 @@ public class ConexionObtenerMedallas {
                             for (int x = 0; x < jsonArray.length(); x++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(x);
 
-                                MedallasSharedPreferences medallasSharedPreferences = new MedallasSharedPreferences(activity);
-                                medallasSharedPreferences.agregarMedalla(jsonObject.getInt("idMedalla"));
+                                
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

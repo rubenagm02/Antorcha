@@ -195,6 +195,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+        <!-- Especialistas -->
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:id="@+id/drawer_layout_especialistas"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:alpha=".5"
+                android:id="@+id/drawer_icono_especialistas"
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+            <TextView
+                android:id="@+id/drawer_texto_especialistas"
+                android:alpha=".7"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="14sp"
+                android:text="Especialistas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
         <TextView
             android:layout_marginBottom="7dp"
             android:layout_marginTop="7dp"
