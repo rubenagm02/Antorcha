@@ -125,6 +125,8 @@
                 android:layout_height="wrap_content" />
             <!-- Tags de actividades -->
             <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/sliding_buscar_espacio_tags_actividades"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -173,6 +175,8 @@
                 android:layout_height="wrap_content" />
             <!-- Tags de los servicios extra-->
             <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/sliding_buscar_espacio_tags_servicios"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

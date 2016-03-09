@@ -250,7 +250,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_gravity="center_vertical"
                 android:textSize="14sp"
-                android:text="Ayudanos a mejorar"
+                android:text="Ayúdanos a mejorar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

@@ -37,7 +37,7 @@ public class ConexionEspecialistas {
                             for (int x = 0; x < jsonArray.length(); x++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(x);
 
-                                
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

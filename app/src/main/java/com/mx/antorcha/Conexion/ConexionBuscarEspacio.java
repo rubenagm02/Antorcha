@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
+import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONArray;
@@ -102,7 +103,7 @@ public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
                                         new MarkerOptions().position(
                                                 new LatLng(espacioDeportivo.getLatitud(),
                                                         espacioDeportivo.getLongitud()))
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.icono_marker_negro))
                                         .title(espacioDeportivo.getNombre())
                                 );
                             }

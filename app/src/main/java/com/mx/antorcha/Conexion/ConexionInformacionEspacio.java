@@ -2,8 +2,10 @@ package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -90,7 +92,58 @@ public class ConexionInformacionEspacio {
                                     ArrayList<String> deportes = new ArrayList<>();
 
                                     for (int y = 0; y < jsonArrayDeportes.length(); y++) {
-                                        deportes.add(jsonArrayDeportes.getJSONObject(y).getString("deporte"));
+                                        deportes.add(jsonArrayDeportes.getJSONObject(y).getString("nombre"));
+                                        //Se cargan los deportes
+                                    }
+
+                                    //Se obtienen los servicios
+                                    JSONArray jsonArrayServicios = jsonObject.getJSONArray("servicios");
+                                    ArrayList<String> servicios = new ArrayList<>();
+
+                                    for (int y = 0; y < jsonArrayServicios.length(); y++) {
+                                        servicios.add(jsonArrayServicios.getJSONObject(y).getString("nombre"));
+                                        //Se cargan los deportes
+                                    }
+
+
+                                    LayoutInflater layoutInflater = LayoutInflater.from(activity);
+                                    //Se muestran los tags de los deportes
+                                    LinearLayout linearLayoutActividades = (LinearLayout) view.findViewById(R.id.sliding_buscar_espacio_tags_actividades);
+                                    linearLayoutActividades.removeAllViews();
+
+
+                                    for (int y = 0; y < deportes.size(); y++) {
+                                        int indice = 0;
+                                        LinearLayout linearLayoutTagActividades = (LinearLayout) layoutInflater.inflate(R.layout.item_tag_actividades, null);
+
+                                        while (indice < 3 && y < deportes.size()) {
+                                            TextView textView = (TextView) linearLayoutTagActividades.getChildAt(indice);
+                                            textView.setText(deportes.get(y));
+                                            textView.setVisibility(View.VISIBLE);
+                                            indice++;
+                                            y++;
+                                        }
+                                        y--;
+                                        linearLayoutActividades.addView(linearLayoutTagActividades);
+                                    }
+
+                                    //Se muestran los tags de los deportes
+                                    LinearLayout linearLayoutServicios = (LinearLayout) view.findViewById(R.id.sliding_buscar_espacio_tags_servicios);
+                                    linearLayoutServicios.removeAllViews();
+
+                                    for (int y = 0; y < servicios.size(); y++) {
+                                        int indice = 0;
+                                        LinearLayout linearLayoutTagsServicios = (LinearLayout) layoutInflater.inflate(R.layout.item_tag_actividades, null);
+
+                                        while (indice < 3 && y < deportes.size()) {
+                                            TextView textView = (TextView) linearLayoutTagsServicios.getChildAt(indice);
+                                            textView.setText(deportes.get(y));
+                                            textView.setVisibility(View.VISIBLE);
+                                            indice++;
+                                            y++;
+                                        }
+                                        y--;
+                                        linearLayoutServicios.addView(linearLayoutServicios);
                                     }
 
                                     ImageView imageViewImagenGaleria = (ImageView) view.findViewById(R.id.sliding_buscar_espacio_imagen_galeria);
