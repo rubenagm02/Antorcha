@@ -27,6 +27,7 @@ public class DialogoValoracion extends DialogFragment{
 
     private double valoracion;
     private Activity activity;
+    private int idEspacio;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,9 +52,10 @@ public class DialogoValoracion extends DialogFragment{
             @Override
             public void onClick(View v) {
                 ConexionValoracion conexionValoracion = new ConexionValoracion(activity,
-                        new MiembroSharedPreferences(activity).getId() + "",
-                        valoracion + "",
-                        1 + "");
+                        idEspacio + "",
+                        valoracion + "");
+                conexionValoracion.setDialog(getDialog());
+                conexionValoracion.enviar();
             }
         });
 
@@ -62,5 +64,9 @@ public class DialogoValoracion extends DialogFragment{
 
     public void setActivity(Activity activity) {
         this.activity = activity;
+    }
+
+    public void setIdEspacio(int idEspacio) {
+        this.idEspacio = idEspacio;
     }
 }

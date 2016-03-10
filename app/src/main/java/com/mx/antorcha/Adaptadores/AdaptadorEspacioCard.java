@@ -143,6 +143,7 @@ public class AdaptadorEspacioCard extends RecyclerView.Adapter<AdaptadorEspacioC
                 public void onClick(View v) {
                     DialogoValoracion dialogoValoracion = new DialogoValoracion();
                     dialogoValoracion.setActivity(activity);
+                    dialogoValoracion.setIdEspacio(espacioDeportivo.getId());
                     dialogoValoracion.show(fragmentManager, "dialogo_valoracion");
                 }
             });
