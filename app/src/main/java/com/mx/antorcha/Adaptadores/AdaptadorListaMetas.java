@@ -46,8 +46,7 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
 
         final Meta meta = getItem(position);
 
-        LayoutInflater vi;
-        vi = LayoutInflater.from(getContext());
+        LayoutInflater vi = LayoutInflater.from(getContext());
         convertView = vi.inflate(R.layout.item_lista_meta, null);
         viewCompartir = convertView;
 

@@ -77,14 +77,14 @@ public class ConexionInformacionEspacio {
 
                                     //Se obtienen las reseñas
                                     JSONArray jsonArrayResenias = jsonObject.getJSONArray("resenias");
-                                    resenias = new ArrayList<>();
+                                    resenias.clear();
 
                                     for (int y = 0; y < jsonArrayResenias.length(); y++) {
                                         JSONObject jsonObjectResenia = jsonArrayResenias.getJSONObject(y);
 
                                         ((TextView) view.findViewById(R.id.sliding_buscar_espacio_resenia)).setText(jsonObjectResenia.getString("resenia"));
                                         ((TextView) view.findViewById(R.id.sliding_buscar_espacio_titulo_resenia)).setText(jsonObjectResenia.getString("titulo"));
-                                        resenias.add(new Resenia(jsonObjectResenia.getString("titulo"), jsonObjectResenia.getString("resenia"), jsonObjectResenia.getString("nombre")));
+                                        resenias.add(new Resenia(jsonObjectResenia.getString("titulo"), jsonObjectResenia.getString("resenia"), ""));
                                     }
 
                                     //Se obtienen los nombres de los deportes
@@ -183,5 +183,9 @@ public class ConexionInformacionEspacio {
 
     public void cargarInformacionEspacio () {
 
+    }
+
+    public void setResenias (ArrayList<Resenia> resenias) {
+        this.resenias = resenias;
     }
 }

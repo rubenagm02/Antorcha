@@ -58,7 +58,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
     private FragmentManager fragmentManager;
     private ConexionBuscarEspacio conexionBuscarEspacio;
     public ArrayList<EspacioDeportivo> espacioDeportivos;
-    private ArrayList<Resenia> resenias;
+    public ArrayList<Resenia> resenias;
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
@@ -72,6 +72,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         final View rootView = inflater.inflate(R.layout.fragment_buscar_espacio, container, false);
         view = rootView;
         espacioDeportivos = new ArrayList<>();
+        resenias = new ArrayList<>();
 
         //
         DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
@@ -196,27 +197,38 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             @Override
             public void onClick(View v) {
 
-                textViewResenia.setText(resenias.get(indice).getResenia());
-                textViewTituloResenia.setText(resenias.get(indice).getTitulo());
+                if (resenias.size() > 0) {
+                    textViewResenia.setText(resenias.get(indice).getResenia());
+                    textViewTituloResenia.setText(resenias.get(indice).getTitulo());
 
-                if (indice == 0) {
-                    indice = resenias.size() - 1;
+                    if (indice == 0) {
+                        indice = resenias.size() - 1;
+                    } else {
+                        indice--;
+                    }
                 } else {
-                    indice--;
+                    Toast.makeText(activity, "No hay reseñas!, se el primero!",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        imageViewFlechaIzquierdaResenia.setOnClickListener(new View.OnClickListener() {
+        imageViewFlechaDerechaResenia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textViewResenia.setText(resenias.get(indice).getResenia());
-                textViewTituloResenia.setText(resenias.get(indice).getTitulo());
 
-                if (indice == resenias.size() - 1) {
-                    indice = 0;
+                if (resenias.size() > 0) {
+                    textViewResenia.setText(resenias.get(indice).getResenia());
+                    textViewTituloResenia.setText(resenias.get(indice).getTitulo());
+
+                    if (indice == resenias.size() - 1) {
+                        indice = 0;
+                    } else {
+                        indice++;
+                    }
                 } else {
-                    indice++;
+                    Toast.makeText(activity, "No hay reseñas!, se el primero!",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -351,7 +363,10 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
 
         ConexionInformacionEspacio conexionInformacionEspacio = new ConexionInformacionEspacio(activity, espacioDeportivo.getId() + "");
         conexionInformacionEspacio.setView(view);
+        conexionInformacionEspacio.setResenias(resenias);
         conexionInformacionEspacio.obtenerEspacio();
+
+        indice = 0;
     }
 
     public void mostrarEspacio (int idEspacio, View view) {

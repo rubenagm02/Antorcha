@@ -142,6 +142,7 @@ public class AdaptadorEspacioCard extends RecyclerView.Adapter<AdaptadorEspacioC
                 @Override
                 public void onClick(View v) {
                     DialogoValoracion dialogoValoracion = new DialogoValoracion();
+                    dialogoValoracion.setActivity(activity);
                     dialogoValoracion.show(fragmentManager, "dialogo_valoracion");
                 }
             });

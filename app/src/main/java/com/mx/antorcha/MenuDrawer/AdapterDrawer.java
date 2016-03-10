@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mx.antorcha.Activities.Actividades;
+import com.mx.antorcha.Activities.AyudanosMejorar;
 import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Activities.Especialistas;
 import com.mx.antorcha.Activities.Inicio;
@@ -209,7 +210,9 @@ public class AdapterDrawer extends ArrayAdapter<String> {
         linearLayoutAyudanosMejorar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity, "Ayudanos a mejorar", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(activity, AyudanosMejorar.class);
+                activity.startActivity(intent);
+                activity.finish();
             }
         });
 

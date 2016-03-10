@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mx.antorcha">
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -47,7 +48,7 @@
         </service>
         <service
             android:name=".GCM.ServicioRegistro"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -91,7 +92,8 @@
             android:name=".Activities.ActualizarPerfil"
             android:label="@string/title_activity_actualizar_perfil"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activities.Especialistas"></activity>
+        <activity android:name=".Activities.Especialistas" />
+        <activity android:name=".Activities.AyudanosMejorar"></activity>
     </application>
 
 </manifest>
