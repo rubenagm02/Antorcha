@@ -41,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
             <Spinner
+                android:id="@+id/especialistas_spinner_municipio"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="15dp"
@@ -53,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp">
             <Spinner
+                android:id="@+id/especialistas_spinner_especialidad"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="20dp"

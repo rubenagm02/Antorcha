@@ -11,9 +11,12 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorEspecialistaCard;
+import com.mx.antorcha.Adaptadores.AdaptadorSpinner;
+import com.mx.antorcha.Conexion.ConexionEspecialistas;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.Modelos.Especialista;
 import com.mx.antorcha.R;
@@ -55,16 +58,6 @@ public class Especialistas extends AppCompatActivity {
             }
         });
 
-
-        /******* VARIABLES DE PRUEBA ******/
-        ArrayList<Especialista> especialistas = new ArrayList<>();
-        especialistas.add(new Especialista("Rubén Alejandro Guardado Maldonado",
-                "Ing. en computación",
-                "Computadoras", "Una personas que le gusta el desarrollo de aplicaciones móviles",
-                "3331420208",
-                "alguncorreo@gmail.com",
-                "Hombre"));
-
         //Se carga la lista de especialistas
         //se carga la parte del recycler view
         LinearLayoutManager layoutManager
@@ -72,7 +65,31 @@ public class Especialistas extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_especialistas);
         recyclerView.setLayoutManager(layoutManager);
 
-        AdaptadorEspecialistaCard adaptadorEspecialistaCard = new AdaptadorEspecialistaCard(Especialistas.this, especialistas);
-        recyclerView.setAdapter(adaptadorEspecialistaCard);
+        //Se cargan los spinner
+        Spinner spinnerMunicipio = (Spinner) findViewById(R.id.especialistas_spinner_municipio);
+        Spinner spinnerEspecialidad = (Spinner) findViewById(R.id.especialistas_spinner_especialidad);
+
+        ArrayList<String> especialidades = new ArrayList<>();
+        ArrayList<String> municipios = new ArrayList<>();
+
+        especialidades.add("Nutriologos");
+        especialidades.add("Fisioterapeuta");
+        especialidades.add("Entrenadores");
+
+        municipios.add("Guadalajara");
+        municipios.add("Zapopan");
+        municipios.add("Tlaquepaque");
+        municipios.add("Tlajomulco");
+        municipios.add("Tonala");
+
+        AdaptadorSpinner adaptadorSpinnerEspecialidades = new AdaptadorSpinner(this, especialidades);
+        AdaptadorSpinner adaptadorSpinnerMunicipios = new AdaptadorSpinner(this, municipios);
+
+        spinnerEspecialidad.setAdapter(adaptadorSpinnerEspecialidades);
+        spinnerMunicipio.setAdapter(adaptadorSpinnerMunicipios);
+
+        //Se realiza la conexión con el web service
+        ConexionEspecialistas conexionEspecialistas = new ConexionEspecialistas(this, recyclerView);
+        conexionEspecialistas.obtenerEspecialistas();
     }
 }

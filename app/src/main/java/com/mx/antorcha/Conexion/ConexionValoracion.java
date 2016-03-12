@@ -27,14 +27,12 @@ public class ConexionValoracion {
     private Activity activity;
     private String id;
     private String valoracion;
-    private String tipo;
     private Dialog dialog;
 
     public ConexionValoracion(Activity activity, String id, String valoracion) {
         this.activity = activity;
         this.id = id;
         this.valoracion = valoracion;
-        this.tipo = tipo;
     }
 
     public void enviar(){

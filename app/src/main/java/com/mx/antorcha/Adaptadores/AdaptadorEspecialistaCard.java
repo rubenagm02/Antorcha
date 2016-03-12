@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mx.antorcha.Modelos.Especialista;
@@ -45,6 +46,7 @@ public class AdaptadorEspecialistaCard extends RecyclerView.Adapter<AdaptadorEsp
         viewHolder.setTextViewDescripcion(especialista.getDescripcion());
         viewHolder.setTextViewEscribir(especialista.getCorreo());
         viewHolder.setTextViewLlamar(especialista.getTelefono());
+        viewHolder.setImageViewPrincipal(especialista.getSexo());
     }
 
     @Override
@@ -60,10 +62,11 @@ public class AdaptadorEspecialistaCard extends RecyclerView.Adapter<AdaptadorEsp
         private TextView textViewDescripcion;
         private TextView textViewEscribir;
         private TextView textViewLlamar;
+        private ImageView imageViewPrincipal;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
+            imageViewPrincipal = (ImageView) itemView.findViewById(R.id.item_especialidades_imagen_perfil);
             textViewNombre = (TextView) itemView.findViewById(R.id.item_especialidades_nombre);
             textViewTitulo = (TextView) itemView.findViewById(R.id.item_especialidades_titulo);
             textViewEspecialidad = (TextView) itemView.findViewById(R.id.item_especialidad_especialidad);
@@ -82,7 +85,21 @@ public class AdaptadorEspecialistaCard extends RecyclerView.Adapter<AdaptadorEsp
         }
 
         public void setTextViewEspecialidad(String especialidad) {
-            textViewEspecialidad.setText(especialidad);
+            //Temporal
+            switch (especialidad) {
+                case "1" : {
+                    textViewEspecialidad.setText("Nutriología");
+                    break;
+                }
+                case "2" : {
+                    textViewEspecialidad.setText("Fisioterapeuta");
+                    break;
+                }
+                case "3" : {
+                    textViewEspecialidad.setText("Entrenador");
+                    break;
+                }
+            }
         }
 
         public void setTextViewDescripcion(String descripcion) {
@@ -113,6 +130,13 @@ public class AdaptadorEspecialistaCard extends RecyclerView.Adapter<AdaptadorEsp
 
                 }
             });
+        }
+
+        public void setImageViewPrincipal(String sexo) {
+
+            if (sexo.toUpperCase().equals("FEMENINO")) {
+                imageViewPrincipal.setImageResource(R.drawable.default_perfil_mujer);
+            }
         }
     }
 }

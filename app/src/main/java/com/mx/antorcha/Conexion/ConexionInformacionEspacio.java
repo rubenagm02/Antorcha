@@ -133,17 +133,17 @@ public class ConexionInformacionEspacio {
 
                                     for (int y = 0; y < servicios.size(); y++) {
                                         int indice = 0;
-                                        LinearLayout linearLayoutTagsServicios = (LinearLayout) layoutInflater.inflate(R.layout.item_tag_actividades, null);
+                                        LinearLayout linearLayoutTagsServicios = (LinearLayout) layoutInflater.inflate(R.layout.item_tag_servicios, null);
 
-                                        while (indice < 3 && y < deportes.size()) {
+                                        while (indice < 3 && y < servicios.size()) {
                                             TextView textView = (TextView) linearLayoutTagsServicios.getChildAt(indice);
-                                            textView.setText(deportes.get(y));
+                                            textView.setText(servicios.get(y));
                                             textView.setVisibility(View.VISIBLE);
                                             indice++;
                                             y++;
                                         }
                                         y--;
-                                        linearLayoutServicios.addView(linearLayoutServicios);
+                                        linearLayoutServicios.addView(linearLayoutTagsServicios);
                                     }
 
                                     ImageView imageViewImagenGaleria = (ImageView) view.findViewById(R.id.sliding_buscar_espacio_imagen_galeria);

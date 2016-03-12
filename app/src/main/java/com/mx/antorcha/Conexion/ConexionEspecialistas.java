@@ -1,6 +1,7 @@
 package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -8,12 +9,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mx.antorcha.Adaptadores.AdaptadorEspecialistaCard;
+import com.mx.antorcha.Modelos.Especialista;
 import com.mx.antorcha.SharedPreferences.MedallasSharedPreferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +28,15 @@ import static com.mx.antorcha.Conexion.InfoConexion.URL_OBTENER_ESPECIALIDADES;
  */
 public class ConexionEspecialistas {
 
-    static public void obtenerEspecialistas (final Activity activity) {
+    private Activity activity;
+    private RecyclerView recyclerView;
+
+    public ConexionEspecialistas(Activity activity, RecyclerView recyclerView) {
+        this.activity = activity;
+        this.recyclerView = recyclerView;
+    }
+
+    public void obtenerEspecialistas () {
         StringRequest postRequest = new StringRequest(Request.Method.GET, URL_OBTENER_ESPECIALIDADES,
                 new Response.Listener<String>() {
                     @Override
@@ -33,12 +45,21 @@ public class ConexionEspecialistas {
 
                         try {
                             JSONArray jsonArray = new JSONArray(response);
+                            ArrayList<Especialista> especialistas = new ArrayList<>();
 
                             for (int x = 0; x < jsonArray.length(); x++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(x);
-
-
+                                especialistas.add(new Especialista(jsonObject.getString("nombre"),
+                                        jsonObject.getString("titulo"),
+                                        jsonObject.getString("especialidad"),
+                                        jsonObject.getString("descripcion"),
+                                        jsonObject.getString("telefono"),
+                                        jsonObject.getString("correo"),
+                                        jsonObject.getString("sexo")));
                             }
+
+                            AdaptadorEspecialistaCard adaptadorEspecialistaCard = new AdaptadorEspecialistaCard(activity, especialistas);
+                            recyclerView.setAdapter(adaptadorEspecialistaCard);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
