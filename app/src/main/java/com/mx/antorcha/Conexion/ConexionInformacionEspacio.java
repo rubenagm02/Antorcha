@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -13,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mx.antorcha.Adaptadores.AdaptadorSpinner;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
 import com.mx.antorcha.Modelos.Resenia;
 import com.mx.antorcha.R;
@@ -145,6 +147,20 @@ public class ConexionInformacionEspacio {
                                         y--;
                                         linearLayoutServicios.addView(linearLayoutTagsServicios);
                                     }
+
+                                    //Se obtienen las membresias
+                                    ArrayList<String> membresias = new ArrayList<>();
+
+                                    JSONArray jsonArrayMembresias = jsonObject.getJSONArray("tipoMembresia");
+
+                                    for (int y = 0; y < jsonArrayMembresias.length(); y++) {
+                                        JSONObject jsonObjectMembresia = jsonArrayMembresias.getJSONObject(y);
+                                        membresias.add(jsonObjectMembresia.getString("duracion") + " $ " + jsonObjectMembresia.getString("costo"));
+                                    }
+                                    AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(activity, membresias);
+                                    Spinner spinnerMembresias = (Spinner) view.findViewById(R.id.buscar_espacio_spinner_membresias);
+                                    spinnerMembresias.setAdapter(adaptadorSpinner);
+
 
                                     ImageView imageViewImagenGaleria = (ImageView) view.findViewById(R.id.sliding_buscar_espacio_imagen_galeria);
                                     DescargarImagen.cargarImagen(activity, InfoConexion.URL_DESCARGAR_IMAGEN_ESPACIO + espacioDeportivo.getId() + "_2_.png", imageViewImagenGaleria);

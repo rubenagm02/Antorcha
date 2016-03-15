@@ -95,10 +95,22 @@ public class NuevaMeta extends AppCompatActivity {
         //Los tipos de medidas
         ArrayList<String> medidas = new ArrayList<>();
         medidas.add("Selecciona una medida");
-        medidas.add("Kilogramo");
-        medidas.add("Metros");
+        medidas.add("Segundos");
+        medidas.add("Minutos");
+        medidas.add("Horas");
+        medidas.add("Gramos");
+        medidas.add("Kilogramos");
         medidas.add("Centimetros");
+        medidas.add("Metros");
         medidas.add("Kilometros");
+        medidas.add("Porcentaje");
+        medidas.add("Repeticiones");
+        medidas.add("Series");
+        medidas.add("Vueltas");
+        medidas.add("Puntos");
+        medidas.add("Anotaciones");
+        medidas.add("Juegos");
+
         spinnerTipo.setAdapter(new AdaptadorSpinner(NuevaMeta.this, medidas));
 
         //Se guarda la meta

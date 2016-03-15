@@ -16,6 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.mx.antorcha.Activities.Actividades;
 import com.mx.antorcha.Activities.AyudanosMejorar;
 import com.mx.antorcha.Activities.BuscarActividad;
@@ -258,6 +260,16 @@ public class AdapterDrawer extends ArrayAdapter<String> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Cuando se responde sí se cierra sesión
+
+                        FacebookSdk.sdkInitialize(activity);
+                        //Se borra la base de datos
+                        activity.deleteDatabase("Antorcha");
+
+
+
+                        //Se borra la imagen de perfil
+                        DescargarImagen.borrarImagen(miembroSharedPreferences.getId());
+
                         miembroSharedPreferences.borrarTodo();
                         Intent intent = new Intent(activity, Inicio.class);
                         activity.startActivity(intent);
@@ -269,11 +281,7 @@ public class AdapterDrawer extends ArrayAdapter<String> {
                 .setTitle("Cerrar sesión")
                 .show();
 
-                //Se borra la base de datos
-                activity.deleteDatabase("Antorcha");
 
-                //Se borra la imagen de perfil
-                DescargarImagen.borrarImagen(miembroSharedPreferences.getId());
             }
         });
 

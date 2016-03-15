@@ -14,14 +14,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
-import com.mx.antorcha.Adaptadores.AdaptadorEspecialistaCard;
 import com.mx.antorcha.Adaptadores.AdaptadorSpinner;
 import com.mx.antorcha.Conexion.ConexionEspecialistas;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
-import com.mx.antorcha.Modelos.Especialista;
 import com.mx.antorcha.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Especialistas extends AppCompatActivity {
@@ -89,7 +86,7 @@ public class Especialistas extends AppCompatActivity {
         spinnerMunicipio.setAdapter(adaptadorSpinnerMunicipios);
 
         //Se realiza la conexión con el web service
-        ConexionEspecialistas conexionEspecialistas = new ConexionEspecialistas(this, recyclerView);
+        ConexionEspecialistas conexionEspecialistas = new ConexionEspecialistas(this, recyclerView, spinnerMunicipio, spinnerEspecialidad);
         conexionEspecialistas.obtenerEspecialistas();
     }
 }

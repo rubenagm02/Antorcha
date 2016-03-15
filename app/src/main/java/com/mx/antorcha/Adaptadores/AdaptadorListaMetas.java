@@ -174,17 +174,50 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
 
     public String obtenerMedida (String medida) {
         switch (medida) {
-            case "Kilogramo" : {
-                return "KG";
+            case "Segundos" : {
+                return "SEG";
             }
-            case "Metros" : {
-                return "MT";
+            case "Minutos" : {
+                return "MIN";
+            }
+            case "Horas" : {
+                return "HR";
+            }
+            case "Gramos" : {
+                return "GR";
+            }
+            case "Kilogramos" : {
+                return "KG";
             }
             case "Centimetros" : {
                 return "CM";
             }
+            case "Metros" : {
+                return "MT";
+            }
             case "Kilometros" : {
                 return "KM";
+            }
+            case "Porcentaje" : {
+                return "%";
+            }
+            case "Repeticiones" : {
+                return "REP";
+            }
+            case "Series" : {
+                return "SER";
+            }
+            case "Vueltas" : {
+                return "VLTS";
+            }
+            case "Puntos" : {
+                return "PTS";
+            }
+            case "Anotaciones" : {
+                return "ATS";
+            }
+            case "Juegos" : {
+                return "J";
             }
             default : {
                 return "N/A";

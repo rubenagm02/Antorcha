@@ -3,6 +3,7 @@ package com.mx.antorcha.Conexion;
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Spinner;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -30,14 +31,20 @@ public class ConexionEspecialistas {
 
     private Activity activity;
     private RecyclerView recyclerView;
+    private Spinner spinnerCiudad;
+    private Spinner spinnerTipo;
 
-    public ConexionEspecialistas(Activity activity, RecyclerView recyclerView) {
+    public ConexionEspecialistas(Activity activity, RecyclerView recyclerView, Spinner spinnerCiudad, Spinner spinnerTipo) {
         this.activity = activity;
         this.recyclerView = recyclerView;
+        this.spinnerCiudad = spinnerCiudad;
+        this.spinnerTipo = spinnerTipo;
     }
 
     public void obtenerEspecialistas () {
-        StringRequest postRequest = new StringRequest(Request.Method.GET, URL_OBTENER_ESPECIALIDADES,
+        StringRequest postRequest = new StringRequest(Request.Method.GET, URL_OBTENER_ESPECIALIDADES
+                + spinnerTipo.getSelectedItem().toString() + "/"
+                + spinnerCiudad.getSelectedItem().toString(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
