@@ -86,7 +86,8 @@ public class ConexionInformacionEspacio {
 
                                         ((TextView) view.findViewById(R.id.sliding_buscar_espacio_resenia)).setText(jsonObjectResenia.getString("resenia"));
                                         ((TextView) view.findViewById(R.id.sliding_buscar_espacio_titulo_resenia)).setText(jsonObjectResenia.getString("titulo"));
-                                        resenias.add(new Resenia(jsonObjectResenia.getString("titulo"), jsonObjectResenia.getString("resenia"), ""));
+                                        ((TextView) view.findViewById(R.id.sliding_buscar_espacio_nombre_resenia)).setText(jsonObjectResenia.getString("idMiembro"));
+                                        resenias.add(new Resenia(jsonObjectResenia.getString("titulo"), jsonObjectResenia.getString("resenia"), jsonObjectResenia.getString("idMiembro")));
                                     }
 
                                     //Se obtienen los nombres de los deportes

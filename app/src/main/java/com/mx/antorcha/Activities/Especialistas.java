@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -25,6 +26,7 @@ public class Especialistas extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private ListView listView;
+    private ConexionEspecialistas conexionEspecialistas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +66,13 @@ public class Especialistas extends AppCompatActivity {
 
         //Se cargan los spinner
         Spinner spinnerMunicipio = (Spinner) findViewById(R.id.especialistas_spinner_municipio);
-        Spinner spinnerEspecialidad = (Spinner) findViewById(R.id.especialistas_spinner_especialidad);
+        final Spinner spinnerEspecialidad = (Spinner) findViewById(R.id.especialistas_spinner_especialidad);
 
         ArrayList<String> especialidades = new ArrayList<>();
         ArrayList<String> municipios = new ArrayList<>();
 
         especialidades.add("Nutriologos");
-        especialidades.add("Fisioterapeuta");
+        especialidades.add("Fisioterapeutas");
         especialidades.add("Entrenadores");
 
         municipios.add("Guadalajara");
@@ -86,7 +88,33 @@ public class Especialistas extends AppCompatActivity {
         spinnerMunicipio.setAdapter(adaptadorSpinnerMunicipios);
 
         //Se realiza la conexión con el web service
-        ConexionEspecialistas conexionEspecialistas = new ConexionEspecialistas(this, recyclerView, spinnerMunicipio, spinnerEspecialidad);
+        conexionEspecialistas = new ConexionEspecialistas(this, recyclerView, spinnerMunicipio, spinnerEspecialidad);
         conexionEspecialistas.obtenerEspecialistas();
+
+        //Se coloca el filtro de buscar especialistas
+        spinnerEspecialidad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                conexionEspecialistas.obtenerEspecialistas();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerMunicipio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                conexionEspecialistas.obtenerEspecialistas();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }
+

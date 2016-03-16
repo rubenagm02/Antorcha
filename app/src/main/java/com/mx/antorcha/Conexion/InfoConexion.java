@@ -5,6 +5,7 @@ package com.mx.antorcha.Conexion;
  */
 public class InfoConexion {
 
+    
     final static public String URL_DESCARGAR_IMAGEN_ESPACIO ="http://admin.antorcha.mx/img/espacios/espacio_";
     final static public String URL_META = "http://api.antorcha.mx/V0.1/metas";
     final static public String URL_META_PROGRESO = "http://api.antorcha.mx/V0.1/metaProgresos";
@@ -28,7 +29,7 @@ public class InfoConexion {
     final static public String URL_ELIMINAR_META = "http://api.antorcha.mx/V0.1/metas/";
     final static public String URL_BUSCAR_UN_ESPACIO = "http://api.antorcha.mx/V0.1/espaciosDeportivos/";
     final static public String URL_OBTENER_MEDALLAS = "http://api.antorcha.mx/V0.1/miembroMedalla/";
-    final static public String URL_OBTENER_ESPECIALIDADES = "http://api.antorcha.mx/V0.1/xEspecialidad/1";
+    final static public String URL_OBTENER_ESPECIALIDADES = "http://api.antorcha.mx/V0.1/xEspecialidad/";
     final static public String URL_VALORACION = "http://api.antorcha.mx/V0.1/valoraciones";
 
     //final static public String URL_SUBIR_IMAGEN = "http://api.antorcha.mx/V0.1/miembros/subirImagen";

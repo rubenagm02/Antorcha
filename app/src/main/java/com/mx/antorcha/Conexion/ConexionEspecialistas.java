@@ -42,8 +42,25 @@ public class ConexionEspecialistas {
     }
 
     public void obtenerEspecialistas () {
+        String tipo = "";
+
+        switch (spinnerTipo.getSelectedItem().toString()) {
+            case "Nutriologos" : {
+                tipo = "1";
+                break;
+            }
+            case "Fisioterapeutas" : {
+                tipo = "2";
+                break;
+            }
+            case "Entrenadores" : {
+                tipo = "3";
+                break;
+            }
+        }
+
         StringRequest postRequest = new StringRequest(Request.Method.GET, URL_OBTENER_ESPECIALIDADES
-                + spinnerTipo.getSelectedItem().toString() + "/"
+                + tipo + "/"
                 + spinnerCiudad.getSelectedItem().toString(),
                 new Response.Listener<String>() {
                     @Override

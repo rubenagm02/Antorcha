@@ -191,6 +191,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
 
         final TextView textViewResenia = (TextView) view.findViewById(R.id.sliding_buscar_espacio_resenia);
         final TextView textViewTituloResenia = (TextView) view.findViewById(R.id.sliding_buscar_espacio_titulo_resenia);
+        final TextView textViewNombreResenia = (TextView) view.findViewById(R.id.sliding_buscar_espacio_nombre_resenia);
 
         //Se colocan los click de las flechas para las reseñas
         imageViewFlechaIzquierdaResenia.setOnClickListener(new View.OnClickListener() {
@@ -200,6 +201,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
                 if (resenias.size() > 0) {
                     textViewResenia.setText(resenias.get(indice).getResenia());
                     textViewTituloResenia.setText(resenias.get(indice).getTitulo());
+                    textViewNombreResenia.setText(resenias.get(indice).getNombre());
 
                     if (indice == 0) {
                         indice = resenias.size() - 1;
@@ -220,6 +222,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
                 if (resenias.size() > 0) {
                     textViewResenia.setText(resenias.get(indice).getResenia());
                     textViewTituloResenia.setText(resenias.get(indice).getTitulo());
+                    textViewNombreResenia.setText(resenias.get(indice).getNombre());
 
                     if (indice == resenias.size() - 1) {
                         indice = 0;

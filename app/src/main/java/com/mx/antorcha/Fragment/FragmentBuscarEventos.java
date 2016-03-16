@@ -1,9 +1,12 @@
 package com.mx.antorcha.Fragment;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,15 +24,21 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.mx.antorcha.Activities.Inicio;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Conexion.ConexionBuscarEvento;
+import com.mx.antorcha.Conexion.DescargarImagen;
 import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
 import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -148,8 +158,6 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
                     return false;
                 }
             });
-
-
 
             //Se buscan los eventos
             ConexionBuscarEvento conexionBuscarEvento = new ConexionBuscarEvento(activity, mMap);
@@ -271,7 +279,36 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
             public void onClick(View v) {
                 new ConexionBaseDatosInsertar(activity).insertarEvento(evento);
 
-                Toast.makeText(activity, "Se ha agregado el evento a tu lista", Toast.LENGTH_LONG).show();
+                new AlertDialog.Builder(activity).setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Cuando se responde sí se agrega al calendario
+                        long startTime = 1;
+                        long endTime = 1;
+
+                        String startDate = evento.getFechaInicio();
+                        try {
+                            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+                            startTime=date.getTime();
+                        }
+                        catch(Exception e){ }
+
+                        Calendar cal = Calendar.getInstance();
+                        Intent intent = new Intent(Intent.ACTION_EDIT);
+                        intent.setType("vnd.android.cursor.item/event");
+                        //intent.putExtra("beginTime",startTime);
+                        intent.putExtra("allDay", true);
+                        intent.putExtra("rrule", "FREQ=YEARLY");
+                        //intent.putExtra("endTime", endTime);
+                        intent.putExtra("title", evento.getNombre());
+                        activity.startActivity(intent);
+                    }
+                }).setNegativeButton("No", null)
+                        .setIcon(R.drawable.logo_antorcha)
+                        .setMessage("¿Quieres agregar el evento a tu calendario?")
+                        .setTitle("Asistir a evento")
+                        .show();
+                //Toast.makeText(activity, evento.getNombre(), Toast.LENGTH_LONG).show();
             }
         });
 
