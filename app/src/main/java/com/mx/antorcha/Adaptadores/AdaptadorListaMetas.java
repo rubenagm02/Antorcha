@@ -62,8 +62,6 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
         TextView textViewNombre = (TextView) convertView.findViewById(R.id.item_meta_nombre_meta);
         textViewNombre.setText(meta.getNombre());
 
-
-
         TextView textViewFin = (TextView) convertView.findViewById(R.id.item_meta_fin);
         textViewFin.setText(meta.getFin() + obtenerMedida(meta.getTipoMedida()));
 
@@ -113,6 +111,17 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
         textViewPorcentaje.setText(porcentaje + "%");
 
         progressBar.setProgress(porcentaje);
+
+        if (porcentaje >= 100) {
+            LinearLayout linearLayoutMetaEnProgreso = (LinearLayout) convertView.findViewById(R.id.item_meta_meta_en_progreso);
+            linearLayoutMetaEnProgreso.setVisibility(View.GONE);
+
+            LinearLayout linearLayoutMetaTerminada = (LinearLayout) convertView.findViewById(R.id.item_meta_meta_terminada);
+            linearLayoutMetaTerminada.setVisibility(View.VISIBLE);
+            ((TextView) convertView.findViewById(R.id.item_meta_nombre_meta_terminada)).setText(meta.getNombre());
+            ((TextView) convertView.findViewById(R.id.item_meta_medida_terminada)).setText(metaProgreso.getProgreso() + obtenerMedida(meta.getTipoMedida()));
+
+        }
 
         //Onlclick del item de la lista
         linearLayoutClic = (LinearLayout) convertView.findViewById(R.id.item_meta_clic_item);

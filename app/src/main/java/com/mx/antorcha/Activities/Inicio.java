@@ -58,10 +58,56 @@ public class Inicio extends AppCompatActivity {
         AdaptadorSVG.mostrarImagen(imageViewIniciarSesion, this, R.raw.iniciar_sesion);
         AdaptadorSVG.mostrarImagen(imageViewRegistrarse, this, R.raw.registrarse);
 
-        AdaptadorInicioTabs adaptadorInicioTabs = new AdaptadorInicioTabs(getSupportFragmentManager());
+        final ImageView imageViewIconoCirculo1 = (ImageView) findViewById(R.id.inicio_icono_circulo_1);
+        final ImageView imageViewIconoCirculo2 = (ImageView) findViewById(R.id.inicio_icono_circulo_2);
+        final ImageView imageViewIconoCirculo3 = (ImageView) findViewById(R.id.inicio_icono_circulo_3);
+        final ImageView imageViewIconoCirculo4 = (ImageView) findViewById(R.id.inicio_icono_circulo_4);
+
+        AdaptadorInicioTabs adaptadorInicioTabs = new AdaptadorInicioTabs(getSupportFragmentManager(), imageViewIconoCirculo1, imageViewIconoCirculo2, imageViewIconoCirculo3, imageViewIconoCirculo4);
+
+
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.inicio_pager);
         viewPager.setAdapter(adaptadorInicioTabs);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                imageViewIconoCirculo1.setAlpha(.4f);
+                imageViewIconoCirculo2.setAlpha(.4f);
+                imageViewIconoCirculo3.setAlpha(.4f);
+                imageViewIconoCirculo4.setAlpha(.4f);
+
+                switch (position) {
+                    case 0 : {
+                        imageViewIconoCirculo1.setAlpha(1f);
+                        break;
+                    }
+                    case 1 : {
+                        imageViewIconoCirculo2.setAlpha(1f);
+                        break;
+                    }
+                    case 2 : {
+                        imageViewIconoCirculo3.setAlpha(1f);
+                        break;
+                    }
+                    case 3 : {
+                        imageViewIconoCirculo4.setAlpha(1f);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         getUserInfo();
     }

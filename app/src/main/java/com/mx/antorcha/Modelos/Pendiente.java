@@ -58,6 +58,5 @@ public class Pendiente {
         private int idMeta;
         private double progreso;
         private String fecha;
-        private int idServidor;
      */
 }

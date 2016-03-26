@@ -71,6 +71,29 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
         return metas;
     }
 
+    public Meta obtenerMetas (int id) {
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_METAS + " AND Id = " + id, null);
+        cursor.moveToFirst();
+
+        Meta meta = new Meta(
+                cursor.getInt(cursor.getColumnIndex("Id")),
+                cursor.getDouble(cursor.getColumnIndex("Inicio")),
+                cursor.getDouble(cursor.getColumnIndex("Fin")),
+                cursor.getString(cursor.getColumnIndex("Nombre")),
+                cursor.getString(cursor.getColumnIndex("FechaFin")),
+                cursor.getString(cursor.getColumnIndex("FechaInicio")),
+                cursor.getString(cursor.getColumnIndex("TipoMedida")),
+                cursor.getInt(cursor.getColumnIndex(("IdServidor"))),
+                1
+        );
+
+        cursor.close();
+
+        return meta;
+    }
+
     public ArrayList<Meta> obtenerMetasEliminar () {
         ArrayList<Meta> metas = new ArrayList<>();
 

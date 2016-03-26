@@ -22,7 +22,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:textSize="18sp"
-        android:text="Que el deporte forme parte de tu día"
+        android:text="Haz equipo"
         android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -32,7 +32,7 @@
         android:layout_marginTop="15dp"
         android:gravity="center"
         android:layout_gravity="center"
-        android:text="Otro texto de relleno"
+        android:text="Motiva a tus amigos invitándolos a encender el fuego deportivo. Practiquen juntos sus actividades deportivas favoritas"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:layout_width="wrap_content"

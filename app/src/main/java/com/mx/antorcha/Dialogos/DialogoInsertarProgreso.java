@@ -1,6 +1,5 @@
 package com.mx.antorcha.Dialogos;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -16,6 +15,7 @@ import android.widget.ListView;
 import com.mx.antorcha.Adaptadores.AdaptadorListaMetas;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
+import com.mx.antorcha.Conexion.ConexionMetaProgreso;
 import com.mx.antorcha.Modelos.MetaProgreso;
 import com.mx.antorcha.R;
 
@@ -47,8 +47,12 @@ public class DialogoInsertarProgreso extends DialogFragment {
                         "2015-11-10", 0);
 
                 ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
-                conexionBaseDatosInsertar.insertarMetaProgreso(metaProgreso);
+                long id = conexionBaseDatosInsertar.insertarMetaProgreso(metaProgreso);
+                metaProgreso.setId((int) id);
 
+                //Se intenta insertar en el servidor
+                ConexionMetaProgreso conexionMetaProgreso = new ConexionMetaProgreso(activity, metaProgreso, 0);
+                conexionMetaProgreso.insertarProgreso();
 
                 if (listView != null) {
                     ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
