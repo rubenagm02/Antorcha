@@ -1,6 +1,7 @@
 package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -25,74 +26,60 @@ import static com.mx.antorcha.Conexion.InfoConexion.URL_META_PROGRESO;
 /**
  *
  */
-public class ConexionMetaProgreso extends AsyncTask<Void, Void, Void> {
+public class ConexionMetaProgreso {
 
-    private Activity activity;
+    private Context activity;
     private int idMeta;
     private int idServidor;
+    private MetaProgreso metaProgreso;
 
     private ConexionBaseDatosActualizar conexionBaseDatosActualizar;
 
-    public ConexionMetaProgreso (Activity activity, int idMeta) {
+    public ConexionMetaProgreso(Context activity, int idMeta, MetaProgreso metaProgreso) {
         this.activity = activity;
         this.idMeta = idMeta;
+        this.metaProgreso = metaProgreso;
         conexionBaseDatosActualizar = new ConexionBaseDatosActualizar(activity);
     }
 
-    @Override
-    protected Void doInBackground(Void... params) {
-        ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
-        ArrayList<MetaProgreso> metaProgresos = conexionBaseDatosObtener.obtenerMetaProgreso(idMeta);
+    public void insertarProgreso() {
 
-        for (int x = 0; x < metaProgresos.size(); x++) {
-            final MetaProgreso metaProgreso = metaProgresos.get(x);
-
-            if (metaProgreso.getIdServidor() == 0) {
-
-                StringRequest postRequest = new StringRequest(Request.Method.POST, URL_META_PROGRESO,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Log.i("Peticion", response);
-
-                                try {
-                                    int idMetaProgteso = new JSONObject(response).getInt("id");
-
-                                    conexionBaseDatosActualizar.actualizarMetaProgreso(metaProgreso.getId(), idMetaProgteso);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                error.printStackTrace();
-                            }
-                        }
-                ) {
+        StringRequest postRequest = new StringRequest(Request.Method.POST, URL_META_PROGRESO,
+                new Response.Listener<String>() {
                     @Override
-                    protected Map<String, String> getParams()
-                    {
-                        Map<String, String>  params = new HashMap<>();
-                        // the POST parameters:
-                        params.put("idMeta", idServidor + "");
-                        params.put("progreso", metaProgreso.getProgreso() + "");
-                        params.put("fecha", metaProgreso.getFecha());
+                    public void onResponse(String response) {
+                        Log.i("Peticion", response);
 
-                        return params;
+                        try {
+                            int idMetaProgteso = new JSONObject(response).getInt("id");
+
+                            conexionBaseDatosActualizar.actualizarMetaProgreso(metaProgreso.getId(), idMetaProgteso);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                };
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<>();
+                // the POST parameters:
+                params.put("idMeta", idServidor + "");
+                params.put("progreso", metaProgreso.getProgreso() + "");
+                params.put("fecha", metaProgreso.getFecha());
 
-                Volley.newRequestQueue(activity).add(postRequest);
+                return params;
             }
-        }
-        
-        return null;
-    }
+        };
 
-    @Override
-    protected void onPostExecute(Void v){
+        Volley.newRequestQueue(activity).add(postRequest);
 
     }
 

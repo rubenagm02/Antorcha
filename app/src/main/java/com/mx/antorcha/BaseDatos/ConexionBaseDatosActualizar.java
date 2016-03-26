@@ -2,6 +2,7 @@ package com.mx.antorcha.BaseDatos;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -9,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  *
  */
 public class ConexionBaseDatosActualizar extends SQLiteOpenHelper{
-    public ConexionBaseDatosActualizar(Activity activity) {
+    public ConexionBaseDatosActualizar(Context activity) {
         super(activity, "Antorcha", null, 1);
     }
 
@@ -20,6 +21,7 @@ public class ConexionBaseDatosActualizar extends SQLiteOpenHelper{
         db.execSQL(Querys.CREAR_TABLA_MEDALLAS);
         db.execSQL(Querys.CREAR_TABLA_DEPORTES);
         db.execSQL(Querys.CREAR_TABLA_DISCIPLINAS);
+        db.execSQL(Querys.CREAR_TABLA_PENDIENTES);
     }
 
     @Override

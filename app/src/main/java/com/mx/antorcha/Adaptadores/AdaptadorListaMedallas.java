@@ -1,6 +1,7 @@
 package com.mx.antorcha.Adaptadores;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +21,14 @@ import java.util.ArrayList;
 public class AdaptadorListaMedallas extends RecyclerView.Adapter<AdaptadorListaMedallas.ViewHolder> {
 
     private ArrayList<Medalla> medallas;
-    static public Activity activity;
+    static public Context activity;
     static TextView textViewNombre;
     static TextView textViewTipo;
     static TextView textViewDescripcion;
     static ImageView imageViewMedallaPrincipal;
     static MedallasSharedPreferences medallasSharedPreferences;
 
-    public AdaptadorListaMedallas (Activity activity, ArrayList<Medalla> medallas) {
+    public AdaptadorListaMedallas (Context activity, ArrayList<Medalla> medallas) {
         this.medallas = medallas;
         this.activity = activity;
         medallasSharedPreferences = new MedallasSharedPreferences(activity);
@@ -117,7 +118,7 @@ public class AdaptadorListaMedallas extends RecyclerView.Adapter<AdaptadorListaM
         }
     }
 
-    static public void mostrarMedallaPequeña(ImageView imageView, int tipo, Activity activity){
+    static public void mostrarMedallaPequeña(ImageView imageView, int tipo, Context activity){
 
         switch (tipo) {
             case 1 : {
@@ -144,7 +145,7 @@ public class AdaptadorListaMedallas extends RecyclerView.Adapter<AdaptadorListaM
         }
     }
 
-    static public void mostrarMedalla(ImageView imageView, int tipo, Activity activity, TextView textView){
+    static public void mostrarMedalla(ImageView imageView, int tipo, Context activity, TextView textView){
 
         switch (tipo) {
             case 1 : {

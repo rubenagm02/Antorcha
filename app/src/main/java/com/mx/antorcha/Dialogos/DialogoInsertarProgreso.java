@@ -1,6 +1,7 @@
 package com.mx.antorcha.Dialogos;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -24,7 +25,7 @@ import com.mx.antorcha.R;
 public class DialogoInsertarProgreso extends DialogFragment {
 
     private int idMeta;
-    private Activity activity;
+    private Context activity;
     private ListView listView;
     private FragmentManager fragmentManager;
     private EditText editTextNuevoProgreso;
@@ -67,7 +68,7 @@ public class DialogoInsertarProgreso extends DialogFragment {
         this.idMeta = idMeta;
     }
 
-    public void setActivity(Activity activity) {
+    public void setActivity(Context activity) {
         this.activity = activity;
     }
 

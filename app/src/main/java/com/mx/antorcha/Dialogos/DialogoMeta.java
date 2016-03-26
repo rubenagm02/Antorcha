@@ -1,6 +1,7 @@
 package com.mx.antorcha.Dialogos;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 public class DialogoMeta extends DialogFragment {
 
     private int idMeta;
-    private Activity activity;
+    private Context activity;
     private ListView listView;
 
     public DialogoMeta () {
@@ -110,7 +111,7 @@ public class DialogoMeta extends DialogFragment {
         this.idMeta = idMeta;
     }
 
-    public void setActivity(Activity activity) {
+    public void setActivity(Context activity) {
         this.activity = activity;
     }
 

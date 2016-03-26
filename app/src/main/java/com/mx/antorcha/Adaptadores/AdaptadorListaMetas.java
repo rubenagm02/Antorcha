@@ -1,6 +1,7 @@
 package com.mx.antorcha.Adaptadores;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,14 +29,14 @@ import java.util.ArrayList;
  *
  */
 public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
-    Activity activity;
+    private Context activity;
 
     FragmentManager fragmentManager;
     private ListView listView;
     View viewCompartir;
     LinearLayout linearLayoutClic;
 
-    public AdaptadorListaMetas(Activity activity, ArrayList<Meta> metas, FragmentManager fragmentManager) {
+    public AdaptadorListaMetas(Context activity, ArrayList<Meta> metas, FragmentManager fragmentManager) {
         super(activity, R.layout.item_lista_meta, metas);
         this.activity = activity;
         this.fragmentManager = fragmentManager;
@@ -127,9 +128,6 @@ public class AdaptadorListaMetas extends ArrayAdapter<Meta> {
             }
         });
 
-        final ConexionMetaProgreso conexionMetaProgreso = new ConexionMetaProgreso(activity, meta.getId());
-        conexionMetaProgreso.setIdServidor(meta.getIdServidor());
-        conexionMetaProgreso.execute();
         return convertView;
     }
 

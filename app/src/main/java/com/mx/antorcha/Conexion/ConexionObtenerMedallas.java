@@ -1,6 +1,7 @@
 package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -25,14 +26,14 @@ import static com.mx.antorcha.Conexion.InfoConexion.URL_OBTENER_MEDALLAS;
  */
 public class ConexionObtenerMedallas {
 
-    private Activity activity;
+    private Context context;
 
-    public ConexionObtenerMedallas(Activity activity) {
-        this.activity = activity;
+    public ConexionObtenerMedallas(Context context) {
+        this.context = context;
     }
 
     public void obtenerMedallas () {
-        int idMiembro = new MiembroSharedPreferences(activity).getId();
+        int idMiembro = new MiembroSharedPreferences(context).getId();
 
         StringRequest postRequest = new StringRequest(Request.Method.GET, URL_OBTENER_MEDALLAS + idMiembro,
                 new Response.Listener<String>() {
@@ -46,7 +47,7 @@ public class ConexionObtenerMedallas {
                             for (int x = 0; x < jsonArray.length(); x++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(x);
 
-                                MedallasSharedPreferences medallasSharedPreferences = new MedallasSharedPreferences(activity);
+                                MedallasSharedPreferences medallasSharedPreferences = new MedallasSharedPreferences(context);
                                 medallasSharedPreferences.agregarMedalla(jsonObject.getInt("idMedalla"));
                             }
                         } catch (JSONException e) {
@@ -71,7 +72,7 @@ public class ConexionObtenerMedallas {
                 return params;
             }
         };
-        Volley.newRequestQueue(activity).add(postRequest);
+        Volley.newRequestQueue(context).add(postRequest);
 
     }
 }

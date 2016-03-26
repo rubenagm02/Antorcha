@@ -1,6 +1,7 @@
 package com.mx.antorcha.Activities;
 
 import android.app.Activity;
+import android.app.IntentService;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
@@ -28,6 +29,7 @@ import com.mx.antorcha.GCM.ServicioRegistro;
 import com.mx.antorcha.LibreriaTabsSliding.SlidingTabLayout;
 import com.mx.antorcha.MenuDrawer.AdapterDrawer;
 import com.mx.antorcha.R;
+import com.mx.antorcha.Servicios.ServicioSincronizacion;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import java.security.MessageDigest;
@@ -45,6 +47,8 @@ public class BuscarActividad extends AppCompatActivity {
         setContentView(R.layout.activity_buscar_actividad);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        Intent intent = new Intent(this, ServicioSincronizacion.class);
+        startService(intent);
 
         //Se inicializa el shared preferences
         MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(this);

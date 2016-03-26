@@ -1,6 +1,7 @@
 package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,19 +29,18 @@ import java.util.Map;
 /**
  *
  */
-public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
+public class ConexionMedallas  {
 
-    private Activity activity;
+    private Context activity;
     private RecyclerView recyclerView;
     private TextView textView;
 
-    public ConexionMedallas(Activity activity) {
+    public ConexionMedallas(Context activity) {
 
         this.activity = activity;
     }
 
-    @Override
-    protected Void doInBackground(Void... params) {
+    public void obtenerMedallas() {
 
         final ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
 
@@ -75,7 +75,7 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
                                             new AdaptadorListaMedallas(activity, medallas);
                                     recyclerView.setAdapter(adaptadorListaMedallas);
 
-                                     textView.setText(
+                                    textView.setText(
                                             new MedallasSharedPreferences(activity).totalObtenidas()
                                                     + "/" + medallas.size());
                                 }
@@ -104,8 +104,6 @@ public class ConexionMedallas extends AsyncTask<Void, Void, Void> {
             }
         };
         Volley.newRequestQueue(activity).add(postRequest);
-
-        return  null;
     }
 
     public void setRecyclerView(RecyclerView recyclerView) {

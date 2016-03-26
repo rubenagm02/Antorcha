@@ -1,6 +1,7 @@
 package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
+import android.app.IntentService;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -12,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mx.antorcha.Activities.BuscarActividad;
+import com.mx.antorcha.Servicios.ServicioDescarga;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONException;
@@ -102,7 +104,12 @@ public class ConexionLogin extends AsyncTask<Void, Void, Void>{
 
                                     }
 
+                                    //Se arranca el hilo que actualizará
+                                    Intent intentService = new Intent(activity, ServicioDescarga.class);
+                                    activity.startService(intentService);
+
                                     Intent intent = new Intent(activity, BuscarActividad.class);
+
                                     activity.startActivity(intent);
                                     activity.finish();
                                 } else if (!jsonObject.isNull("login")) {

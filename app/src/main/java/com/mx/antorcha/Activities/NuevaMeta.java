@@ -18,8 +18,10 @@ import android.widget.Toast;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorSpinner;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
+import com.mx.antorcha.Conexion.ConexionMetas;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -139,11 +141,13 @@ public class NuevaMeta extends AppCompatActivity {
                     meta.setEstado(1);
 
                     ConexionBaseDatosInsertar conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
-                    conexionBaseDatosInsertar.insertarMeta(meta);
+                    long id = conexionBaseDatosInsertar.insertarMeta(meta);
+                    meta.setId((int) id);
 
-                    Intent intent = new Intent(NuevaMeta.this, Metas.class);
-                    startActivity(intent);
-                    finish();
+                    ConexionMetas conexionMetas = new ConexionMetas(activity, meta, 0);
+                    conexionMetas.setId(new MiembroSharedPreferences(activity).getId());
+                    conexionMetas.insertarMetas();
+
                 } else {
                     Toast.makeText(NuevaMeta.this, "Debes llenar todos los campos para poder guardar la meta", Toast.LENGTH_SHORT).show();
                 }

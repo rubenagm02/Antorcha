@@ -1,6 +1,7 @@
 package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.widget.ListView;
@@ -31,22 +32,22 @@ import static com.mx.antorcha.Conexion.InfoConexion.URL_DESCARGAR_PROGRESO_METAS
 /**
  *
  */
-public class ConexionDescargarMetas extends AsyncTask<Void, Void, Void>{
+public class ConexionDescargarMetas {
 
-    private Activity activity;
+    private Context activity;
     private MiembroSharedPreferences miembroSharedPreferences;
     private ConexionBaseDatosInsertar conexionBaseDatosInsertar;
     private FragmentManager fragmentManager;
     private ListView listView;
 
-    public ConexionDescargarMetas(Activity activity) {
+    public ConexionDescargarMetas(Context activity) {
         this.activity = activity;
         conexionBaseDatosInsertar = new ConexionBaseDatosInsertar(activity);
         miembroSharedPreferences = new MiembroSharedPreferences(activity);
     }
 
-    @Override
-    protected Void doInBackground(Void... params) {
+
+    public void obtenerMetas () {
 
         StringRequest postRequest = new StringRequest(Request.Method.GET, URL_DESCARGAR_METAS
                 + miembroSharedPreferences.getId(),
@@ -96,12 +97,15 @@ public class ConexionDescargarMetas extends AsyncTask<Void, Void, Void>{
                                                     e.printStackTrace();
                                                 }
 
-                                                ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
+                                                if (fragmentManager != null && listView != null) {
+                                                    ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
 
-                                                ArrayList<Meta> metas =conexionBaseDatosObtener.obtenerMetas();
+                                                    ArrayList<Meta> metas =conexionBaseDatosObtener.obtenerMetas();
 
-                                                AdaptadorListaMetas adaptadorListaMetas = new AdaptadorListaMetas(activity, metas, fragmentManager);
-                                                listView.setAdapter(adaptadorListaMetas);
+                                                    AdaptadorListaMetas adaptadorListaMetas = new AdaptadorListaMetas(activity, metas, fragmentManager);
+                                                    listView.setAdapter(adaptadorListaMetas);
+                                                }
+
 
                                             }
                                         },
@@ -152,8 +156,6 @@ public class ConexionDescargarMetas extends AsyncTask<Void, Void, Void>{
         Volley.newRequestQueue(activity).add(postRequest);
 
 
-
-        return null;
     }
 
     public void setFragmentManager(FragmentManager fragmentManager) {

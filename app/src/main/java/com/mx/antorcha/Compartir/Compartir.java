@@ -1,6 +1,7 @@
 package com.mx.antorcha.Compartir;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,7 +18,7 @@ import java.io.FileOutputStream;
  */
 public class Compartir {
 
-    public Compartir (Activity activity) {
+    public Compartir (Context activity) {
         this.activity = activity;
         sendIntent = new Intent(Intent.ACTION_SEND);
 
@@ -31,7 +32,7 @@ public class Compartir {
 
     private final String URL = "antorcha.com.mx";
     private Intent sendIntent;
-    private Activity activity;
+    private Context activity;
 
     public void agregarUrl () {
         sendIntent.putExtra(Intent.EXTRA_TEXT, URL);

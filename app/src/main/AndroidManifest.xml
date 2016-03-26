@@ -47,6 +47,20 @@
             </intent-filter>
         </service>
         <service
+            android:name="com.mx.antorcha.Servicios.ServicioDescarga"
+            android:label="ServicioDescarga">
+            <intent-filter>
+                <action android:name = "com.myapp.id.action.ACTION_OPEN_SERVICE"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.mx.antorcha.Servicios.ServicioSincronizacion"
+            android:label="ServicioSincronizacion">
+            <intent-filter>
+                <action android:name = "com.myapp.id.action.ACTION_OPEN_SERVICE"/>
+            </intent-filter>
+        </service>
+        <service
             android:name=".GCM.ServicioRegistro"
             android:exported="false" />
 

@@ -1,6 +1,7 @@
 package com.mx.antorcha.BaseDatos;
 
 import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -12,6 +13,7 @@ import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.Modelos.MetaProgreso;
+import com.mx.antorcha.Modelos.Pendiente;
 
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ import java.util.ArrayList;
  */
 public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
 
-    public ConexionBaseDatosObtener(Activity activity) {
+    public ConexionBaseDatosObtener(Context activity) {
         super(activity, "Antorcha", null, 1);
     }
 
@@ -33,6 +35,7 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
         db.execSQL(Querys.CREAR_TABLA_DISCIPLINAS);
         db.execSQL(Querys.CREAR_TABLA_ESPACIOS);
         db.execSQL(Querys.CREAR_TABLA_EVENTO);
+        db.execSQL(Querys.CREAR_TABLA_PENDIENTES);
     }
 
     @Override
@@ -357,6 +360,24 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
         cursor.close();
 
         return espacioDeportivo;
+    }
+
+    public ArrayList<Pendiente> obtenerPendientes () {
+        ArrayList<Pendiente> pendientes = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_PENDIENTES, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            pendientes.add( new Pendiente(
+                    cursor.getInt(cursor.getColumnIndex("Id")),
+                    cursor.getString(cursor.getColumnIndex("Tipo")),
+                    cursor.getString(cursor.getColumnIndex("Datos"))));
+            cursor.moveToNext();
+        }
+
+        return pendientes;
     }
 
 }

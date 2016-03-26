@@ -2,6 +2,7 @@ package com.mx.antorcha.BaseDatos;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.Modelos.Medalla;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.Modelos.MetaProgreso;
+import com.mx.antorcha.Modelos.Pendiente;
 
 import java.util.ArrayList;
 
@@ -20,9 +22,9 @@ import java.util.ArrayList;
  *
  */
 public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
-    private Activity activity;
+    private Context activity;
 
-    public ConexionBaseDatosInsertar(Activity activity) {
+    public ConexionBaseDatosInsertar(Context activity) {
         super(activity, "Antorcha", null, 1);
 
         this.activity = activity;
@@ -37,6 +39,7 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
         db.execSQL(Querys.CREAR_TABLA_DISCIPLINAS);
         db.execSQL(Querys.CREAR_TABLA_ESPACIOS);
         db.execSQL(Querys.CREAR_TABLA_EVENTO);
+        db.execSQL(Querys.CREAR_TABLA_PENDIENTES);
     }
 
     @Override
@@ -194,5 +197,23 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
 
         Log.i(Querys.TAG_INSERTAR, "Se ha insertado un Espacio deportivo");
     }
+
+    public void insertarPendiente (Pendiente pendiente) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues contentValues   = new ContentValues();
+
+        contentValues.put("Tipo", pendiente.getTipo());
+        contentValues.put("Datos", pendiente.getDatos());
+
+        sqLiteDatabase.insert("Pendiente", null, contentValues);
+
+        Log.i(Querys.TAG_INSERTAR, "Se ha insertado un Pendiente");
+    }
+
+    /*
+    Función que inserta un pendiente de sincronizacion
+
+     */
 
 }

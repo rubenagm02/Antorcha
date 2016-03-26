@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -200,15 +198,5 @@ public class DescargarImagen {
     }
 
     static public void obtenerImagen(String url, String nombre, final ImageView imageView){
-        final ImageLoader imageLoader = ImageLoader.getInstance();
-
-        imageLoader.loadImage(url,new SimpleImageLoadingListener() {
-
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                // Do whatever you want with Bitmap
-                imageView.setImageBitmap(loadedImage);
-            }
-        });
     }
 }

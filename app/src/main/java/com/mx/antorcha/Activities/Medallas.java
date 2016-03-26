@@ -151,7 +151,7 @@ public class Medallas extends AppCompatActivity {
         ConexionMedallas conexionMedallas = new ConexionMedallas(this);
         conexionMedallas.setRecyclerView(recyclerView);
         conexionMedallas.setTextView(textViewCantidadMedallas);
-        conexionMedallas.execute();
+        conexionMedallas.obtenerMedallas();
 
         //Se cargan las medallas obtenidas
         TextView textViewPrometeo = (TextView) findViewById(R.id.medallas_cantidad_prometeo);

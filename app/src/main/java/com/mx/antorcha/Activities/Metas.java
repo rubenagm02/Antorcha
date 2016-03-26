@@ -31,6 +31,8 @@ public class Metas extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ListView listView;
     MiembroSharedPreferences miembroSharedPreferences;
+    private ListView listViewMetas;
+    private ConexionBaseDatosObtener conexionBaseDatosObtener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class Metas extends AppCompatActivity {
         //se carga la barra de android por el xml
         Toolbar toolbar = (Toolbar) findViewById(R.id.metas_toolbar);
         setSupportActionBar(toolbar);
+
+        //Se inicializa el obtener de la base de datos
+        conexionBaseDatosObtener = new ConexionBaseDatosObtener(this);
 
         //Se agrega el drawer
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -74,28 +79,10 @@ public class Metas extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Metas.this, NuevaMeta.class);
                 startActivity(intent);
-                finish();
             }
         });
 
-        /**************
-        //VARIABLES PARA PRUEBAS
-        ArrayList<Meta> metas = new ArrayList<>();
-        metas.add(new Meta());
-        metas.add(new Meta());
-        metas.add(new Meta());
-        /**************/
 
-
-        ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(this);
-        ArrayList<Meta> metas = conexionBaseDatosObtener.obtenerMetas();
-
-        //Se comprueban las metas que se eliminaron
-        ArrayList<Meta> metasEliminar = conexionBaseDatosObtener.obtenerMetasEliminar();
-
-        for (Meta meta : metasEliminar) {
-            ConexionEliminarMeta.eliminarMeta(meta.getId(), meta.getIdServidor(), this);
-        }
 
         //Se inicializa el shared preferences
         MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(this);
@@ -111,22 +98,15 @@ public class Metas extends AppCompatActivity {
         }
 
         //Se carga el adapter para listar las metas
-        ListView listViewMetas = (ListView) findViewById(R.id.metas_lista_metas);
+        listViewMetas = (ListView) findViewById(R.id.metas_lista_metas);
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        ArrayList<Meta> metas = conexionBaseDatosObtener.obtenerMetas();
         AdaptadorListaMetas adaptadorListaMetas = new AdaptadorListaMetas(this, metas, getSupportFragmentManager());
-        adaptadorListaMetas.setListView(listViewMetas);
-
         listViewMetas.setAdapter(adaptadorListaMetas);
-
-        ConexionMetas conexionMetas = new ConexionMetas(this);
-        conexionMetas.setId(miembroSharedPreferences.getId());
-        conexionMetas.execute();
-
-        ConexionDescargarMetas conexionDescargarMetas = new ConexionDescargarMetas(this);
-        conexionDescargarMetas.setFragmentManager(getSupportFragmentManager());
-        conexionDescargarMetas.setListView(listViewMetas);
-
-        conexionDescargarMetas.execute();
-
-
     }
 }
