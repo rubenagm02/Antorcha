@@ -1,9 +1,7 @@
 package com.mx.antorcha.Dialogos;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -15,15 +13,11 @@ import android.view.Window;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.mx.antorcha.Activities.Inicio;
 import com.mx.antorcha.Adaptadores.AdaptadorListaMetas;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosActualizar;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Modelos.Meta;
-import com.mx.antorcha.Modelos.MetaProgreso;
 import com.mx.antorcha.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -119,4 +113,6 @@ public class DialogoMeta extends DialogFragment {
     public void setListView(ListView listView) {
         this.listView = listView;
     }
+
+
 }

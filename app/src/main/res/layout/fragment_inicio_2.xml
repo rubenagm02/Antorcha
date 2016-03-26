@@ -19,6 +19,7 @@
             android:layout_height="400dp" />
     </RelativeLayout>
     <TextView
+        android:text="Registra tus metas"
         android:gravity="center"
         android:layout_gravity="center"
         android:textSize="18sp"
@@ -31,7 +32,7 @@
         android:layout_marginTop="15dp"
         android:gravity="center"
         android:layout_gravity="center"
-        android:text="Texto de relleno para otra pestaña"
+        android:text="Determina tus metas, registra y dales seguimiento y compártelas con tus amigos"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:layout_width="wrap_content"

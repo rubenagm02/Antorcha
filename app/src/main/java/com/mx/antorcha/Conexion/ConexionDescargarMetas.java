@@ -1,8 +1,6 @@
 package com.mx.antorcha.Conexion;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.widget.ListView;
 

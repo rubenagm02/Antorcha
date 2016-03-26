@@ -89,6 +89,10 @@ public class FragmentPerfilPerfil extends Fragment {
         ImageView imageViewDifuminado = (ImageView) rootView.findViewById(R.id.perfil_imagen_degradado);
         AdaptadorSVG.mostrarImagen(imageViewDifuminado, activity, R.raw.degradado_inferior);
 
+        //Se carga la imagen para el degradado superior
+        ImageView imageViewDegradadoSuperior = (ImageView) rootView.findViewById(R.id.perfil_imagen_degradado_superior);
+        AdaptadorSVG.mostrarImagen(imageViewDegradadoSuperior, activity, R.raw.degradado_superior);
+
         //el click en la foto de perfil
         ImageView imageViewPerfil = (ImageView) rootView.findViewById(R.id.perfil_imagen_miembro);
         imageViewPerfil.setOnClickListener(new View.OnClickListener() {

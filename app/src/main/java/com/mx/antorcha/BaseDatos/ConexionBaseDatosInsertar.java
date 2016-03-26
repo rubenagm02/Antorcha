@@ -70,11 +70,12 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
     }
 
     //Se insertan datos en la meta
-    public void insertarMetaProgreso(MetaProgreso metaProgreso){
+    public long insertarMetaProgreso(MetaProgreso metaProgreso){
 
         ArrayList<MetaProgreso> metaProgresos =
                 new ConexionBaseDatosObtener(activity).obtenerMetaProgreso(metaProgreso.getIdMeta());
 
+        long id = -1;
         ArrayList<Integer> enteros = new ArrayList<>();
 
         for (MetaProgreso metaProgreso1 : metaProgresos) {
@@ -91,10 +92,14 @@ public class ConexionBaseDatosInsertar extends SQLiteOpenHelper {
             contentValues.put("Fecha",metaProgreso.getFecha());
             contentValues.put("IdServidor", metaProgreso.getIdServidor());
 
-            sqLiteDatabase.insert("MetaProgreso", null, contentValues);
+            id = sqLiteDatabase.insert("MetaProgreso", null, contentValues);
 
             Log.i(Querys.TAG_INSERTAR, "Se ha insertado una meta progreso");
+
+
         }
+
+        return id;
 
     }
 
