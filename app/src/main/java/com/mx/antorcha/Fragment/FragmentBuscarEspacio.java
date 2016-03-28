@@ -93,6 +93,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         AdaptadorSVG.mostrarImagen(imageViewFlechaDerechaResenia, activity, R.raw.icono_flecha_derecha);
         AdaptadorSVG.mostrarImagen(imageViewFlechaIzquierdaImagen, activity, R.raw.icono_flecha_izquierda);
         AdaptadorSVG.mostrarImagen(imageViewFlechaDerechaImagen, activity, R.raw.icono_flecha_derecha);
+
         //Se cargan las imagenes de los icono de contacto
         ImageView imageViewCompartir = (ImageView) rootView.findViewById(R.id.sliding_buscar_actividades_espacio_compartir);
         ImageView imageViewContacto = (ImageView) rootView.findViewById(R.id.sliding_buscar_actividades_espacio_contacto);
@@ -101,6 +102,10 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
 
         final SlidingUpPanelLayout slidingUpPanelLayout = (SlidingUpPanelLayout) rootView.findViewById(R.id.buscar_espacio_sliding_layout);
         slidingUpPanelLayout.setPanelHeight(0);
+
+        //Se carga el globo de busqueda
+        ImageView imageViewGloboBusqueda = (ImageView) rootView.findViewById(R.id.buscar_espacio_globo_busqueda);
+        AdaptadorSVG.mostrarImagen(imageViewGloboBusqueda, activity, R.raw.globo_busqueda);
 
         //Inicializar el mapa
         mapView = (MapView) rootView.findViewById(R.id.map_fragment_espacio);

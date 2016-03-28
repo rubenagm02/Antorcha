@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
+import com.mx.antorcha.Conexion.ConexionEliminarMeta;
 import com.mx.antorcha.Conexion.ConexionMetaProgreso;
 import com.mx.antorcha.Conexion.ConexionMetas;
 import com.mx.antorcha.Modelos.Meta;
@@ -63,6 +64,15 @@ public class ServicioSincronizacion extends IntentService {
 
                             ConexionMetaProgreso conexionMetaProgreso = new ConexionMetaProgreso(this, metaProgreso, pendiente.getId());
                             conexionMetaProgreso.insertarProgreso();
+                            break;
+                        }
+
+                        case Pendiente.ELIMINAR_META : {
+
+                            //Se obtienen los datos de la meta para eliminarla
+                            Meta meta = new ConexionBaseDatosObtener(this).obtenerMetas(Integer.parseInt(pendiente.getDatos()));
+                            ConexionEliminarMeta.eliminarMeta(meta, this, pendiente.getId());
+
                             break;
                         }
                     }

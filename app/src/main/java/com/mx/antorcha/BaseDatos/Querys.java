@@ -33,4 +33,5 @@ public class Querys {
     static String OBTENER_UN_EVENTO = "SELECT * FROM Evento WHERE Id = ";
     static String OBTENER_UN_ESPACIO = "SELECT * FROM EspacioDeportivo WHERE Id = ";
     static String OBTENER_PENDIENTES = "SELECT * FROM Pendiente";
+    static String OBTENER_UNA_META = "SELECT * FROM Meta WHERE Id = ";
 }

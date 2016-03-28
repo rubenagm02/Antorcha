@@ -103,6 +103,7 @@ public class Metas extends AppCompatActivity {
         super.onResume();
         ArrayList<Meta> metas = conexionBaseDatosObtener.obtenerMetas();
         AdaptadorListaMetas adaptadorListaMetas = new AdaptadorListaMetas(this, metas, getSupportFragmentManager());
+        adaptadorListaMetas.setListView(listViewMetas);
         listViewMetas.setAdapter(adaptadorListaMetas);
     }
 }

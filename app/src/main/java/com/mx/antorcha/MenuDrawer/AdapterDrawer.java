@@ -96,6 +96,7 @@ public class AdapterDrawer extends ArrayAdapter<String> {
         AdaptadorSVG.mostrarImagen(imageViewMedallas, activity, R.raw.icono_medallas);
         AdaptadorSVG.mostrarImagen(imageViewMetas, activity, R.raw.icono_metas);
         AdaptadorSVG.mostrarImagen(imageViewEspecialistas, activity, R.raw.icono_especialistas);
+        AdaptadorSVG.mostrarImagen(imageViewAyudanosMejorar, activity, R.raw.icono_ayudanos_mejorar);
 
         //Se cargan los textview para pintarlos
         TextView textViewBuscarActividad = (TextView) convertView.findViewById(R.id.drawer_texto_buscar_actividad);
@@ -134,6 +135,8 @@ public class AdapterDrawer extends ArrayAdapter<String> {
                 AdaptadorSVG.mostrarImagen(imageViewBuscarActividad, activity, R.raw.icono_buscar_actividad_seleccionado);
                 break;
             case "AyudanosMejorar" :
+                imageViewAyudanosMejorar.setAlpha(1f);
+                AdaptadorSVG.mostrarImagen(imageViewAyudanosMejorar, activity, R.raw.icono_ayudanos_mejorar_seleccionado);
                 textViewAyudanosMejorar.setTextColor(Color.parseColor("#FF9522"));
                 break;
             case "Especialistas" :

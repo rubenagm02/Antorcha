@@ -154,9 +154,14 @@ public class ConexionInformacionEspacio {
 
                                     JSONArray jsonArrayMembresias = jsonObject.getJSONArray("tipoMembresia");
 
-                                    for (int y = 0; y < jsonArrayMembresias.length(); y++) {
-                                        JSONObject jsonObjectMembresia = jsonArrayMembresias.getJSONObject(y);
-                                        membresias.add(jsonObjectMembresia.getString("duracion") + " $ " + jsonObjectMembresia.getString("costo"));
+                                    if (jsonArrayMembresias.length() == 0) {
+                                        membresias.add("Este espacio no cuenta con membresias por el momento");
+                                    } else {
+
+                                        for (int y = 0; y < jsonArrayMembresias.length(); y++) {
+                                            JSONObject jsonObjectMembresia = jsonArrayMembresias.getJSONObject(y);
+                                            membresias.add(jsonObjectMembresia.getString("duracion") + " $ " + jsonObjectMembresia.getString("costo"));
+                                        }
                                     }
                                     AdaptadorSpinner adaptadorSpinner = new AdaptadorSpinner(activity, membresias);
                                     Spinner spinnerMembresias = (Spinner) view.findViewById(R.id.buscar_espacio_spinner_membresias);

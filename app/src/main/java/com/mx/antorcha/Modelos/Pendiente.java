@@ -13,6 +13,9 @@ public class Pendiente {
     static public String SEP = "}";
     static final public String META = "Meta";
     static final public String META_PROGRESO = "MetaProgreso";
+    static final public String DISCIPLINA = "Disciplina";
+    static final public String DEPORTE = "Deporte";
+    static final public String ELIMINAR_META = "EliminarMeta";
 
     public Pendiente(int id, String tipo, String datos) {
         this.id = id;

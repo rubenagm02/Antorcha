@@ -74,7 +74,7 @@ public class ConexionBaseDatosObtener extends SQLiteOpenHelper {
     public Meta obtenerMetas (int id) {
 
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_METAS + " AND Id = " + id, null);
+        Cursor cursor = sqLiteDatabase.rawQuery(Querys.OBTENER_UNA_META + id, null);
         cursor.moveToFirst();
 
         Meta meta = new Meta(
