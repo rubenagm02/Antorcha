@@ -81,6 +81,10 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         ImageView imageViewMarkerCentral = (ImageView) rootView.findViewById(R.id.buscar_evento_marker_central);
         ImageView imageViewBotonAsistoEvento = (ImageView) rootView.findViewById(R.id.sliding_buscar_evento_asisto_evento);
 
+        //Se carga el globo de busqueda
+        ImageView imageViewGloboBusqueda = (ImageView) rootView.findViewById(R.id.buscar_evento_globo_busqueda);
+        AdaptadorSVG.mostrarImagen(imageViewGloboBusqueda, activity, R.raw.globo_busqueda);
+
         AdaptadorSVG.mostrarImagen(imageViewCompartir, activity, R.raw.icono_compartir);
         AdaptadorSVG.mostrarImagen(imageViewContacto, activity, R.raw.icono_llamada);
         AdaptadorSVG.mostrarImagen(imageViewMarkerCentral, activity, R.raw.icono_marker_naranja);

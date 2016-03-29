@@ -34,16 +34,25 @@
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-                    <TextView
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
-                        android:paddingRight="20dp"
-                        android:paddingLeft="20dp"
-                        android:text="Buscar evento"
-                        android:background="#FFFFFF"
-                        android:textSize="14sp"
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_marginLeft="4dp"
+                            android:foregroundGravity="center"
+                            android:id="@+id/buscar_evento_globo_busqueda"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:paddingBottom="2dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="20dp"
+                            android:paddingLeft="20dp"
+                            android:text="Buscar actividad"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </RelativeLayout>
                     <ImageView
                         android:id="@+id/buscar_evento_marker_central"
                         android:layout_gravity="center"

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.mx.antorcha.Adaptadores.AdaptadorListaMetas;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosActualizar;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
+import com.mx.antorcha.Conexion.ConexionEliminarMeta;
 import com.mx.antorcha.Modelos.Meta;
 import com.mx.antorcha.R;
 
@@ -68,10 +69,11 @@ public class DialogoMeta extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Cuando se responde sí se borra la meta (Lógicamente)
+                        Meta meta = new ConexionBaseDatosObtener(activity).obtenerMetas(idMeta);
                         ConexionBaseDatosActualizar conexionBaseDatosActualizar =
                                 new ConexionBaseDatosActualizar(activity);
-
                         conexionBaseDatosActualizar.borrarMeta(idMeta);
+                        ConexionEliminarMeta.eliminarMeta(meta, activity, 0);
 
                         if (listView != null) {
                             //Se actualiza la lista

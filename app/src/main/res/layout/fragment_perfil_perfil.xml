@@ -22,17 +22,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="230dp" />
                     <ImageView
+                        android:src="@drawable/degradado_inferior_png"
                         android:scaleType="centerCrop"
                         android:layout_alignParentBottom="true"
                         android:id="@+id/perfil_imagen_degradado"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="50dp" />
                     <ImageView
+                        android:src="@drawable/degradado_superior_png"
                         android:scaleType="centerCrop"
                         android:layout_alignParentTop="true"
                         android:id="@+id/perfil_imagen_degradado_superior"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="50dp" />
                     <TextView
                         android:alpha=".87"
                         android:fontFamily="sans-serif"
