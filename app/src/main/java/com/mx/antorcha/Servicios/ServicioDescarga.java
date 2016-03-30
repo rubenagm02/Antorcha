@@ -7,6 +7,7 @@ import com.mx.antorcha.Conexion.ConexionDescargarMetas;
 import com.mx.antorcha.Conexion.ConexionMedallas;
 import com.mx.antorcha.Conexion.ConexionMetas;
 import com.mx.antorcha.Conexion.ConexionObtenerMedallas;
+import com.mx.antorcha.Conexion.ConexionObtenerMiembroEspacio;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 /**
@@ -34,6 +35,10 @@ public class ServicioDescarga extends IntentService {
                 //Se descargan las metas y dentro se descarga su progreso
                 ConexionDescargarMetas conexionDescargarMetas = new ConexionDescargarMetas(this);
                 conexionDescargarMetas.obtenerMetas();
+
+                //Se descargan los espacios para mis actividades
+                ConexionObtenerMiembroEspacio conexionObtenerMiembroEspacio = new ConexionObtenerMiembroEspacio(this);
+                conexionObtenerMiembroEspacio.obtenerMiembroEspacio();
             }
         } catch (Exception e) {
             e.printStackTrace();

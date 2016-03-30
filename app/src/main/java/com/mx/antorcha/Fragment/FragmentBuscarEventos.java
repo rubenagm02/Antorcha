@@ -3,6 +3,7 @@ package com.mx.antorcha.Fragment;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,15 +25,18 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.mx.antorcha.Activities.Compartir;
 import com.mx.antorcha.Activities.Inicio;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Conexion.ConexionBuscarEvento;
+import com.mx.antorcha.Conexion.ConexionMiembroEvento;
 import com.mx.antorcha.Conexion.DescargarImagen;
 import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
 import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.text.SimpleDateFormat;
@@ -276,12 +280,40 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         textViewLugar.setText(evento.getDomicilio());
         textViewDescripcion.setText(evento.getDescripcion());
 
+        ImageView imageViewCompartir = (ImageView) view.findViewById(R.id.sliding_buscar_actividades_evento_compartir);
+        ImageView imageViewContacto = (ImageView) view.findViewById(R.id.sliding_buscar_actividades_evento_contacto);
+
+        //Se pone el click de la llamada
+        imageViewContacto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + evento.getTelefono()));
+                activity.startActivity(intent);
+            }
+        });
+
+        imageViewCompartir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, Compartir.class);
+                intent.putExtra("id", evento.getId());
+                intent.putExtra("tipo", "evento");
+
+                activity.startActivity(intent);
+            }
+        });
 
         //El click de l botón de agregar evento
         imageViewAsistirEvento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new ConexionBaseDatosInsertar(activity).insertarEvento(evento);
+                ConexionMiembroEvento conexionMiembroEvento
+                        = new ConexionMiembroEvento(activity,
+                        new MiembroSharedPreferences(activity).getId(),
+                        evento.getId(),
+                        0);
+                conexionMiembroEvento.insertarEvento();
 
                 new AlertDialog.Builder(activity).setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     @Override

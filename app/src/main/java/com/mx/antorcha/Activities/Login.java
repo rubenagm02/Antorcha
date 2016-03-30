@@ -18,6 +18,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -67,7 +68,7 @@ public class Login extends AppCompatActivity {
         //Se agrega el callback
         callbackManager = CallbackManager.Factory.create();
 
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_facebook_login);
+        final LoginButton loginButton = (LoginButton) findViewById(R.id.login_facebook_login);
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday"));
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -111,6 +112,8 @@ public class Login extends AppCompatActivity {
                                     conexionLogin.login();
 
                                     conexionLogin.execute();
+
+                                    LoginManager.getInstance().logOut();
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
