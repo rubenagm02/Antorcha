@@ -74,8 +74,9 @@ public class Perfil extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //Se carga el boton de agregar deporte a la barra
-        ImageView imageViewAgregar = (ImageView) findViewById(R.id.perfil_barra_agregar_deporte);
+        final ImageView imageViewAgregar = (ImageView) findViewById(R.id.perfil_barra_agregar_deporte);
         AdaptadorSVG.mostrarImagen(imageViewAgregar, this, R.raw.icono_agregar);
+        imageViewAgregar.setVisibility(View.INVISIBLE);
 
         //se carga el drawer
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -104,7 +105,7 @@ public class Perfil extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.perfil_pager);
         viewPager.setAdapter(adaptadorPerfilTabs);
 
-         slidingTabLayout = (SlidingTabLayout) findViewById(R.id.perfil_tabs);
+        slidingTabLayout = (SlidingTabLayout) findViewById(R.id.perfil_tabs);
         slidingTabLayout.setDistributeEvenly(true);
         slidingTabLayout.setSelectedIndicatorColors(Color.WHITE);
         slidingTabLayout.setViewPager(viewPager);
@@ -118,6 +119,29 @@ public class Perfil extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Perfil.this, NuevoDeporteFavorito.class);
                 startActivity(intent);
+            }
+        });
+
+        //Se oculta el imageview
+        slidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                if (position == 0) {
+                    imageViewAgregar.setVisibility(View.INVISIBLE);
+                } else {
+                    imageViewAgregar.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
 

@@ -21,6 +21,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.IndoorBuilding;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -29,6 +30,7 @@ import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Conexion.ConexionBuscarEspacio;
 import com.mx.antorcha.Conexion.ConexionInformacionEspacio;
+import com.mx.antorcha.Conexion.ConexionInsertarMiembroEspacio;
 import com.mx.antorcha.Conexion.DescargarImagen;
 import com.mx.antorcha.Conexion.InfoConexion;
 import com.mx.antorcha.Dialogos.DialogoInsertarResenia;
@@ -36,6 +38,7 @@ import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
 import com.mx.antorcha.Modelos.Resenia;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.w3c.dom.Text;
@@ -110,6 +113,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         //Inicializar el mapa
         mapView = (MapView) rootView.findViewById(R.id.map_fragment_espacio);
         mapView.onCreate(savedInstanceState);
+
         MapsInitializer.initialize(getContext());
 
         //Se cargan las imagenes en vectores
@@ -124,7 +128,6 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             //mMap.animateCamera(CameraUpdateFactory.zoomTo(2));
             mMap.setMyLocationEnabled(true);
-
 
             CameraUpdate center=
                     CameraUpdateFactory.newLatLng(new LatLng(20.699359689441785,
@@ -186,6 +189,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             //Se carga la imagen del boton de asignarme espacio
             imageViewAsignarmeEspacio = (ImageView) rootView.findViewById(R.id.buscar_espacio_boton_asignarme_espacio);
             AdaptadorSVG.mostrarImagen(imageViewAsignarmeEspacio, activity, R.raw.boton_asisto_centro_deportivo);
+
         }
 
         if (bundle != null && bundle.containsKey("idEspacio")) {
@@ -365,6 +369,13 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             @Override
             public void onClick(View v) {
                 new ConexionBaseDatosInsertar(activity).insertarEspacioDeportivo(espacioDeportivo);
+                ConexionInsertarMiembroEspacio conexionInsertarMiembroEspacio
+                        = new ConexionInsertarMiembroEspacio(activity,
+                        new MiembroSharedPreferences(activity).getId(),
+                        espacioDeportivo.getId(),
+                        0,
+                        0);
+                conexionInsertarMiembroEspacio.insertarMiembroEspacio();
                 Toast.makeText(activity, "Se ha asignado este espacio a tus actividades", Toast.LENGTH_LONG).show();
             }
         });

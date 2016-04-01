@@ -16,6 +16,10 @@ public class Pendiente {
     static final public String DISCIPLINA = "Disciplina";
     static final public String DEPORTE = "Deporte";
     static final public String ELIMINAR_META = "EliminarMeta";
+    static final public String MIEMBRO_ESPACIO = "MiembroEspacio";
+    static final public String MIEMBRO_EVENTO = "MiembroEvento";
+    static final public String BORRAR_MIEMBRO_ESPACIO = "BorrarMiembroEspacio";
+    static final public String BORRAR_MIEMBRO_EVENTO = "BorrarMiembroEvento";
 
     public Pendiente(int id, String tipo, String datos) {
         this.id = id;

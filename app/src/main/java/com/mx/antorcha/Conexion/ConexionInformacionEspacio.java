@@ -1,6 +1,8 @@
 package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mx.antorcha.Activities.Compartir;
 import com.mx.antorcha.Adaptadores.AdaptadorSpinner;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
 import com.mx.antorcha.Modelos.Resenia;
@@ -58,7 +61,7 @@ public class ConexionInformacionEspacio {
                             for (int x = 0; x < jsonArray.length(); x++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(x);
 
-                                EspacioDeportivo espacioDeportivo = new EspacioDeportivo(
+                                final EspacioDeportivo espacioDeportivo = new EspacioDeportivo(
                                         jsonObject.getInt("id"),
                                         jsonObject.getString("nombre"),
                                         jsonObject.getString("descripcion"),
@@ -167,6 +170,29 @@ public class ConexionInformacionEspacio {
                                     Spinner spinnerMembresias = (Spinner) view.findViewById(R.id.buscar_espacio_spinner_membresias);
                                     spinnerMembresias.setAdapter(adaptadorSpinner);
 
+                                    //Se coloca el click en el contacto y en compartir
+
+                                    ImageView imageViewCompartir = (ImageView) view.findViewById(R.id.sliding_buscar_actividades_espacio_compartir);
+                                    ImageView imageViewContacto = (ImageView) view.findViewById(R.id.sliding_buscar_actividades_espacio_contacto);
+
+                                    imageViewContacto.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + espacioDeportivo.getTelefono()));
+                                            activity.startActivity(intent);
+                                        }
+                                    });
+
+                                    imageViewCompartir.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent(activity, Compartir.class);
+                                            intent.putExtra("id", espacioDeportivo.getId());
+                                            intent.putExtra("tipo", "espacio");
+
+                                            activity.startActivity(intent);
+                                        }
+                                    });
 
                                     ImageView imageViewImagenGaleria = (ImageView) view.findViewById(R.id.sliding_buscar_espacio_imagen_galeria);
                                     DescargarImagen.cargarImagen(activity, InfoConexion.URL_DESCARGAR_IMAGEN_ESPACIO + espacioDeportivo.getId() + "_2_.png", imageViewImagenGaleria);
