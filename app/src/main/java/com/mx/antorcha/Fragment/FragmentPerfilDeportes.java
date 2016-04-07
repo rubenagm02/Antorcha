@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.mx.antorcha.Adaptadores.AdaptadorListaDeportes;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Modelos.Deporte;
+import com.mx.antorcha.Modelos.Disciplina;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.DisciplinasDeportesSharedPreferences;
 
@@ -36,12 +37,12 @@ public class FragmentPerfilDeportes extends Fragment {
         ConexionBaseDatosObtener conexionBaseDatosObtener = new ConexionBaseDatosObtener(activity);
 
         DisciplinasDeportesSharedPreferences disciplinasDeportesSharedPreferences = new DisciplinasDeportesSharedPreferences(activity);
-        ArrayList<Deporte> deportes = conexionBaseDatosObtener.obtenerDeportes();
-        ArrayList<String> disciplinasDeportes = disciplinasDeportesSharedPreferences.getDeportes();
+        ArrayList<Disciplina> deportes = conexionBaseDatosObtener.obtenerDisciplinas();
+        ArrayList<String> disciplinasDeportes = disciplinasDeportesSharedPreferences.getDisciplinas();
 
-        ArrayList<Deporte> deportesAuxiliar = new ArrayList<>();
+        ArrayList<Disciplina> deportesAuxiliar = new ArrayList<>();
 
-        for (Deporte deporte : deportes) {
+        for (Disciplina deporte : deportes) {
 
             if (disciplinasDeportes.contains(deporte.getId() + "")) {
                 deportesAuxiliar.add(deporte);

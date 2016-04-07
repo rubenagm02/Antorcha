@@ -7,6 +7,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp" />
     <ImageView
+        android:id="@+id/item_perfil_deporte_fondo"
         android:background="#A0A0A0"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"

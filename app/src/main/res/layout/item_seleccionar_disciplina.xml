@@ -35,6 +35,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <ImageView
+                android:alpha=".3"
                 android:id="@+id/item_seleccionar_disciplina_imagen"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentRight="true"

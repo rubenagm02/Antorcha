@@ -3,11 +3,13 @@ package com.mx.antorcha.Servicios;
 import android.app.IntentService;
 import android.content.Intent;
 
+import com.mx.antorcha.BaseDatos.CargarDeportesDisciplinas;
 import com.mx.antorcha.Conexion.ConexionDescargarMetas;
 import com.mx.antorcha.Conexion.ConexionMedallas;
 import com.mx.antorcha.Conexion.ConexionMetas;
 import com.mx.antorcha.Conexion.ConexionObtenerMedallas;
 import com.mx.antorcha.Conexion.ConexionObtenerMiembroEspacio;
+import com.mx.antorcha.Conexion.ConexionObtenerMiembroEvento;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 /**
@@ -39,6 +41,13 @@ public class ServicioDescarga extends IntentService {
                 //Se descargan los espacios para mis actividades
                 ConexionObtenerMiembroEspacio conexionObtenerMiembroEspacio = new ConexionObtenerMiembroEspacio(this);
                 conexionObtenerMiembroEspacio.obtenerMiembroEspacio();
+
+                //Se descargan los eventos para mis actividades
+                ConexionObtenerMiembroEvento conexionObtenerMiembroEvento = new ConexionObtenerMiembroEvento(this);
+                conexionObtenerMiembroEvento.obtenerEventos();
+
+                CargarDeportesDisciplinas.cargarDisciplinas(this);
+                CargarDeportesDisciplinas.cargarDeportes(this);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -139,7 +139,7 @@ public class Medallas extends AppCompatActivity {
                 com.mx.antorcha.Compartir.Compartir compartir = new Compartir(Medallas.this);
                 LinearLayout linearLayout = (LinearLayout) findViewById(R.id.medallas_layout_compartir);
                 compartir.agregarView(linearLayout);
-                compartir.agregarTexto("antorcha.com.mx");
+                compartir.agregarTexto("antorcha.com.");
                 compartir.compartir();
             }
         });
