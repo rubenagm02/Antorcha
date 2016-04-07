@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.mx.antorcha.R;
@@ -39,6 +40,26 @@ public class DialogoMostrarFiltroEspacio extends DialogFragment {
             @Override
             public void onClick(View v) {
                 getDialog().dismiss();
+            }
+        });
+
+        //Se programa la acción del seek bar
+
+        SeekBar seekBarRango = (SeekBar) view.findViewById(R.id.filtro_busqueda_espacio_seekbar);
+        seekBarRango.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
 

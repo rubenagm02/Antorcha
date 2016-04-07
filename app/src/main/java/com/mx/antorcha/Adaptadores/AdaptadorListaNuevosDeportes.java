@@ -44,7 +44,8 @@ public class AdaptadorListaNuevosDeportes extends ArrayAdapter<Disciplina>{
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.item_seleccionar_disciplina_imagen);
         AdaptadorSVG.mostrarImagen(imageView, activity, R.raw.icono_flecha_izquierda);
-
+        TextView textViewDisciplina = (TextView) convertView.findViewById(R.id.item_seleccionar_disciplina_texto);
+        textViewDisciplina.setText(disciplina.getNombre());
         /****** VARIABLES DE PRUEBA *******
 
         ArrayList<Deporte> deportes = new ArrayList<>();
