@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.mx.antorcha.Bienvenida.Bienvenida;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
@@ -51,7 +52,7 @@ public class SplashScreen extends AppCompatActivity {
             MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(activity);
 
             if (miembroSharedPreferences.getId() != 0) {
-                Intent intent = new Intent(activity, BuscarActividad.class);
+                Intent intent = new Intent(activity, Bienvenida.class);
                 activity.startActivity(intent);
                 activity.finish();
             } else {

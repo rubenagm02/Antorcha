@@ -47,17 +47,17 @@
             </intent-filter>
         </service>
         <service
-            android:name="com.mx.antorcha.Servicios.ServicioDescarga"
+            android:name=".Servicios.ServicioDescarga"
             android:label="ServicioDescarga">
             <intent-filter>
-                <action android:name = "com.myapp.id.action.ACTION_OPEN_SERVICE"/>
+                <action android:name="com.myapp.id.action.ACTION_OPEN_SERVICE" />
             </intent-filter>
         </service>
         <service
-            android:name="com.mx.antorcha.Servicios.ServicioSincronizacion"
+            android:name=".Servicios.ServicioSincronizacion"
             android:label="ServicioSincronizacion">
             <intent-filter>
-                <action android:name = "com.myapp.id.action.ACTION_OPEN_SERVICE"/>
+                <action android:name="com.myapp.id.action.ACTION_OPEN_SERVICE" />
             </intent-filter>
         </service>
         <service
@@ -107,7 +107,10 @@
             android:label="@string/title_activity_actualizar_perfil"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activities.Especialistas" />
-        <activity android:name=".Activities.AyudanosMejorar"></activity>
+        <activity android:name=".Activities.AyudanosMejorar" />
+        <activity android:name=".Bienvenida.Bienvenida" />
+        <activity android:name=".Bienvenida.SeleccionaDeportes" />
+        <activity android:name=".Bienvenida.BienvenidaNotificaciones"></activity>
     </application>
 
 </manifest>
