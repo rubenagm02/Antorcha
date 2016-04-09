@@ -5,6 +5,8 @@ import android.content.Intent;
 
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Conexion.ConexionEliminarMeta;
+import com.mx.antorcha.Conexion.ConexionInsertarDeporte;
+import com.mx.antorcha.Conexion.ConexionInsertarDisciplina;
 import com.mx.antorcha.Conexion.ConexionMetaProgreso;
 import com.mx.antorcha.Conexion.ConexionMetas;
 import com.mx.antorcha.Modelos.Meta;
@@ -74,6 +76,21 @@ public class ServicioSincronizacion extends IntentService {
                             ConexionEliminarMeta.eliminarMeta(meta, this, pendiente.getId());
 
                             break;
+                        }
+
+                        case Pendiente.DISCIPLINA : {
+
+                            StringTokenizer stringTokenizer = new StringTokenizer(pendiente.getDatos(), Pendiente.SEP);
+                            int disciplina = Integer.parseInt(stringTokenizer.nextToken());
+
+                            new ConexionInsertarDisciplina(this, disciplina, pendiente.getId()).insertarDisciplina();
+                        }
+
+                        case Pendiente.DEPORTE : {
+                            StringTokenizer stringTokenizer = new StringTokenizer(pendiente.getDatos(), Pendiente.SEP);
+                            int deporte = Integer.parseInt(stringTokenizer.nextToken());
+
+                            new ConexionInsertarDeporte(this, deporte, pendiente.getId());
                         }
                     }
                 }

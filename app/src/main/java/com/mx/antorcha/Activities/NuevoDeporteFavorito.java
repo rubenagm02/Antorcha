@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaNuevosDeportes;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
+import com.mx.antorcha.Conexion.ConexionInsertarDeporte;
+import com.mx.antorcha.Conexion.ConexionInsertarDisciplina;
 import com.mx.antorcha.Modelos.Disciplina;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.DisciplinasDeportesSharedPreferences;
@@ -70,6 +72,17 @@ public class NuevoDeporteFavorito extends AppCompatActivity {
                 disciplinasDeportesSharedPreferences.setDeportes(stringDeportes);
                 disciplinasDeportesSharedPreferences.setDisciplinas(stringDisciplinas);
                 Toast.makeText(NuevoDeporteFavorito.this, "Se han guardado los cambios", Toast.LENGTH_SHORT).show();
+
+                //Se guardan los deportes y las disciplinas
+                for (String deporte : stringDeportes) {
+                    ConexionInsertarDeporte conexionInsertarDeporte = new ConexionInsertarDeporte(NuevoDeporteFavorito.this, Integer.parseInt(deporte), 0);
+                    conexionInsertarDeporte.insertarDeporte();
+                }
+
+                for (String disciplina : stringDisciplinas) {
+                    ConexionInsertarDisciplina conexionInsertarDisciplina = new ConexionInsertarDisciplina(NuevoDeporteFavorito.this, Integer.parseInt(disciplina), 0);
+                    conexionInsertarDisciplina.insertarDisciplina();
+                }
 
                 finish();
             }

@@ -39,6 +39,8 @@ public class InfoConexion {
     final static public String URL_BORRAR_MIEMBRO_EVENTO = "http://api.antorcha.mx/V0.1/miembro/eventoDeportivo";
     final static public String URL_OBTENER_MIEMBRO_ESPACIO = "http://api.antorcha.mx/V0.1/miembro/espacioDeportivo/";
     final static public String URL_OBTENER_MIEMBRO_EVENTO = "http://api.antorcha.mx/V0.1/miembro/eventoDeportivo/";
+    final static public String URL_OBTENER_DISCIPLINAS = "http://api.antorcha.mx/V0.1/miembroDisciplina/";
+    final static public String URL_OBTENER_DEPORTES = "http://api.antorcha.mx/V0.1/miembroDeporte/";
 
     //final static public String URL_SUBIR_IMAGEN = "http://api.antorcha.mx/V0.1/miembros/subirImagen";
 }

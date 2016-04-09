@@ -7,6 +7,8 @@ import com.mx.antorcha.BaseDatos.CargarDeportesDisciplinas;
 import com.mx.antorcha.Conexion.ConexionDescargarMetas;
 import com.mx.antorcha.Conexion.ConexionMedallas;
 import com.mx.antorcha.Conexion.ConexionMetas;
+import com.mx.antorcha.Conexion.ConexionObtenerDeporte;
+import com.mx.antorcha.Conexion.ConexionObtenerDisciplina;
 import com.mx.antorcha.Conexion.ConexionObtenerMedallas;
 import com.mx.antorcha.Conexion.ConexionObtenerMiembroEspacio;
 import com.mx.antorcha.Conexion.ConexionObtenerMiembroEvento;
@@ -45,6 +47,14 @@ public class ServicioDescarga extends IntentService {
                 //Se descargan los eventos para mis actividades
                 ConexionObtenerMiembroEvento conexionObtenerMiembroEvento = new ConexionObtenerMiembroEvento(this);
                 conexionObtenerMiembroEvento.obtenerEventos();
+
+                //Se descargan las disciplinas del miembro
+                ConexionObtenerDisciplina conexionObtenerDisciplina = new ConexionObtenerDisciplina(this);
+                conexionObtenerDisciplina.obtenerDisciplinas();
+
+                //Se descargan los deportes del miembro
+                ConexionObtenerDeporte conexionObtenerDeporte = new ConexionObtenerDeporte(this);
+                conexionObtenerDeporte.obtenerDeportes();
 
                 CargarDeportesDisciplinas.cargarDisciplinas(this);
                 CargarDeportesDisciplinas.cargarDeportes(this);

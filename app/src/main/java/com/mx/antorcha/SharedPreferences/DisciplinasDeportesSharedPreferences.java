@@ -17,7 +17,7 @@ public class DisciplinasDeportesSharedPreferences {
     private String LLAVE_DEPORTES = "llave_deportes";
     private String LLAVE_DISCIPLINAS = "llave_disciplinas";
 
-    public DisciplinasDeportesSharedPreferences (Activity activity) {
+    public DisciplinasDeportesSharedPreferences (Context activity) {
         sharedPreferences = activity.getSharedPreferences(NOMBRE_SP, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
