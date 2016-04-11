@@ -179,6 +179,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
                 @Override
                 public void onClick(View v) {
                     DialogoMostrarFiltroEspacio dialogoMostrarFiltroEspacio = new DialogoMostrarFiltroEspacio();
+                    dialogoMostrarFiltroEspacio.setContext(activity);
                     dialogoMostrarFiltroEspacio.show(fragmentManager, "filtro_espacio");
                 }
             });

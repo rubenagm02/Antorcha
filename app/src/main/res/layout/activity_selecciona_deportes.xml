@@ -13,7 +13,7 @@
         android:layout_alignParentRight="true"
         android:textSize="16sp"
         android:textColor="#FFFFFF"
-        android:text="1/3"
+        android:text="1/2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageView
@@ -54,29 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <CheckBox
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_marginLeft="5dp"
-                android:padding="5dp"
-                android:gravity="center"
-                android:fontFamily="sans-serif-light"
-                android:alpha=".87"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:text="Natación"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="15dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <CheckBox
+                android:id="@+id/selecciona_deportes_1"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -100,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <CheckBox
+                android:id="@+id/selecciona_deportes_2"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -112,7 +91,7 @@
                 android:alpha=".87"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:text="Hockey"
+                android:text="Basketball"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -123,6 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <CheckBox
+                android:id="@+id/selecciona_deportes_3"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -146,6 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <CheckBox
+                android:id="@+id/selecciona_deportes_4"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -158,7 +139,7 @@
                 android:alpha=".87"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:text="Artes marciales (distintas)"
+                android:text="Deportes de combate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -169,6 +150,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <CheckBox
+                android:id="@+id/selecciona_deportes_5"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -181,7 +163,7 @@
                 android:alpha=".87"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:text="Baile"
+                android:text="Danza / Baile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -192,6 +174,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <CheckBox
+                android:id="@+id/selecciona_deportes_6"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-light"
+                android:alpha=".87"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:text="Volleyball"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/selecciona_deportes_7"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"

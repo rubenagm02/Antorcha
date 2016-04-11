@@ -24,7 +24,7 @@ public class ServicioRegistro extends IntentService{
             synchronized ("registro") {
                 // Initially a network call, to retrieve the token, subsequent calls are local.
                 InstanceID instanceID = InstanceID.getInstance(this);
-                String token = instanceID.getToken("272806355866", GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+                String token = instanceID.getToken("906946575566", GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
                 Log.i("GCM", "GCM Registration Token: " + token);
 
                 if (token.length() > 1) {

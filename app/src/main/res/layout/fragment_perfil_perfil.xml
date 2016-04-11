@@ -84,7 +84,7 @@
                     android:textColor="#000000"
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
-                    android:text="Actividad principal como miembro de antorcha"
+                    android:text="Dinos más de ti actualizando tu perfil en antorcha, presiona los tres puntos que se encuentran en la parte superior de la foto de perfil"
                     android:textSize="14sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -95,7 +95,7 @@
                     android:textColor="#000000"
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
-                    android:text="Lugar de residencia"
+                    android:text=""
                     android:textSize="14sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -113,7 +113,7 @@
                     android:textColor="#000000"
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
-                    android:text="Una descripcion de quien eres, la descripcion es personal"
+                    android:text="Actualiza tu información personal!"
                     android:textSize="13sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

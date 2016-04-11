@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
 import com.mx.antorcha.R;
+import com.mx.antorcha.SharedPreferences.FiltroSharedPreferences;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONArray;
@@ -125,11 +126,18 @@ public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<>();
+
+                if (new FiltroSharedPreferences(activity).getActividadesPreferencia()) {
+                    espacios = "1";
+                } else {
+                    espacios = "0";
+                }
+
                 // the POST parameters:
                 params.put("latitud", latitud);
                 params.put("longitud", longitud);
                 params.put("espacios", espacios);
-                params.put("cercania", cercania);
+                params.put("cercania", new FiltroSharedPreferences(activity).getRango() + "");
                 params.put("idMiembro", idMiembro);
 
                 return params;

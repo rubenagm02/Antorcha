@@ -100,6 +100,7 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
             @Override
             public void onClick(View v) {
                 DialogoMostrarFiltroEspacio dialogoMostrarFiltroEspacio = new DialogoMostrarFiltroEspacio();
+                dialogoMostrarFiltroEspacio.setContext(activity);
                 dialogoMostrarFiltroEspacio.show(fragmentManager, "filtro_espacio");
             }
         });

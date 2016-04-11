@@ -17,6 +17,8 @@ public class SeleccionaDeportes extends AppCompatActivity {
         findViewById(R.id.selecciona_deportes_siguiente).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Se insertan los deportes
+
                 Intent intent = new Intent(SeleccionaDeportes.this, BienvenidaNotificaciones.class);
                 startActivity(intent);
             }

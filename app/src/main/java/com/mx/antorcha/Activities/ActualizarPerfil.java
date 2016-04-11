@@ -75,8 +75,14 @@ public class ActualizarPerfil extends AppCompatActivity {
         //Se cargan los datos para mostrarlos en los campos
         editTextNombre.setText(miembroSharedPreferences.getNombre());
         textViewFechaNacimiento.setText(miembroSharedPreferences.getFechaNacimiento());
-        editTextDescripcion.setText(miembroSharedPreferences.getDescripcion());
-        editTextIntereses.setText(miembroSharedPreferences.getIntereses());
+
+        if (miembroSharedPreferences.getDescripcion() != "" && miembroSharedPreferences.getDescripcion() != "null") {
+            editTextDescripcion.setText(miembroSharedPreferences.getDescripcion());
+        }
+
+        if (miembroSharedPreferences.getIntereses() != "" && miembroSharedPreferences.getDescripcion() != "null") {
+            editTextIntereses.setText(miembroSharedPreferences.getIntereses());
+        }
 
         //El botón para guardar el perfil
         ImageView imageViewGuardarPerfil =

@@ -138,8 +138,13 @@ public class FragmentPerfilPerfil extends Fragment {
         TextView textViewDescripcion = (TextView) rootView.findViewById(R.id.perfil_perfil_descripcion);
         TextView textViewIntereses = (TextView) rootView.findViewById(R.id.perfil_perfil_intereses);
 
-        textViewDescripcion.setText(miembroSharedPreferences.getDescripcion());
-        textViewIntereses.setText(miembroSharedPreferences.getIntereses());
+        if (miembroSharedPreferences.getDescripcion() != "" && miembroSharedPreferences.getDescripcion() != "null") {
+            textViewDescripcion.setText(miembroSharedPreferences.getDescripcion());
+        }
+
+        if (miembroSharedPreferences.getIntereses() != "" && miembroSharedPreferences.getDescripcion() != "null") {
+            textViewIntereses.setText(miembroSharedPreferences.getIntereses());
+        }
 
         //Se cargan las medallas obtenidas
         TextView textViewPrometeo = (TextView) rootView.findViewById(R.id.medallas_cantidad_prometeo);

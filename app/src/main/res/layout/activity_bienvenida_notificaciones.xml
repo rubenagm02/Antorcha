@@ -13,7 +13,7 @@
         android:layout_alignParentRight="true"
         android:textSize="16sp"
         android:textColor="#FFFFFF"
-        android:text="2/3"
+        android:text="2/2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageView
@@ -44,9 +44,63 @@
             android:fontFamily="sans-serif-light"
             android:alpha=".87"
             android:textColor="#FFFFFF"
-            android:text="Con antorcha estarás al tanto de cualquier nuevo espacio que haya abierto cerca de ti, un evento o alguna promoción deportiva. Sólo recibirás lo que a ti te interesa."
+            android:text="Con antorcha podrás estar al tanto de cualquier evento, algún nuevo espacio deportivo cerca de ti o alguna promoción. Siempre recibirás sólo lo que a ti te interesa."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <LinearLayout
+            android:alpha=".8"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/notificacion_evento_2"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="55dp" />
+            <ImageView
+                android:src="@drawable/notificacion_espacio_deportivo_2"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="55dp" />
+            <ImageView
+                android:src="@drawable/notificacion_medalla_2"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="55dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:gravity="center"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#FFFFFF"
+                android:text="Eventos"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#FFFFFF"
+                android:text="Espacios deportivos"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#FFFFFF"
+                android:text="Promociones"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
     <TextView
         android:id="@+id/selecciona_deportes_siguiente"
