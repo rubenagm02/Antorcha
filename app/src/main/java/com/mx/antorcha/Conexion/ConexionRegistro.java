@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Activities.Principal;
 import com.mx.antorcha.Bienvenida.Bienvenida;
+import com.mx.antorcha.Servicios.ServicioDescarga;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONException;
@@ -84,6 +85,11 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
                             DescargarImagen.guardarImagen(activity, URL_FACEBOOK_IMAGEN_1 + facebook + URL_FACEBOOK_IMAGEN_2, miembroSharedPreferences.getId() + ".jpg");
                         }
                         //se inicia el activity
+
+                        //Se arranca el hilo que actualizará
+                        Intent intentService = new Intent(activity, ServicioDescarga.class);
+                        activity.startService(intentService);
+
                         //Lo que se hace cuando el Login se hace de manera correcta
                         Intent intent = new Intent(activity, Bienvenida.class);
                         activity.startActivity(intent);

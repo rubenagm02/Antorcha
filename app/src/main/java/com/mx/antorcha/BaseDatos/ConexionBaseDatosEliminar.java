@@ -17,7 +17,14 @@ public class ConexionBaseDatosEliminar extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL(Querys.CREAR_TABLA_METAS);
+        db.execSQL(Querys.CREAR_TABLA_META_PROGRESO);
+        db.execSQL(Querys.CREAR_TABLA_MEDALLAS);
+        db.execSQL(Querys.CREAR_TABLA_DEPORTES);
+        db.execSQL(Querys.CREAR_TABLA_DISCIPLINAS);
+        db.execSQL(Querys.CREAR_TABLA_ESPACIOS);
+        db.execSQL(Querys.CREAR_TABLA_EVENTO);
+        db.execSQL(Querys.CREAR_TABLA_PENDIENTES);
     }
 
     @Override

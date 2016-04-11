@@ -187,7 +187,7 @@
                 android:alpha=".87"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:text="Volleyball"
+                android:text="Voleibol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

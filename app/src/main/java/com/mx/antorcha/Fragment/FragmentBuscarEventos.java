@@ -132,9 +132,9 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         if (mMap != null) {
 
             CameraUpdate center=
-                    CameraUpdateFactory.newLatLng(new LatLng(20.608557015413055,
-                            -103.40919971466064));
-            CameraUpdate zoom = CameraUpdateFactory.zoomTo(13f);
+                    CameraUpdateFactory.newLatLng(new LatLng(20.684899874296615,
+                            -103.34658857434988));
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(10f);
 
             mMap.moveCamera(center);
             mMap.animateCamera(zoom);
