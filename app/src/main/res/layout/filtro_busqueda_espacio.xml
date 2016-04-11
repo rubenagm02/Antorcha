@@ -21,7 +21,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
-        android:text="Utiliza los filtros de búsqueda para encontras el espacio deportivo más adecuado para ti"
+        android:text="Utiliza el filtro de búsqueda para encontra el evento o los espacios deportivos de tu preferencia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView

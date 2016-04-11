@@ -49,24 +49,24 @@
             android:layout_height="wrap_content" />
         <LinearLayout
             android:alpha=".8"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="70dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
                 android:src="@drawable/notificacion_evento_2"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="55dp" />
+                android:layout_height="45dp" />
             <ImageView
                 android:src="@drawable/notificacion_espacio_deportivo_2"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="55dp" />
+                android:layout_height="45dp" />
             <ImageView
                 android:src="@drawable/notificacion_medalla_2"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="55dp" />
+                android:layout_height="45dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="20dp"
@@ -92,6 +92,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/bienvenida_notificaciones"
                 android:gravity="center"
                 android:textSize="16sp"
                 android:fontFamily="sans-serif-light"
@@ -103,7 +104,7 @@
         </LinearLayout>
     </LinearLayout>
     <TextView
-        android:id="@+id/selecciona_deportes_siguiente"
+        android:id="@+id/bienvenida_notificaciones_siguiente"
         android:layout_alignParentBottom="true"
         android:textSize="17sp"
         android:gravity="center"

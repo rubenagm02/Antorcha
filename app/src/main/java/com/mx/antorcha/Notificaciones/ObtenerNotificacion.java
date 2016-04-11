@@ -7,6 +7,7 @@ import android.content.Intent;
 
 import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Activities.Medallas;
+import com.mx.antorcha.Activities.NuevaNotificacion;
 import com.mx.antorcha.Modelos.Notificacion;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.MedallasSharedPreferences;
@@ -43,6 +44,13 @@ public class ObtenerNotificacion {
                 }
                 Intent intent = new Intent(context, Medallas.class);
                 intent.putExtra("id", notificacion.getId());
+
+                return PendingIntent.getActivity(context, 0, intent, 0);
+            }
+            case "notificacion" : {
+                Intent intent = new Intent(context, NuevaNotificacion.class);
+                intent.putExtra("titulo", notificacion.getTitulo());
+                intent.putExtra("contenido", notificacion.getTexto());
 
                 return PendingIntent.getActivity(context, 0, intent, 0);
             }

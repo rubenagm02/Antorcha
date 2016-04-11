@@ -26,6 +26,7 @@ public class MiembroSharedPreferences {
     private String LLAVE_ACTUALIZAR = "llave_actualizar";
     private String LLAVE_GCM = "llave_gcm";
     private String LLAVE_REGISTRADO = "llave_registrado";
+    private String PRIMERA_VEZ = "llave_primera_vez";
 
     public MiembroSharedPreferences(Context context) {
         sharedPreferences = context.getSharedPreferences(NOMBRE_SP, Context.MODE_PRIVATE);
@@ -153,6 +154,15 @@ public class MiembroSharedPreferences {
 
     public void borrarTodo () {
         editor.clear();
+        editor.apply();
+    }
+
+    public boolean getPrimeraVez(){
+        return sharedPreferences.getBoolean(PRIMERA_VEZ, true);
+    }
+
+    public void setPrimeraVez () {
+        editor.putBoolean(PRIMERA_VEZ, false);
         editor.apply();
     }
 }

@@ -33,6 +33,7 @@ import com.mx.antorcha.Conexion.ConexionInformacionEspacio;
 import com.mx.antorcha.Conexion.ConexionInsertarMiembroEspacio;
 import com.mx.antorcha.Conexion.DescargarImagen;
 import com.mx.antorcha.Conexion.InfoConexion;
+import com.mx.antorcha.Dialogos.DialogoBienvenidaMapa;
 import com.mx.antorcha.Dialogos.DialogoInsertarResenia;
 import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
 import com.mx.antorcha.Modelos.EspacioDeportivo;
@@ -130,9 +131,9 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             mMap.setMyLocationEnabled(true);
 
             CameraUpdate center=
-                    CameraUpdateFactory.newLatLng(new LatLng(20.699359689441785,
-                            -103.29570472240448));
-            CameraUpdate zoom = CameraUpdateFactory.zoomTo(14f);
+                    CameraUpdateFactory.newLatLng(new LatLng(20.608557015413055,
+                            -103.40919971466064));
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(13f);
 
             mMap.moveCamera(center);
             mMap.animateCamera(zoom);
@@ -246,6 +247,14 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
             }
         });
 
+
+        if (new MiembroSharedPreferences(activity).getPrimeraVez()) {
+            //El dialogo de bienvenida
+            DialogoBienvenidaMapa dialogoBienvenidaMapa = new DialogoBienvenidaMapa();
+            dialogoBienvenidaMapa.show(fragmentManager, "dialogo_bienvenida");
+            new MiembroSharedPreferences(activity).setPrimeraVez();
+        }
+
         return rootView;
     }
     public void setActivity(Activity activity) {
@@ -339,6 +348,7 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
         TextView textViewHorario = (TextView) view.findViewById(R.id.sliding_buscar_espacio_horario);
         ImageView imageViewImagenPrincipal = (ImageView) view.findViewById(R.id.sliding_buscar_espacio_imagen_principal);
 
+        imageViewImagenPrincipal.setImageResource(R.drawable.default_espacio);
         DescargarImagen.imagenGuardada(activity, "espacio_" + espacioDeportivo.getId() + ".png", imageViewImagenPrincipal, InfoConexion.URL_DESCARGAR_IMAGEN_ESPACIO + espacioDeportivo.getId() + "_1_.png");
         String descripcion = "";
 

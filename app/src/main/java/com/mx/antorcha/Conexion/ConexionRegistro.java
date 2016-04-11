@@ -13,6 +13,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Activities.Principal;
+import com.mx.antorcha.Bienvenida.Bienvenida;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
 
 import org.json.JSONException;
@@ -84,7 +85,7 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
                         }
                         //se inicia el activity
                         //Lo que se hace cuando el Login se hace de manera correcta
-                        Intent intent = new Intent(activity, BuscarActividad.class);
+                        Intent intent = new Intent(activity, Bienvenida.class);
                         activity.startActivity(intent);
                         activity.finish();
 
@@ -136,10 +137,7 @@ public class ConexionRegistro extends AsyncTask<Void, Void, Void> {
             activity.startActivity(intent);
             activity.finish();
         } else {
-            Toast.makeText(activity, "Parece que hay un error con la conexión, " +
-                    "intentalo de nuevo o ponte en contacto con nosotros. " +
-                    "admin@antorcha.com.mx",
-                    Toast.LENGTH_LONG).show();
+
         }
     }
 

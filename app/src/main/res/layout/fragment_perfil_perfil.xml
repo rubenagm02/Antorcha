@@ -77,6 +77,8 @@
                     </RelativeLayout>
                 </RelativeLayout>
                 <TextView
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
                     android:id="@+id/perfil_perfil_descripcion"
                     android:fontFamily="sans-serif"
                     android:layout_marginTop="20dp"
@@ -84,7 +86,7 @@
                     android:textColor="#000000"
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
-                    android:text="Dinos más de ti actualizando tu perfil en antorcha, presiona los tres puntos que se encuentran en la parte superior de la foto de perfil"
+                    android:text="Cuentanos más de ti actualizando tu perfil en antorcha, más opciones que se encuentra en la parte superior derecha de la foto de perfil"
                     android:textSize="14sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -107,6 +109,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp" />
                 <TextView
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
                     android:id="@+id/perfil_perfil_intereses"
                     android:fontFamily="sans-serif"
                     android:alpha=".8"

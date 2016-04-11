@@ -1,6 +1,7 @@
 package com.mx.antorcha.Conexion;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -34,7 +35,7 @@ public class ConexionActualizarPerfil {
         this.activity = activity;
     }
 
-    static public void actualizar (final String nombre, final String fechaNacimiento, final String descripcion, final String intereses, final Activity activity, final String gcm) {
+    static public void actualizar (final String nombre, final String fechaNacimiento, final String descripcion, final String intereses, final Context activity, final String gcm) {
         StringRequest postRequest = new StringRequest(Request.Method.PUT, InfoConexion.URL_ACTUALIZAR_MIEMBRO
                 + (new MiembroSharedPreferences(activity).getId()),
                 new Response.Listener<String>() {

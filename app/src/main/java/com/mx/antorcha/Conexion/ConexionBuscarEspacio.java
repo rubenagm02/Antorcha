@@ -81,6 +81,11 @@ public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
                             for (int x = 0; x < jsonArray.length(); x++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(x);
 
+                                String valoracion = "0.0";
+
+                                if (!jsonObject.getString("valoracion").equals("null")) {
+                                    valoracion = jsonObject.getString("valoracion");
+                                }
                                 EspacioDeportivo espacioDeportivo = new EspacioDeportivo(
                                         jsonObject.getInt("id"),
                                         jsonObject.getString("nombre"),
@@ -94,7 +99,7 @@ public class ConexionBuscarEspacio extends AsyncTask<Void, Void, Void> {
                                         jsonObject.getString("telefono"),
                                         jsonObject.getDouble("latitud"),
                                         jsonObject.getDouble("longitud"),
-                                        jsonObject.getString("valoracion"),
+                                        valoracion,
                                         jsonObject.getString("horario"));
 
                                 espacioDeportivos.add(espacioDeportivo);

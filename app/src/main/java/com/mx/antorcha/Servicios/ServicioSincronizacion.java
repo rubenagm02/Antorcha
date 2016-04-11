@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
+import com.mx.antorcha.Conexion.ConexionActualizarPerfil;
 import com.mx.antorcha.Conexion.ConexionEliminarMeta;
 import com.mx.antorcha.Conexion.ConexionInsertarDeporte;
 import com.mx.antorcha.Conexion.ConexionInsertarDisciplina;
@@ -95,6 +96,14 @@ public class ServicioSincronizacion extends IntentService {
                     }
                 }
             }
+
+            //Siempre se actualiza el perfil
+            MiembroSharedPreferences miembroSharedPreferences = new MiembroSharedPreferences(this);
+            ConexionActualizarPerfil.actualizar(miembroSharedPreferences.getNombre(),
+                    miembroSharedPreferences.getFechaNacimiento(),
+                    miembroSharedPreferences.getDescripcion(),
+                    miembroSharedPreferences.getIntereses(),
+                    this, miembroSharedPreferences.getGCM());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -19,6 +19,7 @@ public class Bienvenida extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Bienvenida.this, SeleccionaDeportes.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

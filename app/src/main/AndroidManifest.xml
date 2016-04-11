@@ -110,7 +110,8 @@
         <activity android:name=".Activities.AyudanosMejorar" />
         <activity android:name=".Bienvenida.Bienvenida" />
         <activity android:name=".Bienvenida.SeleccionaDeportes" />
-        <activity android:name=".Bienvenida.BienvenidaNotificaciones"></activity>
+        <activity android:name=".Bienvenida.BienvenidaNotificaciones" />
+        <activity android:name=".Activities.NuevaNotificacion"></activity>
     </application>
 
 </manifest>

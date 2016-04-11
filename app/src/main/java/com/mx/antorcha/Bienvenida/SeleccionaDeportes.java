@@ -21,6 +21,7 @@ public class SeleccionaDeportes extends AppCompatActivity {
 
                 Intent intent = new Intent(SeleccionaDeportes.this, BienvenidaNotificaciones.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

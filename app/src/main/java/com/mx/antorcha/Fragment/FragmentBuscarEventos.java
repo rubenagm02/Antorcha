@@ -33,6 +33,7 @@ import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Conexion.ConexionBuscarEvento;
 import com.mx.antorcha.Conexion.ConexionMiembroEvento;
 import com.mx.antorcha.Conexion.DescargarImagen;
+import com.mx.antorcha.Conexion.InfoConexion;
 import com.mx.antorcha.Dialogos.DialogoMostrarFiltroEspacio;
 import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.R;
@@ -131,9 +132,9 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         if (mMap != null) {
 
             CameraUpdate center=
-                    CameraUpdateFactory.newLatLng(new LatLng(20.699359689441785,
-                            -103.29570472240448));
-            CameraUpdate zoom = CameraUpdateFactory.zoomTo(14f);
+                    CameraUpdateFactory.newLatLng(new LatLng(20.608557015413055,
+                            -103.40919971466064));
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(13f);
 
             mMap.moveCamera(center);
             mMap.animateCamera(zoom);
@@ -284,6 +285,15 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         ImageView imageViewCompartir = (ImageView) view.findViewById(R.id.sliding_buscar_actividades_evento_compartir);
         ImageView imageViewContacto = (ImageView) view.findViewById(R.id.sliding_buscar_actividades_evento_contacto);
 
+        //Imagen principal
+        ImageView imageViewImagenPrincipal = (ImageView) view.findViewById(R.id.sliding_buscar_espacio_imagen_principal);
+        imageViewImagenPrincipal.setImageResource(R.drawable.default_evento);
+        DescargarImagen.imagenGuardada(activity, "evento_" + evento.getId() + ".png", imageViewImagenPrincipal, InfoConexion.URL_DESCARGAR_IMAGEN_EVENTO + evento.getId() + "_1_.png");
+
+        //Imagen secundaria
+        ImageView imageViewSecundaria = (ImageView) view.findViewById(R.id.sliding_imagen_evento);
+        imageViewSecundaria.setImageResource(R.drawable.default_evento);
+        DescargarImagen.imagenGuardada(activity, "evento_" + evento.getId() + ".png", imageViewSecundaria, InfoConexion.URL_DESCARGAR_IMAGEN_EVENTO + evento.getId() + "_2_.png");
         //Se pone el click de la llamada
         imageViewContacto.setOnClickListener(new View.OnClickListener() {
             @Override

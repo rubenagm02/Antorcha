@@ -7,6 +7,7 @@ public class InfoConexion {
 
     
     final static public String URL_DESCARGAR_IMAGEN_ESPACIO ="http://admin.antorcha.mx/img/espacios/espacio_";
+    final static public String URL_DESCARGAR_IMAGEN_EVENTO ="http://admin.antorcha.mx/img/eventos/eventosevento_";
     final static public String URL_META = "http://api.antorcha.mx/V0.1/metas";
     final static public String URL_META_PROGRESO = "http://api.antorcha.mx/V0.1/metaProgresos";
     final static public String URL_LOGIN = "http://api.antorcha.mx/login";
