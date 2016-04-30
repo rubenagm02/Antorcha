@@ -3,6 +3,7 @@ package com.mx.antorcha.Conexion;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.mx.antorcha.Adaptadores.AdaptadorListaEventos;
 import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.R;
 import com.mx.antorcha.SharedPreferences.MiembroSharedPreferences;
@@ -40,6 +42,7 @@ public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
     private String cercania;
     private String espacios;
     private Activity activity;
+    private ListView listView;
     private GoogleMap googleMap;
     private MiembroSharedPreferences miembroSharedPreferences;
 
@@ -63,6 +66,29 @@ public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
         this.idMiembro = miembroSharedPreferences.getId() + "";
         this.googleMap = googleMap;
         this.activity = activity;
+    }
+
+    public ConexionBuscarEvento(Activity activity, ListView listView, String latitud, String longitud, String idMiembro, String cercania, String espacios) {
+        this.activity = activity;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.idMiembro = idMiembro;
+        this.cercania = cercania;
+        this.espacios = espacios;
+        eventos = new ArrayList<>();
+        miembroSharedPreferences = new MiembroSharedPreferences(activity);
+    }
+
+    public ConexionBuscarEvento (Activity activity, ListView listView) {
+        miembroSharedPreferences = new MiembroSharedPreferences(activity);
+        this.latitud = 20.699359689441785 + "";
+        this.longitud = -103.29570472240448 + "";
+        this.cercania = 10 + "";
+        this.espacios = "si";
+        this.idMiembro = miembroSharedPreferences.getId() + "";
+        this.listView = listView;
+        this.activity = activity;
+        eventos = new ArrayList<>();
     }
 
     @Override
@@ -96,15 +122,31 @@ public class ConexionBuscarEvento extends AsyncTask<Void, Void, Void> {
                                             "",
                                             jsonObject.getDouble("latitud"),
                                             jsonObject.getDouble("longitud"));
-
+                                    evento.setTipo(0);
                                     eventos.add(evento);
-                                    googleMap.addMarker(
-                                            new MarkerOptions().position(
-                                                    new LatLng(evento.getLatitud(),
-                                                            evento.getLongitud()))
-                                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.icono_marker_verde))
-                                                    .title(evento.getNombre())
-                                    );
+
+                                    //Se agrega un mes de prueba
+                                    /** PRUEBA **/
+
+                                if (eventos.size() == 1) {
+                                    Evento evento1 = new Evento();
+                                    evento1.setTipo(1);
+                                    evento1.setMesAnio("Septiembre 2016");
+                                    eventos.add(evento1);
+                                }
+
+                                    if (googleMap != null) {
+                                        googleMap.addMarker(
+                                                new MarkerOptions().position(
+                                                        new LatLng(evento.getLatitud(),
+                                                                evento.getLongitud()))
+                                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.icono_marker_verde))
+                                                        .title(evento.getNombre())
+                                        );
+                                    } else if (listView != null) {
+                                        AdaptadorListaEventos adaptadorListaEventos = new AdaptadorListaEventos(activity, R.layout.item_lista_eventos, eventos);
+                                        listView.setAdapter(adaptadorListaEventos);
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.mx.antorcha.Activities.Compartir;
 import com.mx.antorcha.Activities.Inicio;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
+import com.mx.antorcha.Adaptadores.AdaptadorListaEventos;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosObtener;
 import com.mx.antorcha.Conexion.ConexionBuscarEvento;
@@ -70,6 +72,12 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
                              Bundle savedInstanceState) {
 
         final View rootView = inflater.inflate(R.layout.fragment_buscar_evento, container, false);
+        ListView listView = (ListView) rootView.findViewById(R.id.fragment_buscar_evento_lista);
+
+        ConexionBuscarEvento conexionBuscarEvento = new ConexionBuscarEvento(activity, listView);
+        conexionBuscarEvento.execute();
+        /* PARA LOS MAPAS ----------------
+
         eventos = new ArrayList<>();
         //
         DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
@@ -134,13 +142,17 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
             CameraUpdate center=
                     CameraUpdateFactory.newLatLng(new LatLng(20.684899874296615,
                             -103.34658857434988));
-            CameraUpdate zoom = CameraUpdateFactory.zoomTo(10f);
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(11f);
 
             mMap.moveCamera(center);
             mMap.animateCamera(zoom);
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(14f));
-            mMap.setMyLocationEnabled(true);
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(11f));
+            try {
+                mMap.setMyLocationEnabled(true);
+            } catch (Exception e) {
+
+            }
 
             //Onclick del mapa
             mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -174,7 +186,7 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
             conexionBuscarEvento.setEventos(eventos);
             conexionBuscarEvento.execute();
         }
-
+        */
         return rootView;
     }
 
@@ -209,17 +221,23 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
     @Override
     public void onResume(){
         super.onResume();
-        mapView.onResume();
+        if (mapView != null) {
+            mapView.onResume();
+        }
     }
     @Override
     public void onDestroy(){
         super.onDestroy();
-        mapView.onDestroy();
+        if (mapView != null) {
+            mapView.onDestroy();
+        }
     }
     @Override
     public void onPause(){
         super.onPause();
-        mapView.onPause();
+        if (mapView != null) {
+            mapView.onPause();
+        }
     }
 
     public void setBundle(Bundle bundle) {

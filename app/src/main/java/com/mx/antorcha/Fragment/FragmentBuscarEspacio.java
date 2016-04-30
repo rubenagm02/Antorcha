@@ -128,8 +128,12 @@ public class FragmentBuscarEspacio extends Fragment implements GoogleMap.OnMarke
 
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             //mMap.animateCamera(CameraUpdateFactory.zoomTo(2));
-            mMap.setMyLocationEnabled(true);
 
+            try {
+                mMap.setMyLocationEnabled(true);
+            } catch (Exception e) {
+
+            }
             CameraUpdate center=
                     CameraUpdateFactory.newLatLng(new LatLng(20.608557015413055,
                             -103.40919971466064));

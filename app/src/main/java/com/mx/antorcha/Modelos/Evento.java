@@ -18,6 +18,8 @@ public class Evento {
     private String fechaFin;
     private double latitud;
     private double longitud;
+    private int tipo;
+    private String mesAnio;
 
     public Evento(int id, String nombre, String descripcion, String domicilio, String colonia, String codigoPostal, String municipio, String ciudad, String estado, String telefono, String fechaInicio, String fechaFin, double latitud, double longitud) {
         this.id = id;
@@ -150,5 +152,21 @@ public class Evento {
 
     public void setLongitud(double longitud) {
         this.longitud = longitud;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getMesAnio() {
+        return mesAnio;
+    }
+
+    public void setMesAnio(String mesAnio) {
+        this.mesAnio = mesAnio;
     }
 }
