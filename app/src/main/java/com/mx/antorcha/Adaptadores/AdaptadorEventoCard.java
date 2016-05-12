@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.mx.antorcha.Activities.BuscarActividad;
 import com.mx.antorcha.Activities.Compartir;
+import com.mx.antorcha.Activities.DetalleEvento;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Modelos.Evento;
 import com.mx.antorcha.R;
@@ -89,9 +90,26 @@ public class AdaptadorEventoCard extends RecyclerView.Adapter<AdaptadorEventoCar
             textViewInvitar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(activity, Compartir.class);
-                    intent.putExtra("tipo", "evento");
-                    intent.putExtra("id", idEvento);
+                    Intent intent = new Intent(activity, DetalleEvento.class);
+
+                    String[] parametros = new String[20];
+                    parametros[0] = evento.getId() + "";
+                    parametros[1] = evento.getNombre();
+                    parametros[2] = evento.getDescripcion();
+                    parametros[3] = evento.getDomicilio();
+                    parametros[4] = evento.getColonia();
+                    parametros[5] = evento.getCodigoPostal();
+                    parametros[6] = evento.getMunicipio();
+                    parametros[7] = evento.getCiudad();
+                    parametros[8] = evento.getEstado();
+                    parametros[9] = evento.getTelefono();
+                    parametros[10] = evento.getFechaInicio();
+                    parametros[11] = evento.getFechaFin();
+                    parametros[12] = evento.getLatitud() + "";
+                    parametros[13] = evento.getLongitud() + "";
+
+                    intent.putExtra("Evento", parametros);
+
                     activity.startActivity(intent);
                 }
             });

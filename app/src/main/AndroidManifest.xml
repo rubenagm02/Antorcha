@@ -112,7 +112,8 @@
         <activity android:name=".Bienvenida.SeleccionaDeportes" />
         <activity android:name=".Bienvenida.BienvenidaNotificaciones" />
         <activity android:name=".Activities.NuevaNotificacion" />
-        <activity android:name=".Activities.DetalleEvento"></activity>
+        <activity android:name=".Activities.DetalleEvento" />
+        <activity android:name=".Activities.NuevoEvento"></activity>
     </application>
 
 </manifest>

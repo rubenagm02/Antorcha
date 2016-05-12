@@ -5,6 +5,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
+        android:id="@+id/item_mes_eventos_mes"
         android:background="#FFFFFF"
         android:layout_marginLeft="20dp"
         android:alpha=".7"

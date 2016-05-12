@@ -45,6 +45,23 @@ public class AdaptadorListaEventos extends ArrayAdapter<Evento> {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, DetalleEvento.class);
+                    String[] parametros = new String[20];
+                    parametros[0] = evento.getId() + "";
+                    parametros[1] = evento.getNombre();
+                    parametros[2] = evento.getDescripcion();
+                    parametros[3] = evento.getDomicilio();
+                    parametros[4] = evento.getColonia();
+                    parametros[5] = evento.getCodigoPostal();
+                    parametros[6] = evento.getMunicipio();
+                    parametros[7] = evento.getCiudad();
+                    parametros[8] = evento.getEstado();
+                    parametros[9] = evento.getTelefono();
+                    parametros[10] = evento.getFechaInicio();
+                    parametros[11] = evento.getFechaFin();
+                    parametros[12] = evento.getLatitud() + "";
+                    parametros[13] = evento.getLongitud() + "";
+
+                    intent.putExtra("Evento", parametros);
                     context.startActivity(intent);
                 }
             });
@@ -52,6 +69,7 @@ public class AdaptadorListaEventos extends ArrayAdapter<Evento> {
             //Si es un item del mes
             LayoutInflater vi = LayoutInflater.from(getContext());
             convertView = vi.inflate(R.layout.lista_mes_eventos, null);
+            ((TextView) convertView.findViewById(R.id.item_mes_eventos_mes)).setText(evento.getMesAnio());
 
         }
 
