@@ -38,7 +38,7 @@ public class AdaptadorBuscarActividadTabs extends FragmentStatePagerAdapter {
                 FragmentBuscarEventos fragmentBuscarEventos = new FragmentBuscarEventos();
                 fragmentBuscarEventos.setActivity(activity);
                 fragmentBuscarEventos.setBundle(bundle);
-                fragmentBuscarEventos.setFragmentManager(fragmentManager);
+                //fragmentBuscarEventos.setFragmentManager(fragmentManager);
                 return fragmentBuscarEventos;
             default:
 

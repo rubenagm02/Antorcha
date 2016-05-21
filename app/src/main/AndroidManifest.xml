@@ -113,7 +113,8 @@
         <activity android:name=".Bienvenida.BienvenidaNotificaciones" />
         <activity android:name=".Activities.NuevaNotificacion" />
         <activity android:name=".Activities.DetalleEvento" />
-        <activity android:name=".Activities.NuevoEvento"></activity>
+        <activity android:name=".Activities.NuevoEvento" />
+        <activity android:name=".Activities.SeleccionaUbicacion"></activity>
     </application>
 
 </manifest>

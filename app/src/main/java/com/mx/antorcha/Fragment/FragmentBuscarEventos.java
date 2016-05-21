@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.mx.antorcha.Activities.Compartir;
 import com.mx.antorcha.Activities.Inicio;
+import com.mx.antorcha.Activities.NuevoEvento;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
 import com.mx.antorcha.Adaptadores.AdaptadorListaEventos;
 import com.mx.antorcha.BaseDatos.ConexionBaseDatosInsertar;
@@ -50,17 +52,18 @@ import java.util.Date;
 /**
  *
  */
-public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener{
+public class FragmentBuscarEventos extends Fragment  { //implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener
 
     private Activity activity;
     GoogleMap mMap;
     MapView mapView;
     private Bundle bundle;
     public ArrayList<Evento> eventos;
-    LinearLayout linearLayoutCentral;
+    private ListView listView;
+    /*LinearLayout linearLayoutCentral;
     private FragmentManager fragmentManager;
     SlidingUpPanelLayout slidingUpPanelLayout;
-    LinearLayout linearLayoutSliding;
+    LinearLayout linearLayoutSliding;*/
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
@@ -72,10 +75,16 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
                              Bundle savedInstanceState) {
 
         final View rootView = inflater.inflate(R.layout.fragment_buscar_evento, container, false);
-        ListView listView = (ListView) rootView.findViewById(R.id.fragment_buscar_evento_lista);
+        listView = (ListView) rootView.findViewById(R.id.fragment_buscar_evento_lista);
 
-        ConexionBuscarEvento conexionBuscarEvento = new ConexionBuscarEvento(activity, listView);
-        conexionBuscarEvento.execute();
+        RelativeLayout relativeLayoutAgregar = (RelativeLayout) rootView.findViewById(R.id.fragment_buscar_evento_agregar);
+        relativeLayoutAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, NuevoEvento.class);
+                activity.startActivity(intent);
+            }
+        });
         /* PARA LOS MAPAS ----------------
 
         eventos = new ArrayList<>();
@@ -195,7 +204,7 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
     }
 
     //Onclick del Marcador
-    @Override
+    /*@Override
     public boolean onMarkerClick(Marker marker){
         marker.showInfoWindow();
         return true;
@@ -217,10 +226,14 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
     public void setFragmentManager(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
-
+    */
     @Override
     public void onResume(){
         super.onResume();
+
+        ConexionBuscarEvento conexionBuscarEvento = new ConexionBuscarEvento(activity, listView);
+        conexionBuscarEvento.execute();
+
         if (mapView != null) {
             mapView.onResume();
         }
@@ -244,7 +257,7 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
         this.bundle = bundle;
     }
 
-    private class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+    /*private class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
         private final View v;
         LinearLayout linearLayout;
@@ -377,5 +390,5 @@ public class FragmentBuscarEventos extends Fragment  implements GoogleMap.OnMark
             }
         });
 
-    }
+    }*/
 }
