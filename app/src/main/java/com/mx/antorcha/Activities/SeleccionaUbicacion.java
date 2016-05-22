@@ -1,5 +1,6 @@
 package com.mx.antorcha.Activities;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.mx.antorcha.AdaptadorSVG.AdaptadorSVG;
+import com.mx.antorcha.Bienvenida.SeleccionaDeportes;
 import com.mx.antorcha.R;
 
 import java.text.SimpleDateFormat;
@@ -26,7 +28,7 @@ import java.util.Date;
 public class SeleccionaUbicacion extends AppCompatActivity {
     private GoogleMap googleMap;
     private MapView mapView;
-
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class SeleccionaUbicacion extends AppCompatActivity {
 
         ImageView imageViewRegresar = (ImageView) findViewById(R.id.seleccionar_ubicacion_regresar);
         AdaptadorSVG.mostrarImagen(imageViewRegresar, this, R.raw.icono_regresar);
-
+        activity = this;
         imageViewRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +84,8 @@ public class SeleccionaUbicacion extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //Cuando se responde sí se agrega al calendario
-                            finish();
+                            Intent intent = new Intent(activity, SeleccionaDeportesEvento.class);
+                            startActivity(intent);
                         }
                     }).setNegativeButton("No", null)
                             .setIcon(R.drawable.logo_antorcha)
