@@ -29,11 +29,14 @@ public class SeleccionaUbicacion extends AppCompatActivity {
     private GoogleMap googleMap;
     private MapView mapView;
     private Activity activity;
+    private String datos[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selecciona_ubicacion);
+
+        datos = getIntent().getStringArrayExtra("datos");
 
         //se carga la barra de android por el xml
         Toolbar toolbar = (Toolbar) findViewById(R.id.selecciona_ubicacion_toolbar);
@@ -83,8 +86,12 @@ public class SeleccionaUbicacion extends AppCompatActivity {
                     new AlertDialog.Builder(SeleccionaUbicacion.this).setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
+                            //Se cargan los datos del formulario
+
                             //Cuando se responde sí se agrega al calendario
                             Intent intent = new Intent(activity, SeleccionaDeportesEvento.class);
+                            intent.putExtra("datos", datos);
                             startActivity(intent);
                         }
                     }).setNegativeButton("No", null)
@@ -100,6 +107,8 @@ public class SeleccionaUbicacion extends AppCompatActivity {
                 @Override
                 public void onCameraChange(CameraPosition cameraPosition) {
                     Log.i("Google", cameraPosition.target.toString() +  "///" + cameraPosition.zoom);
+                    datos[7] = String.valueOf(cameraPosition.target.latitude);
+                    datos[8] = String.valueOf(cameraPosition.target.longitude);
                 }
             });
         }

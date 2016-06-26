@@ -41,7 +41,7 @@ public class ConexionNuevoEvento {
                     public void onResponse(String response) {
                         //Si todo sale correcto, después del registro se hace...
                         Log.i("Peticion registro", response);
-                        
+
 
                     }
                 },
@@ -57,16 +57,19 @@ public class ConexionNuevoEvento {
             {
                 Map<String, String>  params = new HashMap<>();
                 params.put("nombre", datos[0]);
-                params.put("direccion", datos[0]);
-                params.put("estado", datos[0]);
-                params.put("municipio", datos[0]);
+                params.put("direccion", datos[1]);
                 params.put("estado", "Jalisco");
-                params.put("descripcion", datos[0]);
-                params.put("fechaInicio", datos[0]);
-                params.put("latitud", datos[0]);
-                params.put("longitud", datos[0]);
-                params.put("telefono", datos[0]);
-                params.put("codigoPostal", datos[0]);
+                params.put("municipio",datos[4]);
+                params.put("descripcion", datos[5]);
+                params.put("fechaInicio", datos[6]);
+                params.put("latitud", datos[7]);
+                params.put("longitud", datos[8]);
+                params.put("telefono", datos[9]);
+                params.put("codigoPostal", "44700");
+
+                //Temporales
+                params.put("fechaFin", "2016-10-10");
+                params.put("colonia", "Guadalajara oriente");
 
                 return params;
             }

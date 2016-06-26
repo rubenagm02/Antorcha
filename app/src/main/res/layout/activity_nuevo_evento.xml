@@ -137,12 +137,55 @@
                 android:layout_marginTop="30dp"
                 android:alpha=".87"
                 android:textColor="#000000"
+                android:text="Ciudad del evento"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/nuevo_evento_ciudad"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/edittext_diseno"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </Spinner>
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="30dp"
+                android:alpha=".87"
+                android:textColor="#000000"
+                android:text="Teléfono de contacto"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:textSize="15sp"
+                android:gravity="center"
+                android:id="@+id/nuevo_evento_telefono"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"
+                android:background="@drawable/edittext_diseno"
+                android:layout_width="match_parent"
+                android:layout_height="37dp" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="30dp"
+                android:alpha=".87"
+                android:textColor="#000000"
                 android:text="Fecha que iniciará evento"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
             <TextView
                 android:id="@+id/nuevo_evento_fecha"
                 android:layout_marginRight="60dp"

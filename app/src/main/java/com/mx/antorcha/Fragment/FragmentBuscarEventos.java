@@ -85,6 +85,12 @@ public class FragmentBuscarEventos extends Fragment  { //implements GoogleMap.On
                 activity.startActivity(intent);
             }
         });
+
+        if (bundle.containsKey("idEvento")) {
+            Toast.makeText(activity,
+                    "Felicidades! se ha dado de alta tu evento!",
+                    Toast.LENGTH_LONG).show();
+        }
         /* PARA LOS MAPAS ----------------
 
         eventos = new ArrayList<>();
